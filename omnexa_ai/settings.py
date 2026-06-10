@@ -88,12 +88,19 @@ ASGI_APPLICATION = 'omnexa_ai.asgi.application'
 
 
 # ── 7. DATABASE ─────────────────────────────────────────────────────────────
+# Read DATABASE_URL manually to handle the case where Render sets it to an
+# empty string (which dj_database_url cannot parse). Fall back to SQLite when
+# the variable is absent or blank.
+_database_url = os.environ.get('DATABASE_URL', '').strip()
 DATABASES = {
-    'default': dj_database_url.config(
-        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',
+    'default': dj_database_url.parse(
+        _database_url,
         conn_max_age=600,
         conn_health_checks=True,
-    )
+    ) if _database_url else {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 
