@@ -14,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ── 1. SECURITY ─────────────────────────────────────────────────────────────
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-change-this-in-production')
 DEBUG = config('DEBUG', default=True, cast=bool)
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1,.onrender.com', cast=lambda v: [s.strip() for s in v.split(',')])
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1,.onrender.com,theomnexaai.com,www.theomnexaai.com', cast=lambda v: [s.strip() for s in v.split(',')])
 
 
 # ── 2. INSTALLED APPS ──────────────────────────────────────────────────────
@@ -181,7 +181,7 @@ REST_FRAMEWORK = {
 # ── 14. CORS CONFIGURATION ─────────────────────────────────────────────────
 CORS_ALLOWED_ORIGINS = config(
     'CORS_ALLOWED_ORIGINS',
-    default='http://localhost:3000,https://omnexa.ai,https://www.omnexa.ai',
+    default='http://localhost:3000,https://theomnexaai.com,https://www.theomnexaai.com',
     cast=lambda v: [s.strip() for s in v.split(',')]
 )
 CORS_ALLOW_CREDENTIALS = True
@@ -195,7 +195,11 @@ if not DEBUG:
     SECURE_HSTS_SECONDS = 31536000
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
-    CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS
+    CSRF_TRUSTED_ORIGINS = [
+        'https://theomnexaai.com',
+        'https://www.theomnexaai.com',
+        'https://omnexa-ai.onrender.com',
+    ]
 
 
 # ── 16. LOGGING ───────────────────────────────────────────────────────────────
