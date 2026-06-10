@@ -88,20 +88,27 @@ ASGI_APPLICATION = 'omnexa_ai.asgi.application'
 
 
 # ── 7. DATABASE ─────────────────────────────────────────────────────────────
-# Read DATABASE_URL manually to handle the case where Render sets it to an
-# empty string (which dj_database_url cannot parse). Fall back to SQLite when
-# the variable is absent or blank.
+# Guard against Render setting DATABASE_URL to an empty or invalid string.
+# dj_database_url.parse() raises ValueError for any unparseable value, so we
+# wrap it in a try/except and fall back to SQLite for local / misconfigured envs.
 _database_url = os.environ.get('DATABASE_URL', '').strip()
-DATABASES = {
-    'default': dj_database_url.parse(
-        _database_url,
-        conn_max_age=600,
-        conn_health_checks=True,
-    ) if _database_url else {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+try:
+    if not _database_url:
+        raise ValueError("DATABASE_URL is empty")
+    DATABASES = {
+        'default': dj_database_url.parse(
+            _database_url,
+            conn_max_age=600,
+            conn_health_checks=True,
+        )
     }
-}
+except (ValueError, KeyError):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # ── 8. AUTH PASSWORD VALIDATORS ─────────────────────────────────────────────
