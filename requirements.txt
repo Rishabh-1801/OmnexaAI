@@ -1,0 +1,31 @@
+# Django Core
+Django>=5.0,<6.0
+djangorestframework>=3.15,<4.0
+django-cors-headers>=4.3,<5.0
+
+# Database
+psycopg2-binary>=2.9,<3.0
+dj-database-url>=2.1,<3.0
+
+# Environment & Configuration
+python-decouple>=3.8,<4.0
+
+# Media & Static Files
+Pillow>=10.0,<11.0
+whitenoise>=6.6,<7.0
+
+# Production Server
+gunicorn>=21.0,<22.0
+
+# Optional: Task Queue (for async email, chatbot, lead notifications)
+# celery>=5.3,<6.0
+# redis>=5.0,<6.0
+
+# Optional: AI Integration (for smart chatbot responses)
+# openai>=1.0,<2.0
+
+# Development Tools
+# django-debug-toolbar>=4.2,<5.0
+# black>=23.0,<24.0
+# flake8>=6.0,<7.0
+# isort>=5.12,<6.0

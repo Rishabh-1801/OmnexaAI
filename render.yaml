@@ -1,0 +1,28 @@
+databases:
+  - name: omnexa-db
+    plan: free
+    databaseName: omnexa_ai
+    user: omnexa_user
+
+services:
+  - type: web
+    name: omnexa-ai
+    runtime: python
+    plan: free
+    buildCommand: ./build.sh
+    startCommand: gunicorn omnexa_ai.wsgi:application
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.3
+      - key: DJANGO_SETTINGS_MODULE
+        value: omnexa_ai.settings
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: False
+      - key: WEB_CONCURRENCY
+        value: 4
+      - fromDatabase:
+          name: omnexa-db
+          property: connectionString
+        key: DATABASE_URL

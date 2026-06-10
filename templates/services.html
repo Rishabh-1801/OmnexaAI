@@ -1,0 +1,1053 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="shortcut icon" type="image/png" href="{% static 'img/OmnexaAI.png' %}" />
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="OMNEXA AI Services - Complete AI-powered solutions including AEO, AI Marketing, AI Software, Chatbots, Content Creation, and Lead Generation.">
+  <meta name="keywords"
+    content="AI Services, AEO, AI Marketing, AI Software, AI Chatbots, Content Creation, Lead Generation">
+  <title>Services - OMNEXA AI | AI-Powered Business Solutions</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- AOS CSS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <!-- Font Awesome 6 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;900&family=Nunito:wght@400;500;600&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}?v=26">
+  <link rel="stylesheet" href="{% static 'css/brand-theme.css' %}">
+</head>
+
+<body>
+  <!-- ============================================
+       NAVBAR
+       ============================================ -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'home:home' %}">
+        <img src="{% static 'img/OmnexaAI.png' %}" alt="OMNEXA AI Logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'home:home' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'services:services' %}">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'solutions:solutions' %}">Solutions</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'case_studies:case-studies' %}">Case Studies</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'blog:blog' %}">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'about:about' %}">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'careers:careers' %}">Careers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'contact:contact' %}">Contact</a>
+          </li>
+        </ul>
+        <a href="{% url 'contact:contact' %}" class="btn btn-gradient ms-3">Book Free Strategy</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================
+       HERO SECTION
+       ============================================ -->
+  <section class="hero-section hero-cosmic" style="min-height: 60vh; padding: 150px 0 80px;">
+    <div id="particles-js"></div>
+    <div class="container hero-content">
+      <div class="row align-items-center">
+        <div class="col-lg-10 mx-auto text-center">
+          <h1 class="hero-title" data-aos="fade-up">
+            <span class="gradient-text">AI Services That Automate Your Business Growth</span>
+          </h1>
+          <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
+            OMNEXA AI provides intelligent systems, automation, and AI-powered marketing to generate leads, content, and
+            sales for your brand.
+          </p>
+          <div class="d-flex justify-content-center gap-3 flex-wrap" data-aos="fade-up" data-aos-delay="400">
+            <a href="#contact" class="btn btn-gradient btn-lg">
+              <i class="fas fa-rocket me-2"></i>Get Free AI Strategy
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SERVICES GRID OVERVIEW
+       ============================================ -->
+  <section class="services-section">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title" data-aos="fade-up">
+          <span class="gradient-text">Complete AI Services</span>
+        </h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">
+          Everything you need to grow your business with AI
+        </p>
+      </div>
+
+      <div class="row g-4 services-grid">
+        <!-- Service 1: AEO -->
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+          <div class="glass-card service-card">
+            <div class="service-icon">
+              <i class="fas fa-search"></i>
+            </div>
+            <h3>AEO</h3>
+            <p>Rank in AI answers and search engines</p>
+          </div>
+        </div>
+
+        <!-- Service 2: AI Marketing -->
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+          <div class="glass-card service-card">
+            <div class="service-icon">
+              <i class="fas fa-bullhorn"></i>
+            </div>
+            <h3>AI Marketing & Automation</h3>
+            <p>Automated marketing systems</p>
+          </div>
+        </div>
+
+        <!-- Service 3: AI Software -->
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+          <div class="glass-card service-card">
+            <div class="service-icon">
+              <i class="fas fa-code"></i>
+            </div>
+            <h3>AI Software Development</h3>
+            <p>Custom AI tools and software</p>
+          </div>
+        </div>
+
+        <!-- Service 4: AI Chatbots -->
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+          <div class="glass-card service-card">
+            <div class="service-icon">
+              <i class="fas fa-robot"></i>
+            </div>
+            <h3>AI Chatbots</h3>
+            <p>24/7 intelligent customer support</p>
+          </div>
+        </div>
+
+        <!-- Service 5: Content Creation -->
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="500">
+          <div class="glass-card service-card">
+            <div class="service-icon">
+              <i class="fas fa-pen-fancy"></i>
+            </div>
+            <h3>Content Creation</h3>
+            <p>AI-generated content for your brand</p>
+          </div>
+        </div>
+
+        <!-- Service 6: Image & Video -->
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="600">
+          <div class="glass-card service-card">
+            <div class="service-icon">
+              <i class="fas fa-image"></i>
+            </div>
+            <h3>Image & Video Generation</h3>
+            <p>AI-powered visual content creation</p>
+          </div>
+        </div>
+
+        <!-- Service 7: Blog Writing -->
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="700">
+          <div class="glass-card service-card">
+            <div class="service-icon">
+              <i class="fas fa-blog"></i>
+            </div>
+            <h3>Blog Writing</h3>
+            <p>SEO-optimized AI blog content</p>
+          </div>
+        </div>
+
+        <!-- Service 8: Lead Generation -->
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="800">
+          <div class="glass-card service-card">
+            <div class="service-icon">
+              <i class="fas fa-funnel-dollar"></i>
+            </div>
+            <h3>Lead Generation</h3>
+            <p>Automated lead capture systems</p>
+          </div>
+        </div>
+
+        <!-- Service 9: Meta Ads -->
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="900">
+          <div class="glass-card service-card">
+            <div class="service-icon">
+              <i class="fab fa-meta"></i>
+            </div>
+            <h3>Meta Ads</h3>
+            <p>AI-optimized Facebook & Instagram ads</p>
+          </div>
+        </div>
+
+        <!-- Service 10: Landing Pages -->
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="1000">
+          <div class="glass-card service-card">
+            <div class="service-icon">
+              <i class="fas fa-landing"></i>
+            </div>
+            <h3>Landing Page Optimization</h3>
+            <p>High-converting AI-optimized pages</p>
+          </div>
+        </div>
+
+        <!-- Service 11: Social Media -->
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="1100">
+          <div class="glass-card service-card">
+            <div class="service-icon">
+              <i class="fas fa-share-alt"></i>
+            </div>
+            <h3>Social Media Marketing</h3>
+            <p>AI-powered social media growth</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       HOW OMNEXA AI DELIVERS
+       ============================================ -->
+  <section class="process-section" style="background: #F8FAFF;">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title" data-aos="fade-up">
+          <span class="gradient-text">How We Deliver Every Service</span>
+        </h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">
+          Our proven 3-step process for all AI services
+        </p>
+      </div>
+
+      <div class="process-steps">
+        <div class="step-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="step-number">
+            <i class="fas fa-brain"></i>
+          </div>
+          <h3>AI Analysis of Your Business</h3>
+          <p>We analyze your current setup, market position, and growth opportunities using advanced AI tools.</p>
+        </div>
+
+        <div class="step-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="step-number">
+            <i class="fas fa-cogs"></i>
+          </div>
+          <h3>AI System & Content Setup</h3>
+          <p>We build custom AI systems, create AI-generated content, and set up automation for your business.</p>
+        </div>
+
+        <div class="step-card" data-aos="fade-up" data-aos-delay="500">
+          <div class="step-number">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3>Automated Growth & Leads</h3>
+          <p>Your AI systems run 24/7, generating leads, creating content, and growing your business automatically.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       INDIVIDUAL SERVICE DETAILS (TABS)
+       ============================================ -->
+  <section class="service-details-section solutions-tabs-section">
+    <div class="container mb-5">
+      <div class="text-center">
+        <h2 class="section-title mb-3" data-aos="fade-up">
+          <span class="gradient-text">Deep Dive Into Our Services</span>
+        </h2>
+        <p class="section-subtitle mb-0" data-aos="fade-up" data-aos-delay="200">
+          Learn how each service transforms your business
+        </p>
+      </div>
+    </div>
+
+    <div class="container" data-aos="fade-up">
+      <div class="row">
+        <!-- Sidebar Navigation column -->
+        <div class="col-lg-3 col-md-4 mb-4 mb-md-0">
+          <div class="solutions-sidebar-card p-4">
+            <div class="nav flex-column nav-pills solutions-nav" id="v-pills-tab" role="tablist"
+              aria-orientation="vertical">
+              <button class="nav-link active" id="v-pills-aeo-tab" data-bs-toggle="pill" data-bs-target="#v-pills-aeo"
+                type="button" role="tab" aria-controls="v-pills-aeo" aria-selected="true">
+                AEO
+                <span class="arrow-container"><i class="arrow-icon"></i></span>
+              </button>
+              <button class="nav-link" id="v-pills-marketing-tab" data-bs-toggle="pill"
+                data-bs-target="#v-pills-marketing" type="button" role="tab" aria-controls="v-pills-marketing"
+                aria-selected="false">
+                AI Marketing & Automation
+                <span class="arrow-container"><i class="arrow-icon"></i></span>
+              </button>
+              <button class="nav-link" id="v-pills-software-tab" data-bs-toggle="pill"
+                data-bs-target="#v-pills-software" type="button" role="tab" aria-controls="v-pills-software"
+                aria-selected="false">
+                AI Software Development
+                <span class="arrow-container"><i class="arrow-icon"></i></span>
+              </button>
+              <button class="nav-link" id="v-pills-chatbots-tab" data-bs-toggle="pill"
+                data-bs-target="#v-pills-chatbots" type="button" role="tab" aria-controls="v-pills-chatbots"
+                aria-selected="false">
+                AI Chatbots
+                <span class="arrow-container"><i class="arrow-icon"></i></span>
+              </button>
+              <button class="nav-link" id="v-pills-content-tab" data-bs-toggle="pill" data-bs-target="#v-pills-content"
+                type="button" role="tab" aria-controls="v-pills-content" aria-selected="false">
+                Content Creation
+                <span class="arrow-container"><i class="arrow-icon"></i></span>
+              </button>
+              <button class="nav-link" id="v-pills-visuals-tab" data-bs-toggle="pill" data-bs-target="#v-pills-visuals"
+                type="button" role="tab" aria-controls="v-pills-visuals" aria-selected="false">
+                Image & Video Generation
+                <span class="arrow-container"><i class="arrow-icon"></i></span>
+              </button>
+              <button class="nav-link" id="v-pills-blog-tab" data-bs-toggle="pill" data-bs-target="#v-pills-blog"
+                type="button" role="tab" aria-controls="v-pills-blog" aria-selected="false">
+                Blog Writing
+                <span class="arrow-container"><i class="arrow-icon"></i></span>
+              </button>
+              <button class="nav-link" id="v-pills-lead-gen-tab" data-bs-toggle="pill"
+                data-bs-target="#v-pills-lead-gen" type="button" role="tab" aria-controls="v-pills-lead-gen"
+                aria-selected="false">
+                Lead Generation
+                <span class="arrow-container"><i class="arrow-icon"></i></span>
+              </button>
+              <button class="nav-link" id="v-pills-meta-ads-tab" data-bs-toggle="pill"
+                data-bs-target="#v-pills-meta-ads" type="button" role="tab" aria-controls="v-pills-meta-ads"
+                aria-selected="false">
+                Meta Ads
+                <span class="arrow-container"><i class="arrow-icon"></i></span>
+              </button>
+              <button class="nav-link" id="v-pills-landing-tab" data-bs-toggle="pill" data-bs-target="#v-pills-landing"
+                type="button" role="tab" aria-controls="v-pills-landing" aria-selected="false">
+                Landing Page Optimization
+                <span class="arrow-container"><i class="arrow-icon"></i></span>
+              </button>
+              <button class="nav-link" id="v-pills-social-tab" data-bs-toggle="pill" data-bs-target="#v-pills-social"
+                type="button" role="tab" aria-controls="v-pills-social" aria-selected="false">
+                Social Media Marketing
+                <span class="arrow-container"><i class="arrow-icon"></i></span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content Detail Pane column -->
+        <div class="col-lg-9 col-md-8">
+          <div class="tab-content" id="v-pills-tabContent">
+            <!-- Service 1: AEO -->
+            <div class="tab-pane fade show active" id="v-pills-aeo" role="tabpanel" aria-labelledby="v-pills-aeo-tab">
+              <div class="solutions-detail-card p-4 p-md-5">
+                <h2 class="gradient-text mb-4"><i class="fas fa-search me-3"></i>AEO (Answer Engine Optimization)</h2>
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Problem</h5>
+                    <p>Businesses struggle to appear in AI answers from ChatGPT, Claude, and other AI platforms.
+                      Traditional
+                      SEO doesn't work for AI search engines.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-lightbulb me-2 text-success"></i>AI Solution</h5>
+                    <p>AEO optimizes your content specifically for AI answer engines, ensuring your brand appears when
+                      people
+                      ask AI questions.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-tools me-2 text-primary"></i>What OMNEXA AI Does</h5>
+                    <p>We analyze AI answer patterns, create AI-optimized content, and implement structured data that AI
+                      engines prefer.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-trophy me-2 text-warning"></i>Result</h5>
+                    <p>Your brand appears in AI answers, driving organic traffic and establishing authority in your
+                      industry.
+                    </p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-list-ol me-2 text-info"></i>Process</h5>
+                    <ol>
+                      <li>Analyze your industry's AI answer patterns</li>
+                      <li>Create AI-optimized content structure</li>
+                      <li>Implement structured data markup</li>
+                      <li>Monitor and optimize for AI rankings</li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Service 2: AI Marketing -->
+            <div class="tab-pane fade" id="v-pills-marketing" role="tabpanel" aria-labelledby="v-pills-marketing-tab">
+              <div class="solutions-detail-card p-4 p-md-5">
+                <h2 class="gradient-text mb-4"><i class="fas fa-bullhorn me-3"></i>AI Marketing & Automation</h2>
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Problem</h5>
+                    <p>Traditional marketing is slow, expensive, and requires constant manual effort. Results are often
+                      unpredictable.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-lightbulb me-2 text-success"></i>AI Solution</h5>
+                    <p>AI marketing automates campaigns, optimizes in real-time, and delivers predictable, scalable
+                      results.
+                    </p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-tools me-2 text-primary"></i>What OMNEXA AI Does</h5>
+                    <p>We build automated marketing funnels, AI-powered ad campaigns, and intelligent customer journeys.
+                    </p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-trophy me-2 text-warning"></i>Result</h5>
+                    <p>Automated marketing that runs 24/7, generating leads and sales while you sleep.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-list-ol me-2 text-info"></i>Process</h5>
+                    <ol>
+                      <li>Analyze your marketing funnel</li>
+                      <li>Build AI automation workflows</li>
+                      <li>Set up intelligent ad campaigns</li>
+                      <li>Monitor and optimize automatically</li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Service 3: AI Software -->
+            <div class="tab-pane fade" id="v-pills-software" role="tabpanel" aria-labelledby="v-pills-software-tab">
+              <div class="solutions-detail-card p-4 p-md-5">
+                <h2 class="gradient-text mb-4"><i class="fas fa-code me-3"></i>AI Software Development</h2>
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Problem</h5>
+                    <p>Off-the-shelf software doesn't fit unique business needs. Custom development is expensive and
+                      slow.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-lightbulb me-2 text-success"></i>AI Solution</h5>
+                    <p>AI-powered custom software that adapts to your business and improves over time.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-tools me-2 text-primary"></i>What OMNEXA AI Does</h5>
+                    <p>We develop custom AI tools, automation software, and intelligent business applications.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-trophy me-2 text-warning"></i>Result</h5>
+                    <p>Custom software that automates your workflows and grows with your business.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-list-ol me-2 text-info"></i>Process</h5>
+                    <ol>
+                      <li>Understand your business requirements</li>
+                      <li>Design AI-powered solution</li>
+                      <li>Develop and integrate AI models</li>
+                      <li>Deploy and provide ongoing support</li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Service 4: AI Chatbots -->
+            <div class="tab-pane fade" id="v-pills-chatbots" role="tabpanel" aria-labelledby="v-pills-chatbots-tab">
+              <div class="solutions-detail-card p-4 p-md-5">
+                <h2 class="gradient-text mb-4"><i class="fas fa-robot me-3"></i>AI Chatbots</h2>
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Problem</h5>
+                    <p>Customer support is expensive, slow, and limited to business hours. Missed opportunities cost
+                      revenue.
+                    </p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-lightbulb me-2 text-success"></i>AI Solution</h5>
+                    <p>Intelligent chatbots that provide 24/7 support, capture leads, and improve customer satisfaction.
+                    </p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-tools me-2 text-primary"></i>What OMNEXA AI Does</h5>
+                    <p>We build custom AI chatbots trained on your business knowledge and customer interactions.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-trophy me-2 text-warning"></i>Result</h5>
+                    <p>24/7 intelligent customer support that captures leads and reduces support costs.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-list-ol me-2 text-info"></i>Process</h5>
+                    <ol>
+                      <li>Analyze your support needs</li>
+                      <li>Train AI on your business data</li>
+                      <li>Build and integrate chatbot</li>
+                      <li>Monitor and improve responses</li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Service 5: Content Creation -->
+            <div class="tab-pane fade" id="v-pills-content" role="tabpanel" aria-labelledby="v-pills-content-tab">
+              <div class="solutions-detail-card p-4 p-md-5">
+                <h2 class="gradient-text mb-4"><i class="fas fa-pen-fancy me-3"></i>Content Creation</h2>
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Problem</h5>
+                    <p>Content creation is time-consuming, expensive, and inconsistent. Quality varies widely.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-lightbulb me-2 text-success"></i>AI Solution</h5>
+                    <p>AI-generated content that's high-quality, consistent, and produced at scale.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-tools me-2 text-primary"></i>What OMNEXA AI Does</h5>
+                    <p>We create AI content systems that generate blogs, social posts, emails, and marketing copy.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-trophy me-2 text-warning"></i>Result</h5>
+                    <p>Consistent, high-quality content produced at scale without manual effort.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-list-ol me-2 text-info"></i>Process</h5>
+                    <ol>
+                      <li>Define your brand voice and goals</li>
+                      <li>Train AI on your content style</li>
+                      <li>Set up automated content generation</li>
+                      <li>Review, refine, and publish content</li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Service 6: Image & Video -->
+            <div class="tab-pane fade" id="v-pills-visuals" role="tabpanel" aria-labelledby="v-pills-visuals-tab">
+              <div class="solutions-detail-card p-4 p-md-5">
+                <h2 class="gradient-text mb-4"><i class="fas fa-image me-3"></i>Image & Video Generation</h2>
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Problem</h5>
+                    <p>Visual content creation requires expensive equipment, skills, and time. Stock media looks
+                      generic.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-lightbulb me-2 text-success"></i>AI Solution</h5>
+                    <p>AI-generated images and videos that are unique, on-brand, and produced instantly.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-tools me-2 text-primary"></i>What OMNEXA AI Does</h5>
+                    <p>We create AI visual content systems for marketing, social media, and brand assets.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-trophy me-2 text-warning"></i>Result</h5>
+                    <p>Unique, branded visual content created instantly without expensive production.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-list-ol me-2 text-info"></i>Process</h5>
+                    <ol>
+                      <li>Define your visual brand guidelines</li>
+                      <li>Train AI on your brand style</li>
+                      <li>Generate custom images and videos</li>
+                      <li>Integrate into your marketing channels</li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Service 7: Blog Writing -->
+            <div class="tab-pane fade" id="v-pills-blog" role="tabpanel" aria-labelledby="v-pills-blog-tab">
+              <div class="solutions-detail-card p-4 p-md-5">
+                <h2 class="gradient-text mb-4"><i class="fas fa-blog me-3"></i>Blog Writing</h2>
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Problem</h5>
+                    <p>Consistent blogging requires significant time and resources. Most businesses can't maintain
+                      frequency.
+                    </p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-lightbulb me-2 text-success"></i>AI Solution</h5>
+                    <p>AI-powered blog writing that produces SEO-optimized content at scale.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-tools me-2 text-primary"></i>What OMNEXA AI Does</h5>
+                    <p>We create AI blog systems that generate, optimize, and publish content automatically.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-trophy me-2 text-warning"></i>Result</h5>
+                    <p>Consistent, high-quality blog content that drives organic traffic and establishes authority.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-list-ol me-2 text-info"></i>Process</h5>
+                    <ol>
+                      <li>Research your industry and keywords</li>
+                      <li>Train AI on your brand voice</li>
+                      <li>Generate SEO-optimized blog posts</li>
+                      <li>Review, refine, and publish content</li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Service 8: Lead Generation -->
+            <div class="tab-pane fade" id="v-pills-lead-gen" role="tabpanel" aria-labelledby="v-pills-lead-gen-tab">
+              <div class="solutions-detail-card p-4 p-md-5">
+                <h2 class="gradient-text mb-4"><i class="fas fa-funnel-dollar me-3"></i>Lead Generation</h2>
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Problem</h5>
+                    <p>Manual lead generation is inconsistent, expensive, and doesn't scale. Quality leads are hard to
+                      find.
+                    </p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-lightbulb me-2 text-success"></i>AI Solution</h5>
+                    <p>AI-powered lead generation that identifies, qualifies, and captures leads automatically.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-tools me-2 text-primary"></i>What OMNEXA AI Does</h5>
+                    <p>We build AI lead systems that capture, qualify, and nurture leads 24/7.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-trophy me-2 text-warning"></i>Result</h5>
+                    <p>Consistent flow of qualified leads generated automatically while you focus on closing.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-list-ol me-2 text-info"></i>Process</h5>
+                    <ol>
+                      <li>Analyze your ideal customer profile</li>
+                      <li>Build AI lead capture systems</li>
+                      <li>Implement automated qualification</li>
+                      <li>Set up lead nurturing workflows</li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Service 9: Meta Ads -->
+            <div class="tab-pane fade" id="v-pills-meta-ads" role="tabpanel" aria-labelledby="v-pills-meta-ads-tab">
+              <div class="solutions-detail-card p-4 p-md-5">
+                <h2 class="gradient-text mb-4"><i class="fab fa-meta me-3"></i>Meta Ads</h2>
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Problem</h5>
+                    <p>Meta ads are expensive and complex to optimize. Manual management wastes budget and
+                      underperforms.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-lightbulb me-2 text-success"></i>AI Solution</h5>
+                    <p>AI-optimized Meta ads that automatically improve performance and reduce costs.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-tools me-2 text-primary"></i>What OMNEXA AI Does</h5>
+                    <p>We create AI-powered Meta ad campaigns that optimize in real-time for maximum ROI.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-trophy me-2 text-warning"></i>Result</h5>
+                    <p>Lower ad costs, higher conversions, and automated campaign optimization.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-list-ol me-2 text-info"></i>Process</h5>
+                    <ol>
+                      <li>Analyze your target audience</li>
+                      <li>Create AI-optimized ad creatives</li>
+                      <li>Launch intelligent campaigns</li>
+                      <li>Monitor and optimize automatically</li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Service 10: Landing Page Optimization -->
+            <div class="tab-pane fade" id="v-pills-landing" role="tabpanel" aria-labelledby="v-pills-landing-tab">
+              <div class="solutions-detail-card p-4 p-md-5">
+                <h2 class="gradient-text mb-4"><i class="fas fa-landing me-3"></i>Landing Page Optimization</h2>
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Problem</h5>
+                    <p>Most landing pages convert poorly. A/B testing is slow and expensive. Optimization is guesswork.
+                    </p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-lightbulb me-2 text-success"></i>AI Solution</h5>
+                    <p>AI-optimized landing pages that automatically improve conversion rates.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-tools me-2 text-primary"></i>What OMNEXA AI Does</h5>
+                    <p>We build AI-optimized landing pages that test, learn, and improve automatically.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-trophy me-2 text-warning"></i>Result</h5>
+                    <p>Higher conversion rates, better ROI, and landing pages that improve over time.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-list-ol me-2 text-info"></i>Process</h5>
+                    <ol>
+                      <li>Analyze your conversion goals</li>
+                      <li>Build AI-optimized landing page</li>
+                      <li>Implement automatic testing</li>
+                      <li>Continuously improve conversions</li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Service 11: Social Media -->
+            <div class="tab-pane fade" id="v-pills-social" role="tabpanel" aria-labelledby="v-pills-social-tab">
+              <div class="solutions-detail-card p-4 p-md-5">
+                <h2 class="gradient-text mb-4"><i class="fas fa-share-alt me-3"></i>Social Media Marketing</h2>
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Problem</h5>
+                    <p>Social media marketing is time-consuming and inconsistent. Results are hard to measure and scale.
+                    </p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-lightbulb me-2 text-success"></i>AI Solution</h5>
+                    <p>AI-powered social media marketing that automates posting, engagement, and growth.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-tools me-2 text-primary"></i>What OMNEXA AI Does</h5>
+                    <p>We build AI social media systems that create content, schedule posts, and engage audiences
+                      automatically.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-trophy me-2 text-warning"></i>Result</h5>
+                    <p>Consistent social media presence, automated growth, and measurable results.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-list-ol me-2 text-info"></i>Process</h5>
+                    <ol>
+                      <li>Analyze your social media presence</li>
+                      <li>Create AI content strategy</li>
+                      <li>Set up automated posting</li>
+                      <li>Monitor and optimize engagement</li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       RESULTS YOU CAN EXPECT
+       ============================================ -->
+  <section class="results-section" style="background: #F8FAFF;">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title" data-aos="fade-up">
+          <span class="gradient-text">Results You Can Expect</span>
+        </h2>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="glass-card p-4 text-center">
+            <i class="fas fa-users text-primary fs-1 mb-3"></i>
+            <h4>More Leads</h4>
+            <p class="text-muted">Automated lead generation that captures prospects 24/7</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="glass-card p-4 text-center">
+            <i class="fas fa-chart-line text-success fs-1 mb-3"></i>
+            <h4>Better Ad ROI</h4>
+            <p class="text-muted">AI-optimized campaigns that reduce costs and increase conversions</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="glass-card p-4 text-center">
+            <i class="fas fa-pen-fancy text-warning fs-1 mb-3"></i>
+            <h4>Automated Content</h4>
+            <p class="text-muted">High-quality content generated consistently without manual effort</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
+          <div class="glass-card p-4 text-center">
+            <i class="fas fa-search text-info fs-1 mb-3"></i>
+            <h4>Higher Visibility</h4>
+            <p class="text-muted">Rank in AI answers and search engines for maximum exposure</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
+          <div class="glass-card p-4 text-center">
+            <i class="fas fa-clock text-danger fs-1 mb-3"></i>
+            <h4>Less Manual Work</h4>
+            <p class="text-muted">Automation handles repetitive tasks so you can focus on growth</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       FINAL CTA
+       ============================================ -->
+  <section class="cta-section cosmic-pulse">
+    <div class="container">
+      <div class="cta-content" data-aos="fade-up">
+        <h2>Let AI Handle Your Growth While You Focus on Business</h2>
+        <p>Book a free strategy call and discover how AI can transform your business.</p>
+        <a href="{% url 'contact:contact' %}" class="btn btn-gradient btn-lg">
+          <i class="fas fa-calendar-check me-2"></i>Book Free AI Strategy Call
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="footer footer-cosmic">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="footer-brand">
+            <img src="{% static 'img/OmnexaAI2.png' %}" alt="OMNEXA AI Logo" class="footer-logo mb-3">
+            <p>Your Innovative Partner</p>
+            <p class="mt-3">Building the future of business growth with intelligent AI automation and marketing systems.
+            </p>
+            <div class="social-icons">
+              <a href="https://www.facebook.com/profile.php?id=61589441850784" target="_blank"><i
+                  class="fab fa-facebook-f"></i></a>
+              <a href="https://www.instagram.com/omnexaai/" target="_blank"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.linkedin.com/company/omnexa-ai/" target="_blank"><i
+                  class="fab fa-linkedin-in"></i></a>
+              <!-- <a href="#"><i class="fab fa-youtube"></i></a> -->
+              <a href="https://wa.me/919687517233" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-6">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="{% url 'home:home' %}"><i class="fas fa-chevron-right me-2"></i>Home</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>Services</a></li>
+            <li><a href="{% url 'solutions:solutions' %}"><i class="fas fa-chevron-right me-2"></i>Solutions</a></li>
+            <li><a href="{% url 'case_studies:case-studies' %}"><i class="fas fa-chevron-right me-2"></i>Case
+                Studies</a></li>
+            <li><a href="{% url 'blog:blog' %}"><i class="fas fa-chevron-right me-2"></i>Blog</a></li>
+            <li><a href="{% url 'about:about' %}"><i class="fas fa-chevron-right me-2"></i>About</a></li>
+            <li><a href="{% url 'contact:contact' %}"><i class="fas fa-chevron-right me-2"></i>Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <h4>Services</h4>
+          <ul class="footer-links">
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AEO</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AI Marketing</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AI Software</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AI Chatbots</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AI Content</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>Lead Generation</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <h4>Contact</h4>
+          <a href="https://maps.app.goo.gl/rJrDEAXuMCZB4Xdr8?g_st=aw" target="_blank" class="footer-contact-link">
+            <div class="footer-contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>210, Sarthak Pulse Mall, PDPU Cross Road,<br>Ahmedabad - Gandhinagar Highway,<br>Bhaijipura,
+                Kudasan,
+                Gandhinagar</span>
+            </div>
+          </a>
+          <a href="mailto:info.omnexaai@gmail.com" class="footer-contact-link">
+            <div class="footer-contact-item">
+              <i class="fas fa-envelope"></i>
+              <span>info.omnexaai@gmail.com</span>
+            </div>
+          </a>
+          <a href="tel:+919687517233" class="footer-contact-link">
+            <div class="footer-contact-item">
+              <i class="fas fa-phone"></i>
+              <span>+91 96875 17233</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; <span class="current-year"></span> OMNEXA AI. All Rights Reserved. | Powered by Artificial
+          Intelligence</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       CHATBOT WIDGET
+       ============================================ -->
+  <div class="chatbot-widget">
+    <div class="chatbot-popup">
+      <div class="chatbot-header">
+        <div class="chatbot-avatar">
+          <i class="fas fa-robot"></i>
+        </div>
+        <div class="chatbot-info">
+          <h4>OMNEXA AI Assistant</h4>
+          <p>Online • Ready to help</p>
+        </div>
+      </div>
+      <div class="chatbot-messages">
+        <div class="chatbot-message">
+          Hi! I'm the OMNEXA AI assistant. How can I help you grow your business today?
+        </div>
+      </div>
+      <div class="chatbot-input-group">
+        <input type="text" class="chatbot-input" placeholder="Type your message...">
+        <button type="button"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+    <div class="chatbot-button">
+      <i class="fas fa-comments"></i>
+    </div>
+  </div>
+
+
+  <!-- ============================================
+       SCRIPTS
+       ============================================ -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/brand-theme.js' %}?v=3"></script>
+
+  <script>
+    particlesJS('particles-js', {
+      'particles': {
+        'number': {
+          'value': 60,
+          'density': {
+            'enable': true,
+            'value_area': 800
+          }
+        },
+        'color': {
+          'value': ['#282973', '#FDB81E']
+        },
+        'shape': {
+          'type': 'circle'
+        },
+        'opacity': {
+          'value': 0.6,
+          'random': true,
+          'anim': {
+            'enable': true,
+            'speed': 1,
+            'opacity_min': 0.3,
+            'sync': false
+          }
+        },
+        'size': {
+          'value': 6,
+          'random': true,
+          'anim': {
+            'enable': true,
+            'speed': 2,
+            'size_min': 1.5,
+            'sync': false
+          }
+        },
+        'line_linked': {
+          'enable': true,
+          'distance': 150,
+          'color': '#282973',
+          'opacity': 0.35,
+          'width': 1.5
+        },
+        'move': {
+          'enable': true,
+          'speed': 2,
+          'direction': 'none',
+          'random': false,
+          'straight': false,
+          'out_mode': 'out',
+          'bounce': false
+        }
+      },
+      'interactivity': {
+        'detect_on': 'canvas',
+        'events': {
+          'onhover': {
+            'enable': true,
+            'mode': 'grab'
+          },
+          'onclick': {
+            'enable': true,
+            'mode': 'push'
+          },
+          'resize': true
+        },
+        'modes': {
+          'grab': {
+            'distance': 140,
+            'line_linked': {
+              'opacity': 0.5
+            }
+          },
+          'push': {
+            'particles_nb': 4
+          }
+        }
+      },
+      'retina_detect': true
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,446 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="shortcut icon" type="image/png" href="{% static 'img/OmnexaAI.png' %}" />
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="OMNEXA AI Blog - AI Marketing insights, guides, and strategies. Learn how AI, automation, AEO, and smart marketing systems are changing business growth.">
+  <meta name="keywords"
+    content="AI Marketing Blog, AEO Guide, AI Tools, Automation, Meta Ads, Lead Generation, AI Content">
+  <title>Blog - OMNEXA AI | AI Marketing Insights & Strategies</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- AOS CSS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <!-- Font Awesome 6 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;900&family=Nunito:wght@400;500;600&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}?v=7">
+  <link rel="stylesheet" href="{% static 'css/brand-theme.css' %}">
+</head>
+
+<body>
+  <!-- ============================================
+       NAVBAR
+       ============================================ -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'home:home' %}">
+        <img src="{% static 'img/OmnexaAI.png' %}" alt="OMNEXA AI Logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'home:home' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'services:services' %}">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'solutions:solutions' %}">Solutions</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'case_studies:case-studies' %}">Case Studies</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'blog:blog' %}">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'about:about' %}">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'careers:careers' %}">Careers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'contact:contact' %}">Contact</a>
+          </li>
+        </ul>
+        <a href="{% url 'contact:contact' %}" class="btn btn-gradient ms-3">Book Free Strategy</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================
+       HERO SECTION
+       ============================================ -->
+  <section class="hero-section hero-cosmic" style="min-height: 50vh; padding: 150px 0 80px;">
+    <div id="particles-js"></div>
+    <div class="container hero-content">
+      <div class="row align-items-center">
+        <div class="col-lg-10 mx-auto text-center">
+          <h1 class="hero-title" data-aos="fade-up">
+            <span class="gradient-text">AI Marketing Insights, Guides & Strategies</span>
+          </h1>
+          <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
+            Learn how AI, automation, AEO, and smart marketing systems are changing business growth.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       BLOG CATEGORY FILTER
+       ============================================ -->
+  <section class="blog-filter">
+    <div class="container">
+      <div class="d-flex flex-wrap justify-content-center gap-2 mb-5" data-aos="fade-up">
+        <button class="btn blog-filter-btn active" data-category="all">All</button>
+        <button class="btn blog-filter-btn" data-category="aeo">AEO</button>
+        <button class="btn blog-filter-btn" data-category="ai_marketing">AI Marketing</button>
+        <button class="btn blog-filter-btn" data-category="ai_tools">AI Tools</button>
+        <button class="btn blog-filter-btn" data-category="automation">Automation</button>
+        <button class="btn blog-filter-btn" data-category="meta_ads">Meta Ads with AI</button>
+        <button class="btn blog-filter-btn" data-category="lead_generation">Lead Generation</button>
+        <button class="btn blog-filter-btn" data-category="ai_content">AI Content Creation</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       BLOG LISTING
+       ============================================ -->
+  <section class="blog-listing">
+    <div class="container">
+      <div class="row g-4 blog-grid">
+        {% for post in posts %}
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="{{ forloop.counter }}00">
+          <div class="glass-card blog-card h-100" data-category="{{ post.category }}">
+            {% if post.featured_image %}
+            <div class="blog-image"
+              style="height: 200px; background-image: url('{{ post.featured_image.url }}'); background-size: contain; background-repeat: no-repeat; background-position: center; border-radius: 20px 20px 0 0; background-color: white;">
+            </div>
+            {% else %}
+            <div class="blog-image"
+              style="height: 200px; background: linear-gradient(135deg, #FDB81E, #282973); border-radius: 20px 20px 0 0; display: flex; align-items: center; justify-content: center;">
+              <i class="fas fa-newspaper text-white fs-1"></i>
+            </div>
+            {% endif %}
+            <div class="p-4">
+              <span class="badge bg-primary mb-2">{{ post.get_category_display }}</span>
+              <h5 class="mb-3">{{ post.title }}</h5>
+              <p class="text-muted mb-3">{{ post.excerpt }}</p>
+              <a href="{% url 'blog:blog-detail' post.slug %}" class="btn btn-outline-gradient btn-sm">Read More <i
+                  class="fas fa-arrow-right ms-2"></i></a>
+            </div>
+          </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-5">
+          <p class="text-muted">No blog posts found.</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       LEAD CAPTURE SIDEBAR
+       ============================================ -->
+  <section class="lead-capture-sidebar" style="background: #F8FAFF;">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4" data-aos="fade-right">
+          <div class="glass-card p-4">
+            <h5 class="mb-4"><i class="fas fa-folder me-2"></i>Categories</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="#" class="text-decoration-none text-muted"><i
+                    class="fas fa-chevron-right me-2"></i>AEO</a></li>
+              <li class="mb-2"><a href="#" class="text-decoration-none text-muted"><i
+                    class="fas fa-chevron-right me-2"></i>AI Marketing</a></li>
+              <li class="mb-2"><a href="#" class="text-decoration-none text-muted"><i
+                    class="fas fa-chevron-right me-2"></i>AI Tools</a></li>
+              <li class="mb-2"><a href="#" class="text-decoration-none text-muted"><i
+                    class="fas fa-chevron-right me-2"></i>Automation</a></li>
+              <li class="mb-2"><a href="#" class="text-decoration-none text-muted"><i
+                    class="fas fa-chevron-right me-2"></i>Meta Ads with AI</a></li>
+              <li class="mb-2"><a href="#" class="text-decoration-none text-muted"><i
+                    class="fas fa-chevron-right me-2"></i>Lead Generation</a></li>
+              <li><a href="#" class="text-decoration-none text-muted"><i class="fas fa-chevron-right me-2"></i>AI
+                  Content Creation</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-4" data-aos="fade-up">
+          <div class="glass-card p-4">
+            <h5 class="mb-4"><i class="fas fa-clock me-2"></i>Recent Posts</h5>
+            <ul class="list-unstyled">
+              {% for recent_post in recent_posts %}
+              <li class="mb-3">
+                <a href="{% url 'blog:blog-detail' recent_post.slug %}" class="text-decoration-none text-muted">
+                  <strong>{{ recent_post.title }}</strong><br>
+                  <small>{{ recent_post.published_at|date:"M d, Y" }}</small>
+                </a>
+              </li>
+              {% empty %}
+              <li class="text-muted">No recent posts.</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-4" data-aos="fade-left">
+          <div class="glass-card p-4 text-center" style="background: var(--gradient-primary); color: white;">
+            <i class="fas fa-rocket fs-1 mb-3"></i>
+            <h5 class="mb-3">Get Free AI Strategy</h5>
+            <p class="mb-4">Discover how AI can transform your business growth with a free strategy call.</p>
+            <a href="{% url 'contact:contact' %}" class="btn btn-light w-100">
+              <i class="fas fa-calendar-check me-2"></i>Book Free Strategy Call
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="footer footer-cosmic">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="footer-brand">
+            <img src="{% static 'img/OmnexaAI2.png' %}" alt="OMNEXA AI Logo" class="footer-logo mb-3">
+            <p>Your Innovative Partner</p>
+            <p class="mt-3">Building the future of business growth with intelligent AI automation and marketing systems.
+            </p>
+            <div class="social-icons">
+              <a href="https://www.facebook.com/profile.php?id=61589441850784" target="_blank"><i
+                  class="fab fa-facebook-f"></i></a>
+              <a href="https://www.instagram.com/omnexaai/" target="_blank"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.linkedin.com/company/omnexa-ai/" target="_blank"><i
+                  class="fab fa-linkedin-in"></i></a>
+              <!-- <a href="#"><i class="fab fa-youtube"></i></a> -->
+              <a href="https://wa.me/919687517233" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-6">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="{% url 'home:home' %}"><i class="fas fa-chevron-right me-2"></i>Home</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>Services</a></li>
+            <li><a href="{% url 'solutions:solutions' %}"><i class="fas fa-chevron-right me-2"></i>Solutions</a></li>
+            <li><a href="{% url 'case_studies:case-studies' %}"><i class="fas fa-chevron-right me-2"></i>Case
+                Studies</a></li>
+            <li><a href="{% url 'blog:blog' %}"><i class="fas fa-chevron-right me-2"></i>Blog</a></li>
+            <li><a href="{% url 'about:about' %}"><i class="fas fa-chevron-right me-2"></i>About</a></li>
+            <li><a href="{% url 'contact:contact' %}"><i class="fas fa-chevron-right me-2"></i>Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <h4>Services</h4>
+          <ul class="footer-links">
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AEO</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AI Marketing</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AI Software</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AI Chatbots</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AI Content</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>Lead Generation</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <h4>Contact</h4>
+          <a href="https://maps.app.goo.gl/rJrDEAXuMCZB4Xdr8?g_st=aw" target="_blank" class="footer-contact-link">
+            <div class="footer-contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>210, Sarthak Pulse Mall, PDPU Cross Road,<br>Ahmedabad - Gandhinagar Highway,<br>Bhaijipura,
+                Kudasan,
+                Gandhinagar</span>
+            </div>
+          </a>
+          <a href="mailto:info.omnexaai@gmail.com" class="footer-contact-link">
+            <div class="footer-contact-item">
+              <i class="fas fa-envelope"></i>
+              <span>info.omnexaai@gmail.com</span>
+            </div>
+          </a>
+          <a href="tel:+919687517233" class="footer-contact-link">
+            <div class="footer-contact-item">
+              <i class="fas fa-phone"></i>
+              <span>+91 96875 17233</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; <span class="current-year"></span> OMNEXA AI. All Rights Reserved. | Powered by Artificial
+          Intelligence</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       CHATBOT WIDGET
+       ============================================ -->
+  <div class="chatbot-widget">
+    <div class="chatbot-popup">
+      <div class="chatbot-header">
+        <div class="chatbot-avatar">
+          <i class="fas fa-robot"></i>
+        </div>
+        <div class="chatbot-info">
+          <h4>OMNEXA AI Assistant</h4>
+          <p>Online • Ready to help</p>
+        </div>
+      </div>
+      <div class="chatbot-messages">
+        <div class="chatbot-message">
+          Hi! I'm the OMNEXA AI assistant. How can I help you grow your business today?
+        </div>
+      </div>
+      <div class="chatbot-input-group">
+        <input type="text" class="chatbot-input" placeholder="Type your message...">
+        <button type="button"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+    <div class="chatbot-button">
+      <i class="fas fa-comments"></i>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SCRIPTS
+       ============================================ -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/brand-theme.js' %}?v=3"></script>
+
+  <script>
+    particlesJS('particles-js', {
+      'particles': {
+        'number': {
+          'value': 60,
+          'density': {
+            'enable': true,
+            'value_area': 800
+          }
+        },
+        'color': {
+          'value': ['#282973', '#FDB81E']
+        },
+        'shape': {
+          'type': 'circle'
+        },
+        'opacity': {
+          'value': 0.6,
+          'random': true,
+          'anim': {
+            'enable': true,
+            'speed': 1,
+            'opacity_min': 0.3,
+            'sync': false
+          }
+        },
+        'size': {
+          'value': 6,
+          'random': true,
+          'anim': {
+            'enable': true,
+            'speed': 2,
+            'size_min': 1.5,
+            'sync': false
+          }
+        },
+        'line_linked': {
+          'enable': true,
+          'distance': 150,
+          'color': '#282973',
+          'opacity': 0.35,
+          'width': 1.5
+        },
+        'move': {
+          'enable': true,
+          'speed': 2,
+          'direction': 'none',
+          'random': false,
+          'straight': false,
+          'out_mode': 'out',
+          'bounce': false
+        }
+      },
+      'interactivity': {
+        'detect_on': 'canvas',
+        'events': {
+          'onhover': {
+            'enable': true,
+            'mode': 'grab'
+          },
+          'onclick': {
+            'enable': true,
+            'mode': 'push'
+          },
+          'resize': true
+        },
+        'modes': {
+          'grab': {
+            'distance': 140,
+            'line_linked': {
+              'opacity': 0.5
+            }
+          },
+          'push': {
+            'particles_nb': 4
+          }
+        }
+      },
+      'retina_detect': true
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const filterButtons = document.querySelectorAll('.blog-filter-btn');
+      const blogCards = document.querySelectorAll('.blog-grid > div');
+
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          // Remove active class from all buttons
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          // Add active class to clicked button
+          button.classList.add('active');
+
+          const category = button.getAttribute('data-category');
+
+          blogCards.forEach(cardWrapper => {
+            const card = cardWrapper.querySelector('.blog-card');
+            if (!card) return;
+
+            if (category === 'all' || card.getAttribute('data-category') === category) {
+              cardWrapper.style.display = 'block';
+              cardWrapper.classList.add('aos-animate');
+            } else {
+              cardWrapper.style.display = 'none';
+              cardWrapper.classList.remove('aos-animate');
+            }
+          });
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

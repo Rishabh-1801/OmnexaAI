@@ -1,0 +1,946 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="shortcut icon" type="image/png" href="{% static 'img/OmnexaAI.png' %}" />
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="OMNEXA AI Solutions - Industry-specific AI solutions for Real Estate, Healthcare, E-commerce, Coaches, Local Businesses, Startups, and Education.">
+  <meta name="keywords" content="AI Solutions, Real Estate AI, Healthcare AI, E-commerce AI, Business Automation">
+  <title>Solutions - OMNEXA AI | Industry-Specific AI Solutions</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- AOS CSS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <!-- Font Awesome 6 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;900&family=Nunito:wght@400;500;600&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}?v=26">
+  <link rel="stylesheet" href="{% static 'css/brand-theme.css' %}">
+</head>
+
+<body>
+  <!-- ============================================
+       NAVBAR
+       ============================================ -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'home:home' %}">
+        <img src="{% static 'img/OmnexaAI.png' %}" alt="OMNEXA AI Logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'home:home' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'services:services' %}">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'solutions:solutions' %}">Solutions</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'case_studies:case-studies' %}">Case Studies</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'blog:blog' %}">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'about:about' %}">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'careers:careers' %}">Careers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'contact:contact' %}">Contact</a>
+          </li>
+        </ul>
+        <a href="{% url 'contact:contact' %}" class="btn btn-gradient ms-3">Book Free Strategy</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================
+       HERO SECTION
+       ============================================ -->
+  <section class="hero-section hero-cosmic" style="min-height: 60vh; padding: 150px 0 80px;">
+    <div id="particles-js"></div>
+    <div class="container hero-content">
+      <div class="row align-items-center">
+        <div class="col-lg-10 mx-auto text-center">
+          <h1 class="hero-title" data-aos="fade-up">
+            <span class="gradient-text">AI Solutions for Every Type of Business</span>
+          </h1>
+          <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
+            OMNEXA AI builds intelligent systems tailored to your industry to automate marketing, leads, and growth.
+          </p>
+          <div class="d-flex justify-content-center gap-3 flex-wrap" data-aos="fade-up" data-aos-delay="400">
+            <a href="#contact" class="btn btn-gradient btn-lg">
+              <i class="fas fa-rocket me-2"></i>Get Free AI Strategy
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       CHOOSE YOUR INDUSTRY & EXPLORE AI SOLUTIONS
+       ============================================ -->
+  <section class="solutions-tabs-section">
+    <div class="container mb-5">
+      <div class="text-center">
+        <h2 class="section-title mb-3" data-aos="fade-up">
+          <span class="gradient-text">Choose Your Industry & Explore AI Solutions</span>
+        </h2>
+        <p class="section-subtitle mb-0" data-aos="fade-up" data-aos-delay="200">
+          Select your business type to see how OMNEXA AI builds intelligent systems tailored to your industry.
+        </p>
+      </div>
+    </div>
+
+    <div class="container" data-aos="fade-up">
+      <div class="row">
+        <!-- Sidebar Navigation column -->
+        <div class="col-lg-3 col-md-4 mb-4 mb-md-0">
+          <div class="solutions-sidebar-card p-4">
+            <div class="nav flex-column nav-pills solutions-nav" id="v-pills-tab" role="tablist"
+              aria-orientation="vertical">
+              <button class="nav-link active" id="v-pills-real-estate-tab" data-bs-toggle="pill"
+                data-bs-target="#v-pills-real-estate" type="button" role="tab" aria-controls="v-pills-real-estate"
+                aria-selected="true">
+                Real Estate AI Solution
+                <span class="arrow-container"><i class="arrow-icon"></i></span>
+              </button>
+              <button class="nav-link" id="v-pills-healthcare-tab" data-bs-toggle="pill"
+                data-bs-target="#v-pills-healthcare" type="button" role="tab" aria-controls="v-pills-healthcare"
+                aria-selected="false">
+                Healthcare / Clinics AI Solution
+                <span class="arrow-container"><i class="arrow-icon"></i></span>
+              </button>
+              <button class="nav-link" id="v-pills-ecommerce-tab" data-bs-toggle="pill"
+                data-bs-target="#v-pills-ecommerce" type="button" role="tab" aria-controls="v-pills-ecommerce"
+                aria-selected="false">
+                E-commerce AI Solution
+                <span class="arrow-container"><i class="arrow-icon"></i></span>
+              </button>
+              <button class="nav-link" id="v-pills-coaches-tab" data-bs-toggle="pill" data-bs-target="#v-pills-coaches"
+                type="button" role="tab" aria-controls="v-pills-coaches" aria-selected="false">
+                Coaches / Consultants AI Solution
+                <span class="arrow-container"><i class="arrow-icon"></i></span>
+              </button>
+              <button class="nav-link" id="v-pills-local-business-tab" data-bs-toggle="pill"
+                data-bs-target="#v-pills-local-business" type="button" role="tab" aria-controls="v-pills-local-business"
+                aria-selected="false">
+                Local Business AI Solution
+                <span class="arrow-container"><i class="arrow-icon"></i></span>
+              </button>
+              <button class="nav-link" id="v-pills-startups-tab" data-bs-toggle="pill"
+                data-bs-target="#v-pills-startups" type="button" role="tab" aria-controls="v-pills-startups"
+                aria-selected="false">
+                Startups / SaaS AI Solution
+                <span class="arrow-container"><i class="arrow-icon"></i></span>
+              </button>
+              <button class="nav-link" id="v-pills-education-tab" data-bs-toggle="pill"
+                data-bs-target="#v-pills-education" type="button" role="tab" aria-controls="v-pills-education"
+                aria-selected="false">
+                Education Institutes AI Solution
+                <span class="arrow-container"><i class="arrow-icon"></i></span>
+              </button>
+              <button class="nav-link" id="v-pills-other-tab" data-bs-toggle="pill" data-bs-target="#v-pills-other"
+                type="button" role="tab" aria-controls="v-pills-other" aria-selected="false">
+                Other Industries AI Solution
+                <span class="arrow-container"><i class="arrow-icon"></i></span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content Detail Pane column -->
+        <div class="col-lg-9 col-md-8">
+          <div class="tab-content" id="v-pills-tabContent">
+            <!-- Real Estate Tab Pane -->
+            <div class="tab-pane fade show active" id="v-pills-real-estate" role="tabpanel"
+              aria-labelledby="v-pills-real-estate-tab">
+              <div class="solutions-detail-card p-4 p-md-5">
+                <h2 class="gradient-text mb-4"><i class="fas fa-building me-3"></i>Real Estate AI Solution</h2>
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Problems Real Estate Faces</h5>
+                    <ul>
+                      <li>High competition for property listings</li>
+                      <li>Time-consuming manual follow-ups</li>
+                      <li>Difficulty standing out in local markets</li>
+                      <li>Expensive traditional advertising</li>
+                      <li>Inconsistent lead generation</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-lightbulb me-2 text-success"></i>OMNEXA AI Solution</h5>
+                    <p>We build AI-powered real estate systems that automate property marketing, generate qualified
+                      leads, and nurture prospects 24/7. Our AI creates property descriptions, virtual tour content, and
+                      automated follow-ups that convert.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-tools me-2 text-primary"></i>What We Implement</h5>
+                    <ul>
+                      <li>AI-powered property listing optimization</li>
+                      <li>Automated lead capture and qualification</li>
+                      <li>AI chatbot for property inquiries</li>
+                      <li>Automated email and SMS follow-ups</li>
+                      <li>Virtual tour content generation</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-list-ol me-2 text-info"></i>How It Works — 5 Steps</h5>
+                    <ol>
+                      <li>Analyze your property portfolio and market</li>
+                      <li>Create AI-optimized property listings</li>
+                      <li>Set up automated lead capture systems</li>
+                      <li>Implement AI chatbot for inquiries</li>
+                      <li>Automate follow-ups and nurture leads</li>
+                    </ol>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-trophy me-2 text-warning"></i>Results You Can Expect</h5>
+                    <ul>
+                      <li>More qualified property inquiries</li>
+                      <li>Faster response times to prospects</li>
+                      <li>Reduced advertising costs</li>
+                      <li>Higher conversion rates</li>
+                      <li>24/7 automated lead nurturing</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Healthcare / Clinics Tab Pane -->
+            <div class="tab-pane fade" id="v-pills-healthcare" role="tabpanel" aria-labelledby="v-pills-healthcare-tab">
+              <div class="solutions-detail-card p-4 p-md-5">
+                <h2 class="gradient-text mb-4"><i class="fas fa-heartbeat me-3"></i>Healthcare / Clinics AI Solution
+                </h2>
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Problems Healthcare Faces</h5>
+                    <ul>
+                      <li>Missed appointment opportunities</li>
+                      <li>Difficulty reaching new patients</li>
+                      <li>Time-consuming patient communication</li>
+                      <li>Limited online visibility</li>
+                      <li>Inconsistent patient follow-ups</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-lightbulb me-2 text-success"></i>OMNEXA AI Solution</h5>
+                    <p>We build AI-powered healthcare systems that automate patient engagement, appointment scheduling,
+                      and communication. Our AI helps clinics attract new patients, reduce no-shows, and improve patient
+                      satisfaction.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-tools me-2 text-primary"></i>What We Implement</h5>
+                    <ul>
+                      <li>AI-powered patient acquisition systems</li>
+                      <li>Automated appointment scheduling</li>
+                      <li>AI chatbot for patient inquiries</li>
+                      <li>Automated reminder and follow-up systems</li>
+                      <li>Health content creation and marketing</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-list-ol me-2 text-info"></i>How It Works — 5 Steps</h5>
+                    <ol>
+                      <li>Analyze your clinic's services and market</li>
+                      <li>Create AI-powered patient acquisition system</li>
+                      <li>Set up automated appointment scheduling</li>
+                      <li>Implement AI chatbot for patient support</li>
+                      <li>Automate reminders and follow-ups</li>
+                    </ol>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-trophy me-2 text-warning"></i>Results You Can Expect</h5>
+                    <ul>
+                      <li>More new patient appointments</li>
+                      <li>Reduced no-show rates</li>
+                      <li>Better patient engagement</li>
+                      <li>Improved online reviews</li>
+                      <li>24/7 patient support availability</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- E-commerce Tab Pane -->
+            <div class="tab-pane fade" id="v-pills-ecommerce" role="tabpanel" aria-labelledby="v-pills-ecommerce-tab">
+              <div class="solutions-detail-card p-4 p-md-5">
+                <h2 class="gradient-text mb-4"><i class="fas fa-shopping-cart me-3"></i>E-commerce AI Solution</h2>
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Problems E-commerce Faces</h5>
+                    <ul>
+                      <li>High cart abandonment rates</li>
+                      <li>Expensive customer acquisition</li>
+                      <li>Difficulty personalizing experiences</li>
+                      <li>Time-consuming product content creation</li>
+                      <li>Inconsistent customer support</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-lightbulb me-2 text-success"></i>OMNEXA AI Solution</h5>
+                    <p>We build AI-powered e-commerce systems that personalize customer experiences, recover abandoned
+                      carts, and automate marketing. Our AI creates product content, optimizes pricing, and delivers
+                      24/7 customer support.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-tools me-2 text-primary"></i>What We Implement</h5>
+                    <ul>
+                      <li>AI-powered product recommendations</li>
+                      <li>Automated cart recovery systems</li>
+                      <li>AI chatbot for customer support</li>
+                      <li>Product content generation</li>
+                      <li>Personalized email marketing automation</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-list-ol me-2 text-info"></i>How It Works — 5 Steps</h5>
+                    <ol>
+                      <li>Analyze your e-commerce data and customers</li>
+                      <li>Create AI-powered recommendation engine</li>
+                      <li>Set up automated cart recovery</li>
+                      <li>Implement AI chatbot for support</li>
+                      <li>Automate personalized marketing campaigns</li>
+                    </ol>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-trophy me-2 text-warning"></i>Results You Can Expect</h5>
+                    <ul>
+                      <li>Higher conversion rates</li>
+                      <li>Reduced cart abandonment</li>
+                      <li>Increased average order value</li>
+                      <li>Better customer retention</li>
+                      <li>24/7 automated customer support</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Coaches / Consultants Tab Pane -->
+            <div class="tab-pane fade" id="v-pills-coaches" role="tabpanel" aria-labelledby="v-pills-coaches-tab">
+              <div class="solutions-detail-card p-4 p-md-5">
+                <h2 class="gradient-text mb-4"><i class="fas fa-chalkboard-teacher me-3"></i>Coaches / Consultants AI
+                  Solution</h2>
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Problems Coaches Face</h5>
+                    <ul>
+                      <li>Difficulty attracting new clients</li>
+                      <li>Time-consuming content creation</li>
+                      <li>Inconsistent lead generation</li>
+                      <li>Limited time for client work</li>
+                      <li>Manual follow-up processes</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-lightbulb me-2 text-success"></i>OMNEXA AI Solution</h5>
+                    <p>We build AI-powered systems for coaches that automate client acquisition, content creation, and
+                      lead nurturing. Our AI helps you attract more clients while freeing up time to focus on coaching.
+                    </p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-tools me-2 text-primary"></i>What We Implement</h5>
+                    <ul>
+                      <li>AI-powered lead generation systems</li>
+                      <li>Automated content creation for social media</li>
+                      <li>AI chatbot for initial consultations</li>
+                      <li>Automated email nurturing sequences</li>
+                      <li>Client onboarding automation</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-list-ol me-2 text-info"></i>How It Works — 5 Steps</h5>
+                    <ol>
+                      <li>Analyze your coaching niche and audience</li>
+                      <li>Create AI-powered lead generation system</li>
+                      <li>Set up automated content creation</li>
+                      <li>Implement AI chatbot for consultations</li>
+                      <li>Automate client nurturing and onboarding</li>
+                    </ol>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-trophy me-2 text-warning"></i>Results You Can Expect</h5>
+                    <ul>
+                      <li>More qualified coaching clients</li>
+                      <li>Consistent content without manual effort</li>
+                      <li>Automated lead nurturing</li>
+                      <li>More time for actual coaching</li>
+                      <li>Scalable client acquisition</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Local Business Tab Pane -->
+            <div class="tab-pane fade" id="v-pills-local-business" role="tabpanel"
+              aria-labelledby="v-pills-local-business-tab">
+              <div class="solutions-detail-card p-4 p-md-5">
+                <h2 class="gradient-text mb-4"><i class="fas fa-store me-3"></i>Local Business AI Solution</h2>
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Problems Local Businesses Face</h5>
+                    <ul>
+                      <li>Difficulty standing out locally</li>
+                      <li>Limited online visibility</li>
+                      <li>Time-consuming social media management</li>
+                      <li>Inconsistent customer engagement</li>
+                      <li>Expensive local advertising</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-lightbulb me-2 text-success"></i>OMNEXA AI Solution</h5>
+                    <p>We build AI-powered systems for local businesses that improve local SEO, automate social media,
+                      and enhance customer engagement. Our AI helps you dominate your local market online.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-tools me-2 text-primary"></i>What We Implement</h5>
+                    <ul>
+                      <li>AI-powered local SEO optimization</li>
+                      <li>Automated social media posting</li>
+                      <li>AI chatbot for customer inquiries</li>
+                      <li>Review management and response automation</li>
+                      <li>Local advertising optimization</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-list-ol me-2 text-info"></i>How It Works — 5 Steps</h5>
+                    <ol>
+                      <li>Analyze your local market and competition</li>
+                      <li>Create AI-powered local SEO system</li>
+                      <li>Set up automated social media management</li>
+                      <li>Implement AI chatbot for customer support</li>
+                      <li>Automate review management and responses</li>
+                    </ol>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-trophy me-2 text-warning"></i>Results You Can Expect</h5>
+                    <ul>
+                      <li>Higher local search rankings</li>
+                      <li>More customer inquiries</li>
+                      <li>Better online reviews</li>
+                      <li>Consistent social media presence</li>
+                      <li>Reduced advertising costs</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Startups / SaaS Tab Pane -->
+            <div class="tab-pane fade" id="v-pills-startups" role="tabpanel" aria-labelledby="v-pills-startups-tab">
+              <div class="solutions-detail-card p-4 p-md-5">
+                <h2 class="gradient-text mb-4"><i class="fas fa-rocket me-3"></i>Startups / SaaS AI Solution</h2>
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Problems Startups Face</h5>
+                    <ul>
+                      <li>Limited resources for marketing</li>
+                      <li>Difficulty acquiring first users</li>
+                      <li>Time-consuming content creation</li>
+                      <li>Need for rapid growth</li>
+                      <li>Competing with established players</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-lightbulb me-2 text-success"></i>OMNEXA AI Solution</h5>
+                    <p>We build AI-powered growth systems for startups that automate user acquisition, content creation,
+                      and customer engagement. Our AI helps you grow faster with limited resources.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-tools me-2 text-primary"></i>What We Implement</h5>
+                    <ul>
+                      <li>AI-powered user acquisition systems</li>
+                      <li>Automated content creation and distribution</li>
+                      <li>AI chatbot for user onboarding</li>
+                      <li>Growth hacking automation</li>
+                      <li>Customer engagement automation</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-list-ol me-2 text-info"></i>How It Works — 5 Steps</h5>
+                    <ol>
+                      <li>Analyze your startup and target market</li>
+                      <li>Create AI-powered growth system</li>
+                      <li>Set up automated content creation</li>
+                      <li>Implement AI chatbot for onboarding</li>
+                      <li>Automate growth and engagement</li>
+                    </ol>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-trophy me-2 text-warning"></i>Results You Can Expect</h5>
+                    <ul>
+                      <li>Faster user acquisition</li>
+                      <li>Consistent content without manual effort</li>
+                      <li>Better user onboarding</li>
+                      <li>Higher engagement rates</li>
+                      <li>Scalable growth with limited resources</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Education Institutes Tab Pane -->
+            <div class="tab-pane fade" id="v-pills-education" role="tabpanel" aria-labelledby="v-pills-education-tab">
+              <div class="solutions-detail-card p-4 p-md-5">
+                <h2 class="gradient-text mb-4"><i class="fas fa-graduation-cap me-3"></i>Education Institutes AI
+                  Solution</h2>
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Problems Education Faces</h5>
+                    <ul>
+                      <li>Difficulty attracting new students</li>
+                      <li>Time-consuming inquiry management</li>
+                      <li>Limited online visibility</li>
+                      <li>Inconsistent communication with prospects</li>
+                      <li>Manual enrollment processes</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-lightbulb me-2 text-success"></i>OMNEXA AI Solution</h5>
+                    <p>We build AI-powered systems for education institutes that automate student enrollment, inquiry
+                      management, and communication. Our AI helps you attract more students and streamline operations.
+                    </p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-tools me-2 text-primary"></i>What We Implement</h5>
+                    <ul>
+                      <li>AI-powered student acquisition systems</li>
+                      <li>Automated inquiry management</li>
+                      <li>AI chatbot for student inquiries</li>
+                      <li>Automated communication and follow-ups</li>
+                      <li>Enrollment process automation</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-list-ol me-2 text-info"></i>How It Works — 5 Steps</h5>
+                    <ol>
+                      <li>Analyze your institute and programs</li>
+                      <li>Create AI-powered student acquisition system</li>
+                      <li>Set up automated inquiry management</li>
+                      <li>Implement AI chatbot for student support</li>
+                      <li>Automate enrollment and communication</li>
+                    </ol>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-trophy me-2 text-warning"></i>Results You Can Expect</h5>
+                    <ul>
+                      <li>More student enrollments</li>
+                      <li>Faster inquiry response times</li>
+                      <li>Better student engagement</li>
+                      <li>Streamlined operations</li>
+                      <li>24/7 student support availability</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Other Industries Tab Pane -->
+            <div class="tab-pane fade" id="v-pills-other" role="tabpanel" aria-labelledby="v-pills-other-tab">
+              <div class="solutions-detail-card p-4 p-md-5">
+                <h2 class="gradient-text mb-4"><i class="fas fa-ellipsis-h me-3"></i>Other Industries AI Solution</h2>
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Problems Other Industries Face</h5>
+                    <ul>
+                      <li>Difficulty standing out in competitive markets</li>
+                      <li>Time-consuming manual marketing efforts</li>
+                      <li>Inconsistent lead generation</li>
+                      <li>Limited online visibility</li>
+                      <li>High customer acquisition costs</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-lightbulb me-2 text-success"></i>OMNEXA AI Solution</h5>
+                    <p>We build AI-powered systems for various industries including AEO, Meta Ads, Marketing and
+                      automation, Chatbot development, and Lead generation. Our AI helps you automate marketing,
+                      generate leads, and grow your business efficiently.</p>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-tools me-2 text-primary"></i>What We Implement</h5>
+                    <ul>
+                      <li><strong>AEO (Answer Engine Optimization)</strong> - AI-powered content optimization for search
+                        engines</li>
+                      <li><strong>Meta Ads</strong> - Automated advertising campaign management</li>
+                      <li><strong>Marketing and Automation</strong> - Complete marketing workflow automation</li>
+                      <li><strong>Chatbot</strong> - 24/7 intelligent customer support AI</li>
+                      <li><strong>Lead Generation</strong> - Automated lead capture and qualification</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-list-ol me-2 text-info"></i>How It Works — 5 Steps</h5>
+                    <ol>
+                      <li>Analyze your business and target market</li>
+                      <li>Create AI-powered marketing system</li>
+                      <li>Set up automated lead generation</li>
+                      <li>Implement AI chatbot for customer support</li>
+                      <li>Automate marketing and growth processes</li>
+                    </ol>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <h5><i class="fas fa-trophy me-2 text-warning"></i>Results You Can Expect</h5>
+                    <ul>
+                      <li>More qualified leads automatically</li>
+                      <li>Better online visibility and rankings</li>
+                      <li>Reduced marketing costs</li>
+                      <li>24/7 customer support availability</li>
+                      <li>Scalable business growth</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       COMMON AI SYSTEM
+       ============================================ -->
+  <section class="common-system" style="background: #F8FAFF;">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title" data-aos="fade-up">
+          <span class="gradient-text">Common AI System Behind All Solutions</span>
+        </h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">
+          Every industry gets these powerful AI components
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="glass-card p-4 text-center">
+            <i class="fas fa-brain text-primary fs-1 mb-3"></i>
+            <h4>AI Analysis</h4>
+            <p class="text-muted">Deep analysis of your business, market, and opportunities</p>
+          </div>
+        </div>
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="glass-card p-4 text-center">
+            <i class="fas fa-pen-fancy text-success fs-1 mb-3"></i>
+            <h4>AI Content</h4>
+            <p class="text-muted">Automated content creation for all your marketing channels</p>
+          </div>
+        </div>
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="glass-card p-4 text-center">
+            <i class="fas fa-robot text-warning fs-1 mb-3"></i>
+            <h4>AI Chatbot</h4>
+            <p class="text-muted">24/7 intelligent customer support and lead capture</p>
+          </div>
+        </div>
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+          <div class="glass-card p-4 text-center">
+            <i class="fas fa-bullhorn text-danger fs-1 mb-3"></i>
+            <h4>AI Ads</h4>
+            <p class="text-muted">Optimized advertising campaigns that reduce costs</p>
+          </div>
+        </div>
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
+          <div class="glass-card p-4 text-center">
+            <i class="fas fa-cogs text-info fs-1 mb-3"></i>
+            <h4>Automation</h4>
+            <p class="text-muted">Complete workflow automation for your business processes</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       RESULTS SNAPSHOT
+       ============================================ -->
+  <section class="results-snapshot">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title" data-aos="fade-up">
+          <span class="gradient-text">Results Snapshot</span>
+        </h2>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="glass-card p-4 d-flex align-items-center">
+            <i class="fas fa-check-circle text-success fs-1 me-3"></i>
+            <span>More leads generated automatically</span>
+          </div>
+        </div>
+
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="glass-card p-4 d-flex align-items-center">
+            <i class="fas fa-check-circle text-success fs-1 me-3"></i>
+            <span>Automated replies to inquiries</span>
+          </div>
+        </div>
+
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="glass-card p-4 d-flex align-items-center">
+            <i class="fas fa-check-circle text-success fs-1 me-3"></i>
+            <span>Better conversion rates</span>
+          </div>
+        </div>
+
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
+          <div class="glass-card p-4 d-flex align-items-center">
+            <i class="fas fa-check-circle text-success fs-1 me-3"></i>
+            <span>Lower marketing effort and costs</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       FINAL CTA
+       ============================================ -->
+  <section class="cta-section cosmic-pulse">
+    <div class="container">
+      <div class="cta-content" data-aos="fade-up">
+        <h2>Your Business Deserves an AI System, Not Manual Marketing</h2>
+        <p>Book a free strategy call and discover how AI can transform your industry.</p>
+        <a href="{% url 'contact:contact' %}" class="btn btn-gradient btn-lg">
+          <i class="fas fa-calendar-check me-2"></i>Book Free AI Strategy Call
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="footer footer-cosmic">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="footer-brand">
+            <img src="{% static 'img/OmnexaAI2.png' %}" alt="OMNEXA AI Logo" class="footer-logo mb-3">
+            <p>Your Innovative Partner</p>
+            <p class="mt-3">Building the future of business growth with intelligent AI automation and marketing systems.
+            </p>
+            <div class="social-icons">
+              <a href="https://www.facebook.com/profile.php?id=61589441850784" target="_blank"><i
+                  class="fab fa-facebook-f"></i></a>
+              <a href="https://www.instagram.com/omnexaai/" target="_blank"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.linkedin.com/company/omnexa-ai/" target="_blank"><i
+                  class="fab fa-linkedin-in"></i></a>
+              <!-- <a href="#"><i class="fab fa-youtube"></i></a> -->
+              <a href="https://wa.me/919687517233" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-6">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="{% url 'home:home' %}"><i class="fas fa-chevron-right me-2"></i>Home</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>Services</a></li>
+            <li><a href="{% url 'solutions:solutions' %}"><i class="fas fa-chevron-right me-2"></i>Solutions</a></li>
+            <li><a href="{% url 'case_studies:case-studies' %}"><i class="fas fa-chevron-right me-2"></i>Case
+                Studies</a></li>
+            <li><a href="{% url 'blog:blog' %}"><i class="fas fa-chevron-right me-2"></i>Blog</a></li>
+            <li><a href="{% url 'about:about' %}"><i class="fas fa-chevron-right me-2"></i>About</a></li>
+            <li><a href="{% url 'contact:contact' %}"><i class="fas fa-chevron-right me-2"></i>Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <h4>Services</h4>
+          <ul class="footer-links">
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AEO</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AI Marketing</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AI Software</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AI Chatbots</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AI Content</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>Lead Generation</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <h4>Contact</h4>
+          <a href="https://maps.app.goo.gl/rJrDEAXuMCZB4Xdr8?g_st=aw" target="_blank" class="footer-contact-link">
+            <div class="footer-contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>210, Sarthak Pulse Mall, PDPU Cross Road,<br>Ahmedabad - Gandhinagar Highway,<br>Bhaijipura,
+                Kudasan,
+                Gandhinagar</span>
+            </div>
+          </a>
+          <a href="mailto:info.omnexaai@gmail.com" class="footer-contact-link">
+            <div class="footer-contact-item">
+              <i class="fas fa-envelope"></i>
+              <span>info.omnexaai@gmail.com</span>
+            </div>
+          </a>
+          <a href="tel:+919687517233" class="footer-contact-link">
+            <div class="footer-contact-item">
+              <i class="fas fa-phone"></i>
+              <span>+91 96875 17233</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; <span class="current-year"></span> OMNEXA AI. All Rights Reserved. | Powered by Artificial
+          Intelligence</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       CHATBOT WIDGET
+       ============================================ -->
+  <div class="chatbot-widget">
+    <div class="chatbot-popup">
+      <div class="chatbot-header">
+        <div class="chatbot-avatar">
+          <i class="fas fa-robot"></i>
+        </div>
+        <div class="chatbot-info">
+          <h4>OMNEXA AI Assistant</h4>
+          <p>Online • Ready to help</p>
+        </div>
+      </div>
+      <div class="chatbot-messages">
+        <div class="chatbot-message">
+          Hi! I'm the OMNEXA AI assistant. How can I help you grow your business today?
+        </div>
+      </div>
+      <div class="chatbot-input-group">
+        <input type="text" class="chatbot-input" placeholder="Type your message...">
+        <button type="button"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+    <div class="chatbot-button">
+      <i class="fas fa-comments"></i>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SCRIPTS
+       ============================================ -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/brand-theme.js' %}?v=3"></script>
+
+  <script>
+    particlesJS('particles-js', {
+      'particles': {
+        'number': {
+          'value': 60,
+          'density': {
+            'enable': true,
+            'value_area': 800
+          }
+        },
+        'color': {
+          'value': ['#282973', '#FDB81E']
+        },
+        'shape': {
+          'type': 'circle'
+        },
+        'opacity': {
+          'value': 0.6,
+          'random': true,
+          'anim': {
+            'enable': true,
+            'speed': 1,
+            'opacity_min': 0.3,
+            'sync': false
+          }
+        },
+        'size': {
+          'value': 6,
+          'random': true,
+          'anim': {
+            'enable': true,
+            'speed': 2,
+            'size_min': 1.5,
+            'sync': false
+          }
+        },
+        'line_linked': {
+          'enable': true,
+          'distance': 150,
+          'color': '#282973',
+          'opacity': 0.35,
+          'width': 1.5
+        },
+        'move': {
+          'enable': true,
+          'speed': 2,
+          'direction': 'none',
+          'random': false,
+          'straight': false,
+          'out_mode': 'out',
+          'bounce': false
+        }
+      },
+      'interactivity': {
+        'detect_on': 'canvas',
+        'events': {
+          'onhover': {
+            'enable': true,
+            'mode': 'grab'
+          },
+          'onclick': {
+            'enable': true,
+            'mode': 'push'
+          },
+          'resize': true
+        },
+        'modes': {
+          'grab': {
+            'distance': 140,
+            'line_linked': {
+              'opacity': 0.5
+            }
+          },
+          'push': {
+            'particles_nb': 4
+          }
+        }
+      },
+      'retina_detect': true
+    });
+  </script>
+</body>
+
+</html>

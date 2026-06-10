@@ -1,0 +1,798 @@
+{% load static home_extras %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="shortcut icon" type="image/png" href="{% static 'img/OmnexaAI.png' %}" />
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="OMNEXA AI - Your Innovative Partner. AI-powered marketing, automation, and lead generation systems that grow your business 24/7.">
+  <meta name="keywords"
+    content="AI Marketing, AEO, Answer Engine Optimization, AI Automation, Lead Generation, AI Chatbots, Content Creation">
+  <title>OMNEXA AI - Your Innovative Partner | AI Marketing & Automation</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- AOS CSS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <!-- Font Awesome 6 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;900&family=Nunito:wght@400;500;600&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}?v=26">
+  <link rel="stylesheet" href="{% static 'css/brand-theme.css' %}">
+</head>
+
+<body>
+  {% csrf_token %}
+  <!-- ============================================
+       NAVBAR
+       ============================================ -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'home:home' %}">
+        <img src="{% static 'img/OmnexaAI.png' %}" alt="OMNEXA AI Logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'home:home' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'services:services' %}">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'solutions:solutions' %}">Solutions</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'case_studies:case-studies' %}">Case Studies</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'blog:blog' %}">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'about:about' %}">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'careers:careers' %}">Careers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'contact:contact' %}">Contact</a>
+          </li>
+        </ul>
+        <a href="{% url 'contact:contact' %}" class="btn btn-gradient ms-3 book-strategy-btn">Book Free Strategy</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================
+       HERO SECTION
+       ============================================ -->
+  <section class="hero-section hero-cosmic">
+    <div id="particles-js"></div>
+
+    <!-- Neural Network Background SVG -->
+    <svg class="neural-network-bg" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#1A6DFF;stop-opacity:0.3" />
+          <stop offset="50%" style="stop-color:#7B2FD4;stop-opacity:0.3" />
+          <stop offset="100%" style="stop-color:#FF6B00;stop-opacity:0.3" />
+        </linearGradient>
+      </defs>
+      <!-- Animated lines -->
+      <g stroke="url(#lineGradient)" stroke-width="2" fill="none">
+        <path d="M100,400 L300,200 L500,400 L700,200 L900,400 L1100,200" class="neural-line">
+          <animate attributeName="stroke-dasharray" values="0,2000;2000,0" dur="3s" repeatCount="indefinite" />
+        </path>
+        <path d="M100,400 L300,600 L500,400 L700,600 L900,400 L1100,600" class="neural-line">
+          <animate attributeName="stroke-dasharray" values="0,2000;2000,0" dur="3s" repeatCount="indefinite"
+            begin="0.5s" />
+        </path>
+        <path d="M300,200 L300,600" class="neural-line">
+          <animate attributeName="stroke-dasharray" values="0,400;400,0" dur="2s" repeatCount="indefinite" />
+        </path>
+        <path d="M500,200 L500,600" class="neural-line">
+          <animate attributeName="stroke-dasharray" values="0,400;400,0" dur="2s" repeatCount="indefinite"
+            begin="0.3s" />
+        </path>
+        <path d="M700,200 L700,600" class="neural-line">
+          <animate attributeName="stroke-dasharray" values="0,400;400,0" dur="2s" repeatCount="indefinite"
+            begin="0.6s" />
+        </path>
+        <path d="M900,200 L900,600" class="neural-line">
+          <animate attributeName="stroke-dasharray" values="0,400;400,0" dur="2s" repeatCount="indefinite"
+            begin="0.9s" />
+        </path>
+      </g>
+      <!-- Nodes -->
+      <g fill="#1A6DFF" opacity="0.6">
+        <circle cx="100" cy="400" r="8">
+          <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="300" cy="200" r="6">
+          <animate attributeName="r" values="6;10;6" dur="2s" repeatCount="indefinite" begin="0.3s" />
+        </circle>
+        <circle cx="300" cy="600" r="6">
+          <animate attributeName="r" values="6;10;6" dur="2s" repeatCount="indefinite" begin="0.6s" />
+        </circle>
+        <circle cx="500" cy="400" r="10">
+          <animate attributeName="r" values="10;14;10" dur="2s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="700" cy="200" r="6">
+          <animate attributeName="r" values="6;10;6" dur="2s" repeatCount="indefinite" begin="0.4s" />
+        </circle>
+        <circle cx="700" cy="600" r="6">
+          <animate attributeName="r" values="6;10;6" dur="2s" repeatCount="indefinite" begin="0.7s" />
+        </circle>
+        <circle cx="900" cy="400" r="8">
+          <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="1100" cy="200" r="6">
+          <animate attributeName="r" values="6;10;6" dur="2s" repeatCount="indefinite" begin="0.5s" />
+        </circle>
+        <circle cx="1100" cy="600" r="6">
+          <animate attributeName="r" values="6;10;6" dur="2s" repeatCount="indefinite" begin="0.8s" />
+        </circle>
+      </g>
+    </svg>
+
+    <div class="container hero-content">
+      <div class="row align-items-center">
+        <div class="col-lg-10 mx-auto text-center">
+          <h1 class="hero-title gradient-text-shimmer" data-aos="fade-up">
+            <span class="hero-base-text">Grow Your Business With The Power of </span><span class="gradient-text"
+              id="typewriter-text">AI</span><span class="typewriter-cursor">|</span>
+          </h1>
+          <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
+            OMNEXA AI builds intelligent automation, AI marketing, and lead systems that grow your brand 24/7.
+          </p>
+          <div class="d-flex justify-content-center gap-3 flex-wrap" data-aos="fade-up" data-aos-delay="400">
+            <a href="{% url 'contact:contact' %}" class="btn btn-gradient btn-lg btn-ripple">
+              <i class="fas fa-rocket me-2"></i>Get Free AI Strategy
+            </a>
+            <a href="{% url 'contact:contact' %}" class="btn btn-outline-gradient btn-lg btn-ripple">
+              <i class="fas fa-comments me-2"></i>Chat With Our AI
+            </a>
+          </div>
+          <div class="floating-badges justify-content-center" data-aos="fade-up" data-aos-delay="600">
+            <div class="floating-badge">
+              <i class="fas fa-chart-line me-2"></i>300% Traffic Growth
+            </div>
+            <div class="floating-badge">
+              <i class="fas fa-users me-2"></i>5X Lead Generation
+            </div>
+            <div class="floating-badge">
+              <i class="fas fa-piggy-bank me-2"></i>60% Lower Ad Cost
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SERVICES OVERVIEW SECTION
+       ============================================ -->
+  <section class="services-section">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title" data-aos="fade-up">
+          <span class="gradient-text">What We Do</span>
+        </h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">
+          Complete AI-powered solutions to automate your business growth
+        </p>
+      </div>
+
+      <div class="row g-4 services-grid">
+        <!-- Service 1: AEO -->
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+          <div class="service-card-v2">
+            <div class="sc-bg-image" style="background-image: url('{% static 'img/service_aeo.png' %}');"></div>
+            <div class="sc-hover-content">
+              <div class="sc-text">
+                <h3>AEO</h3>
+                <p>Answer Engine Optimization</p>
+              </div>
+              <a href="{% url 'services:services' %}" class="sc-learn-more">
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service 2: AI Marketing -->
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+          <div class="service-card-v2">
+            <div class="sc-bg-image" style="background-image: url('{% static 'img/service_ai_marketing.png' %}');">
+            </div>
+            <div class="sc-hover-content">
+              <div class="sc-text">
+                <h3>AI Marketing &amp; Automation</h3>
+                <p>Lead Generation on Autopilot</p>
+              </div>
+              <a href="{% url 'services:services' %}" class="sc-learn-more">
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service 3: AI Software -->
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+          <div class="service-card-v2">
+            <div class="sc-bg-image" style="background-image: url('{% static 'img/service_ai_software.png' %}');"></div>
+            <div class="sc-hover-content">
+              <div class="sc-text">
+                <h3>AI Software Development</h3>
+                <p>Custom AI Tools for Your Business</p>
+              </div>
+              <a href="{% url 'services:services' %}" class="sc-learn-more">
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service 4: AI Chatbots -->
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+          <div class="service-card-v2">
+            <div class="sc-bg-image" style="background-image: url('{% static 'img/service_chatbot.png' %}');"></div>
+            <div class="sc-hover-content">
+              <div class="sc-text">
+                <h3>AI Chatbots</h3>
+                <p>24/7 Customer Support &amp; Lead Capture</p>
+              </div>
+              <a href="{% url 'services:services' %}" class="sc-learn-more">
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service 5: AI Content -->
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="500">
+          <div class="service-card-v2">
+            <div class="sc-bg-image" style="background-image: url('{% static 'img/service_content.png' %}');"></div>
+            <div class="sc-hover-content">
+              <div class="sc-text">
+                <h3>AI Content Creation</h3>
+                <p>High-Quality AI Content for Your Brand</p>
+              </div>
+              <a href="{% url 'services:services' %}" class="sc-learn-more">
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service 6: Lead Generation -->
+        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="600">
+          <div class="service-card-v2">
+            <div class="sc-bg-image" style="background-image: url('{% static 'img/service_leads.png' %}');"></div>
+            <div class="sc-hover-content">
+              <div class="sc-text">
+                <h3>Lead Generation</h3>
+                <p>Automated Lead Capture 24/7</p>
+              </div>
+              <a href="{% url 'services:services' %}" class="sc-learn-more">
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-5" data-aos="fade-up" data-aos-delay="700">
+        <p class="text-muted fs-5">
+          <i class="fas fa-plus-circle me-2"></i>
+          And much more: Meta Ads, Blog Writing, Image & Video Generation, Landing Pages, Social Media Marketing
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       WHY OMNEXA AI IS DIFFERENT SECTION
+       ============================================ -->
+  <section class="comparison-section" style="background: #F8FAFF;">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title" data-aos="fade-up">
+          <span class="gradient-text">Why OMNEXA AI is Different</span>
+        </h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">
+          See the difference between traditional agencies and AI-powered growth
+        </p>
+      </div>
+
+      <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="400">
+        <div class="col-lg-10">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>Normal Agency</th>
+                <th>OMNEXA AI</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Work Style</strong></td>
+                <td>Manual work</td>
+                <td class="omnexa-highlight">AI Automation</td>
+              </tr>
+              <tr>
+                <td><strong>Results Speed</strong></td>
+                <td>Slow results</td>
+                <td class="omnexa-highlight">Data-driven growth</td>
+              </tr>
+              <tr>
+                <td><strong>Content Creation</strong></td>
+                <td>Content writers</td>
+                <td class="omnexa-highlight">AI Content Engine</td>
+              </tr>
+              <tr>
+                <td><strong>Advertising</strong></td>
+                <td>Basic ads</td>
+                <td class="omnexa-highlight">AI Optimized Ads</td>
+              </tr>
+              <tr>
+                <td><strong>Website</strong></td>
+                <td>Static website</td>
+                <td class="omnexa-highlight">AI-powered funnel</td>
+              </tr>
+              <tr>
+                <td><strong>Lead Generation</strong></td>
+                <td>Manual outreach</td>
+                <td class="omnexa-highlight">24/7 Automated capture</td>
+              </tr>
+              <tr>
+                <td><strong>Analytics</strong></td>
+                <td>Basic reports</td>
+                <td class="omnexa-highlight">Real-time AI insights</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       HOW WE WORK - 3 STEPS
+       ============================================ -->
+  <section class="process-section">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title" data-aos="fade-up">
+          <span class="gradient-text">Our AI Services Explained in 3 Steps</span>
+        </h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">
+          Simple process to transform your business with AI
+        </p>
+      </div>
+
+      <div class="process-steps">
+        <!-- Step 1 -->
+        <div class="step-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="step-number">
+            <i class="fas fa-brain"></i>
+          </div>
+          <h3>We Analyze Your Business with AI</h3>
+          <p>Our AI systems analyze your current marketing, website, and business model to identify growth
+            opportunities.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="step-number">
+            <i class="fas fa-cogs"></i>
+          </div>
+          <h3>We Build AI Systems & Content</h3>
+          <p>We create custom AI tools, automated marketing systems, and AI-generated content tailored to your brand.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-card" data-aos="fade-up" data-aos-delay="500">
+          <div class="step-number">
+            <i class="fas fa-rocket"></i>
+          </div>
+          <h3>You Get Automated Leads & Growth</h3>
+          <p>Watch your business grow with 24/7 automated lead generation, content creation, and customer engagement.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       CASE STUDIES SNAPSHOT - COUNTERS
+       ============================================ -->
+  <section class="counter-section">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title" data-aos="fade-up">
+          <span class="gradient-text">Real Results From AI Systems</span>
+        </h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">
+          Numbers don't lie. See what our AI systems deliver.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+          <div class="glass-card stat-card hover-glow">
+            <span class="stat-number" data-target="300" data-suffix="%">0%</span>
+            <span class="stat-label">Traffic Growth</span>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+          <div class="glass-card stat-card hover-glow">
+            <span class="stat-number" data-target="5" data-suffix="X">0X</span>
+            <span class="stat-label">Lead Generation</span>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+          <div class="glass-card stat-card hover-glow">
+            <span class="stat-number" data-target="60" data-suffix="%">0%</span>
+            <span class="stat-label">Lower Ad Cost</span>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+          <div class="glass-card stat-card hover-glow">
+            <span class="stat-number" data-target="24" data-suffix="/7">0/7</span>
+            <span class="stat-label">Automated Lead Capture</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       CLIENT TESTIMONIALS SECTION
+       ============================================ -->
+  <section id="testimonials" class="testimonials-section">
+    <div class="container">
+      <!-- Section Header -->
+      <div class="testimonials-header">
+        <div class="testimonials-header-left">
+          <span class="testimonials-label">What Our Clients Say</span>
+          <h2 class="testimonials-title gradient-text">Trusted By Our Clients</h2>
+          <div class="testimonials-nav">
+            <button class="testimonials-nav-btn prev-btn" aria-label="Previous testimonial">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="testimonials-nav-btn next-btn" aria-label="Next testimonial">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+        <div class="testimonials-header-center mt-3">
+          <p class="testimonials-description">
+            OMNEXA AI has helped businesses across India grow their leads,
+            automate their marketing, and generate real results using AI systems.
+            Here is what our clients say about working with us.
+          </p>
+        </div>
+      </div>
+
+      <!-- Testimonials Slider -->
+      <div class="testimonials-slider-container">
+        <div class="testimonials-slider" id="testimonialsSlider">
+          {% for testimonial in testimonials %}
+          <!-- Testimonial Card {{ forloop.counter }} -->
+          <div class="testimonial-card">
+            <div class="testimonial-quote-mark">"</div>
+            <div class="testimonial-header">
+              {% if testimonial.image %}
+              <img src="{{ testimonial.image.url }}" alt="{{ testimonial.client_name }}" class="testimonial-avatar">
+              {% else %}
+              <img src="https://i.pravatar.cc/60?img={{ forloop.counter }}" alt="{{ testimonial.client_name }}"
+                class="testimonial-avatar">
+              {% endif %}
+              <div class="testimonial-info">
+                <h4 class="testimonial-name">{{ testimonial.client_name }}</h4>
+                <span class="testimonial-location">{{ testimonial.client_company|default:"" }}</span>
+              </div>
+            </div>
+            <p class="testimonial-quote">
+              {{ testimonial.quote }}
+            </p>
+            <div class="testimonial-stars">
+              {% for i in testimonial.rating|default:5|times %}
+              <i class="fas fa-star"></i>
+              {% endfor %}
+            </div>
+          </div>
+          {% empty %}
+          <!-- No testimonials found -->
+          <div class="col-12 text-center py-5">
+            <p class="text-muted">No testimonials found. Add testimonials from the admin panel.</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       FINAL HOME CTA
+       ============================================ -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content" data-aos="fade-up">
+        <h2>Ready to Let AI Grow Your Business?</h2>
+        <p>Book a free 30-minute AI strategy call. No commitment. Pure value.</p>
+        <a href="{% url 'contact:contact' %}" class="btn btn-gradient btn-lg btn-ripple">
+          <i class="fas fa-calendar-check me-2"></i>Book Free AI Consultation
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row g-4">
+        <!-- Brand Column -->
+        <div class="col-lg-4 col-md-6">
+          <div class="footer-brand">
+            <img src="{% static 'img/OmnexaAI2.png' %}" alt="OMNEXA AI Logo" class="footer-logo mb-3">
+            <p>Your Innovative Partner</p>
+            <p class="mt-3">Building the future of business growth with intelligent AI automation and marketing systems.
+            </p>
+            <div class="social-icons">
+              <a href="https://www.facebook.com/profile.php?id=61589441850784" target="_blank"><i
+                  class="fab fa-facebook-f"></i></a>
+              <a href="https://www.instagram.com/omnexaai/" target="_blank"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.linkedin.com/company/omnexa-ai/" target="_blank"><i
+                  class="fab fa-linkedin-in"></i></a>
+              <!-- <a href="#"><i class="fab fa-youtube"></i></a> -->
+              <a href="https://wa.me/919687517233" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Links Column -->
+        <div class="col-lg-2 col-md-6">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="{% url 'home:home' %}"><i class="fas fa-chevron-right me-2"></i>Home</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>Services</a></li>
+            <li><a href="{% url 'solutions:solutions' %}"><i class="fas fa-chevron-right me-2"></i>Solutions</a></li>
+            <li><a href="{% url 'case_studies:case-studies' %}"><i class="fas fa-chevron-right me-2"></i>Case
+                Studies</a></li>
+            <li><a href="{% url 'blog:blog' %}"><i class="fas fa-chevron-right me-2"></i>Blog</a></li>
+            <li><a href="{% url 'about:about' %}"><i class="fas fa-chevron-right me-2"></i>About</a></li>
+            <li><a href="{% url 'contact:contact' %}"><i class="fas fa-chevron-right me-2"></i>Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Services Column -->
+        <div class="col-lg-3 col-md-6">
+          <h4>Services</h4>
+          <ul class="footer-links">
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AEO</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AI Marketing</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AI Software</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AI Chatbots</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AI Content</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>Lead Generation</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Contact Column -->
+        <div class="col-lg-3 col-md-6">
+          <h4>Contact</h4>
+          <a href="https://maps.app.goo.gl/rJrDEAXuMCZB4Xdr8?g_st=aw" target="_blank" class="footer-contact-link">
+            <div class="footer-contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>210, Sarthak Pulse Mall, PDPU Cross Road,<br>Ahmedabad - Gandhinagar Highway,<br>Bhaijipura,
+                Kudasan,
+                Gandhinagar</span>
+            </div>
+          </a>
+          <a href="mailto:info.omnexaai@gmail.com" class="footer-contact-link">
+            <div class="footer-contact-item">
+              <i class="fas fa-envelope"></i>
+              <span>info.omnexaai@gmail.com</span>
+            </div>
+          </a>
+          <a href="tel:+919687517233" class="footer-contact-link">
+            <div class="footer-contact-item">
+              <i class="fas fa-phone"></i>
+              <span>+91 96875 17233</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; <span class="current-year"></span> OMNEXA AI. All Rights Reserved. | Powered by Artificial
+          Intelligence</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       CHATBOT WIDGET
+       ============================================ -->
+  <div class="chatbot-widget">
+    <div class="chatbot-popup">
+      <div class="chatbot-header">
+        <div class="chatbot-avatar">
+          <i class="fas fa-robot"></i>
+        </div>
+        <div class="chatbot-info">
+          <h4>OMNEXA AI Assistant</h4>
+          <p>Online • Ready to help</p>
+        </div>
+      </div>
+      <div class="chatbot-messages">
+        <div class="chatbot-message">
+          Hi! I'm the OMNEXA AI assistant. How can I help you grow your business today?
+        </div>
+      </div>
+      <div class="chatbot-input-group">
+        <input type="text" class="chatbot-input" placeholder="Type your message...">
+        <button type="button"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+    <div class="chatbot-button">
+      <i class="fas fa-comments"></i>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SCRIPTS
+       ============================================ -->
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+  <!-- Particles.js -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+  <!-- Custom JS -->
+  <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/brand-theme.js' %}?v=3"></script>
+
+  <!-- Particles.js Configuration -->
+  <script>
+    particlesJS('particles-js', {
+      'particles': {
+        'number': {
+          'value': 80,
+          'density': {
+            'enable': true,
+            'value_area': 800
+          }
+        },
+        'color': {
+          'value': ['#282973', '#FDB81E']
+        },
+        'shape': {
+          'type': 'circle'
+        },
+        'opacity': {
+          'value': 0.6,
+          'random': true,
+          'anim': {
+            'enable': true,
+            'speed': 1,
+            'opacity_min': 0.3,
+            'sync': false
+          }
+        },
+        'size': {
+          'value': 6,
+          'random': true,
+          'anim': {
+            'enable': true,
+            'speed': 2,
+            'size_min': 1.5,
+            'sync': false
+          }
+        },
+        'line_linked': {
+          'enable': true,
+          'distance': 150,
+          'color': '#282973',
+          'opacity': 0.35,
+          'width': 1.5
+        },
+        'move': {
+          'enable': true,
+          'speed': 2,
+          'direction': 'none',
+          'random': false,
+          'straight': false,
+          'out_mode': 'out',
+          'bounce': false
+        }
+      },
+      'interactivity': {
+        'detect_on': 'canvas',
+        'events': {
+          'onhover': {
+            'enable': true,
+            'mode': 'grab'
+          },
+          'onclick': {
+            'enable': true,
+            'mode': 'push'
+          },
+          'resize': true
+        },
+        'modes': {
+          'grab': {
+            'distance': 140,
+            'line_linked': {
+              'opacity': 0.5
+            }
+          },
+          'push': {
+            'particles_nb': 4
+          }
+        }
+      },
+      'retina_detect': true
+    });
+  </script>
+
+  <!-- Service Card Touch Handler for Mobile -->
+  <script>
+    (function () {
+      var cards = document.querySelectorAll('.service-card-v2');
+
+      cards.forEach(function (card) {
+        card.addEventListener('touchstart', function (e) {
+          var alreadyTapped = card.classList.contains('tapped');
+
+          // Remove tapped from all cards
+          cards.forEach(function (c) { c.classList.remove('tapped'); });
+
+          // If it wasn't already tapped, tap it now (first tap = show panel)
+          // If it WAS already tapped, second tap follows the link inside
+          if (!alreadyTapped) {
+            e.preventDefault();
+            card.classList.add('tapped');
+          }
+          // If already tapped — let the touch proceed naturally (link click)
+        }, { passive: false });
+      });
+
+      // Tap anywhere outside cards → close all panels
+      document.addEventListener('touchstart', function (e) {
+        if (!e.target.closest('.service-card-v2')) {
+          cards.forEach(function (c) { c.classList.remove('tapped'); });
+        }
+      });
+    })();
+  </script>
+</body>
+
+</html>

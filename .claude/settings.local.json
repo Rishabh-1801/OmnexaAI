@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p css js images)",
+      "Bash(cp -r /home/rishabh/OmnexaAI/css /home/rishabh/OmnexaAI/static/)",
+      "Bash(cp -r /home/rishabh/OmnexaAI/js /home/rishabh/OmnexaAI/static/)",
+      "Bash(cp -r /home/rishabh/OmnexaAI/images /home/rishabh/OmnexaAI/static/)",
+      "Bash(cp -r /home/rishabh/OmnexaAI/img /home/rishabh/OmnexaAI/static/)",
+      "Bash(python manage.py makemigrations home)",
+      "Bash(python3 manage.py makemigrations home)",
+      "Bash(curl -s http://localhost:8000/)",
+      "Bash(python manage.py makemigrations home --empty)",
+      "Bash(python3 manage.py makemigrations home --empty)",
+      "Bash(python manage.py makemigrations careers)",
+      "Bash(python3 manage.py makemigrations careers)",
+      "Bash(python manage.py startapp testimonials omnexa_ai/testimonials)",
+      "Bash(python3 manage.py startapp testimonials omnexa_ai/testimonials)",
+      "Bash(myenv/bin/python manage.py makemigrations home)"
+    ],
+    "additionalDirectories": [
+      "/home/rishabh/OmnexaAI/css"
+    ]
+  }
+}

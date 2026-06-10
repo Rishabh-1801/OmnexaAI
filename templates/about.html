@@ -1,0 +1,712 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="shortcut icon" type="image/png" href="{% static 'img/OmnexaAI.png' %}" />
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="About OMNEXA AI - We are building the future of business with AI. Learn our mission, vision, and how we're transforming business growth.">
+  <meta name="keywords" content="About OMNEXA AI, AI Company, Mission, Vision, AI Automation, Business Growth">
+  <title>About - OMNEXA AI | Building the Future of Business with AI</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- AOS CSS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <!-- Font Awesome 6 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;900&family=Nunito:wght@400;500;600&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}?v=26">
+  <link rel="stylesheet" href="{% static 'css/brand-theme.css' %}">
+</head>
+
+<body>
+  <!-- ============================================
+       NAVBAR
+       ============================================ -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'home:home' %}">
+        <img src="{% static 'img/OmnexaAI.png' %}" alt="OMNEXA AI Logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'home:home' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'services:services' %}">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'solutions:solutions' %}">Solutions</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'case_studies:case-studies' %}">Case Studies</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'blog:blog' %}">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'about:about' %}">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'careers:careers' %}">Careers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'contact:contact' %}">Contact</a>
+          </li>
+        </ul>
+        <a href="{% url 'contact:contact' %}" class="btn btn-gradient ms-3">Book Free Strategy</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================
+       HERO SECTION
+       ============================================ -->
+  <section class="hero-section hero-cosmic" style="min-height: 60vh; padding: 150px 0 80px;">
+    <div id="particles-js"></div>
+    <div class="container hero-content">
+      <div class="row align-items-center">
+        <div class="col-lg-10 mx-auto text-center">
+          <h1 class="hero-title" data-aos="fade-up">
+            <span class="gradient-text">We Are Building the Future of Business with AI</span>
+          </h1>
+          <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
+            OMNEXA AI was created to replace traditional marketing and manual systems with intelligent AI automation
+            that grows businesses faster.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       WHY OMNEXA AI WAS CREATED
+       ============================================ -->
+  <section class="why-created">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title" data-aos="fade-up">
+          <span class="gradient-text">Why OMNEXA AI Was Created</span>
+        </h2>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-6" data-aos="fade-right" data-aos-delay="100">
+          <div class="glass-card p-4">
+            <h5 class="mb-4"><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Problems in the Market</h5>
+            <ul class="list-unstyled">
+              <li class="mb-3"><i class="fas fa-times-circle text-danger me-2"></i>Businesses depend on slow marketing
+                agencies</li>
+              <li class="mb-3"><i class="fas fa-times-circle text-danger me-2"></i>Manual content creation is
+                time-consuming</li>
+              <li class="mb-3"><i class="fas fa-times-circle text-danger me-2"></i>Guesswork ads waste budget</li>
+              <li class="mb-3"><i class="fas fa-times-circle text-danger me-2"></i>No automation in marketing processes
+              </li>
+              <li><i class="fas fa-times-circle text-danger me-2"></i>No AI usage in business growth</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
+          <div class="glass-card p-4" style="background: var(--gradient-primary); color: white;">
+            <h5 class="mb-4"><i class="fas fa-lightbulb me-2"></i>Our Solution</h5>
+            <p class="mb-3">OMNEXA AI was founded to bring AI, automation, and intelligent systems into everyday
+              business growth.</p>
+            <p class="mb-3">We replace outdated marketing methods with AI-powered systems that:</p>
+            <ul class="list-unstyled">
+              <li class="mb-2"><i class="fas fa-check-circle me-2"></i>Automate lead generation 24/7</li>
+              <li class="mb-2"><i class="fas fa-check-circle me-2"></i>Create content at scale</li>
+              <li class="mb-2"><i class="fas fa-check-circle me-2"></i>Optimize ads with AI</li>
+              <li><i class="fas fa-check-circle me-2"></i>Deliver predictable, scalable results</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       WHAT MAKES OMNEXA AI DIFFERENT
+       ============================================ -->
+  <section class="what-makes-different" style="background: #F8FAFF;">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title" data-aos="fade-up">
+          <span class="gradient-text">What Makes OMNEXA AI Different</span>
+        </h2>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="glass-card p-4 d-flex align-items-start">
+            <i class="fas fa-ban text-danger fs-1 me-3"></i>
+            <div>
+              <h5>We Don't Do Traditional Marketing</h5>
+              <p class="text-muted">We don't rely on outdated methods. Everything we do is AI-powered and automated.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="glass-card p-4 d-flex align-items-start">
+            <i class="fas fa-robot text-primary fs-1 me-3"></i>
+            <div>
+              <h5>We Build AI Systems</h5>
+              <p class="text-muted">We create intelligent systems that work for you 24/7, not just campaigns.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="glass-card p-4 d-flex align-items-start">
+            <i class="fas fa-cogs text-success fs-1 me-3"></i>
+            <div>
+              <h5>We Focus on Automation</h5>
+              <p class="text-muted">Every solution we build automates repetitive tasks and processes.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
+          <div class="glass-card p-4 d-flex align-items-start">
+            <i class="fas fa-microchip text-warning fs-1 me-3"></i>
+            <div>
+              <h5>We Use Advanced AI Tools</h5>
+              <p class="text-muted">We leverage cutting-edge AI technology to deliver superior results.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 mx-auto" data-aos="fade-up" data-aos-delay="500">
+          <div class="glass-card p-4 d-flex align-items-start">
+            <i class="fas fa-chart-line text-info fs-1 me-3"></i>
+            <div>
+              <h5>We Work on Data, Not Guesses</h5>
+              <p class="text-muted">Every decision is backed by data and AI insights, not intuition.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       OUR MISSION
+       ============================================ -->
+  <section class="our-mission">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title" data-aos="fade-up">
+          <span class="gradient-text">Our Mission</span>
+        </h2>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="glass-card p-4 text-center">
+            <i class="fas fa-search text-primary fs-1 mb-3"></i>
+            <h5>Help Brands Appear in AI Answers (AEO)</h5>
+            <p class="text-muted">Optimize content for AI answer engines to maximize visibility and authority.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="glass-card p-4 text-center">
+            <i class="fas fa-bullhorn text-success fs-1 mb-3"></i>
+            <h5>Automate Marketing Using AI</h5>
+            <p class="text-muted">Replace manual marketing with intelligent AI automation systems.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="glass-card p-4 text-center">
+            <i class="fas fa-code text-warning fs-1 mb-3"></i>
+            <h5>Build AI Tools for Businesses</h5>
+            <p class="text-muted">Create custom AI solutions that solve specific business challenges.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
+          <div class="glass-card p-4 text-center">
+            <i class="fas fa-funnel-dollar text-danger fs-1 mb-3"></i>
+            <h5>Generate Leads Through Intelligent Systems</h5>
+            <p class="text-muted">Build systems that capture, qualify, and nurture leads automatically.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       OUR VISION
+       ============================================ -->
+  <section class="our-vision">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title" data-aos="fade-up">
+          <span class="gradient-text">Our Vision</span>
+        </h2>
+        <p class="fs-4 text-muted mt-4" data-aos="fade-up" data-aos-delay="200">
+          "To make AI-powered growth accessible to every business and replace outdated marketing methods with
+          intelligent automation."
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SERVICES SNAPSHOT
+       ============================================ -->
+  <section class="services-snapshot">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title" data-aos="fade-up">
+          <span class="gradient-text">What We Do</span>
+        </h2>
+      </div>
+
+
+      <div class="marquee-banner" style="padding: 1rem 0;">
+        <div class="marquee-content d-flex align-items-center" style="gap: 1.5rem;">
+          <!-- Set 1 -->
+          <div class="glass-card p-3 text-center services-marquee-card">
+            <i class="fas fa-search text-primary fs-2 mb-2"></i>
+            <h6>AEO</h6>
+          </div>
+          <div class="glass-card p-3 text-center services-marquee-card">
+            <i class="fas fa-bullhorn text-success fs-2 mb-2"></i>
+            <h6>AI Marketing</h6>
+          </div>
+          <div class="glass-card p-3 text-center services-marquee-card">
+            <i class="fas fa-code text-warning fs-2 mb-2"></i>
+            <h6>AI Software</h6>
+          </div>
+          <div class="glass-card p-3 text-center services-marquee-card">
+            <i class="fas fa-robot text-danger fs-2 mb-2"></i>
+            <h6>AI Chatbots</h6>
+          </div>
+          <div class="glass-card p-3 text-center services-marquee-card">
+            <i class="fas fa-pen-fancy text-info fs-2 mb-2"></i>
+            <h6>AI Content</h6>
+          </div>
+          <div class="glass-card p-3 text-center services-marquee-card">
+            <i class="fas fa-funnel-dollar text-secondary fs-2 mb-2"></i>
+            <h6>Lead Generation</h6>
+          </div>
+
+          <!-- Set 2 -->
+          <div class="glass-card p-3 text-center services-marquee-card">
+            <i class="fas fa-search text-primary fs-2 mb-2"></i>
+            <h6>AEO</h6>
+          </div>
+          <div class="glass-card p-3 text-center services-marquee-card">
+            <i class="fas fa-bullhorn text-success fs-2 mb-2"></i>
+            <h6>AI Marketing</h6>
+          </div>
+          <div class="glass-card p-3 text-center services-marquee-card">
+            <i class="fas fa-code text-warning fs-2 mb-2"></i>
+            <h6>AI Software</h6>
+          </div>
+          <div class="glass-card p-3 text-center services-marquee-card">
+            <i class="fas fa-robot text-danger fs-2 mb-2"></i>
+            <h6>AI Chatbots</h6>
+          </div>
+          <div class="glass-card p-3 text-center services-marquee-card">
+            <i class="fas fa-pen-fancy text-info fs-2 mb-2"></i>
+            <h6>AI Content</h6>
+          </div>
+          <div class="glass-card p-3 text-center services-marquee-card">
+            <i class="fas fa-funnel-dollar text-secondary fs-2 mb-2"></i>
+            <h6>Lead Generation</h6>
+          </div>
+
+          <!-- Set 3 -->
+          <div class="glass-card p-3 text-center services-marquee-card">
+            <i class="fas fa-search text-primary fs-2 mb-2"></i>
+            <h6>AEO</h6>
+          </div>
+          <div class="glass-card p-3 text-center services-marquee-card">
+            <i class="fas fa-bullhorn text-success fs-2 mb-2"></i>
+            <h6>AI Marketing</h6>
+          </div>
+          <div class="glass-card p-3 text-center services-marquee-card">
+            <i class="fas fa-code text-warning fs-2 mb-2"></i>
+            <h6>AI Software</h6>
+          </div>
+          <div class="glass-card p-3 text-center services-marquee-card">
+            <i class="fas fa-robot text-danger fs-2 mb-2"></i>
+            <h6>AI Chatbots</h6>
+          </div>
+          <div class="glass-card p-3 text-center services-marquee-card">
+            <i class="fas fa-pen-fancy text-info fs-2 mb-2"></i>
+            <h6>AI Content</h6>
+          </div>
+          <div class="glass-card p-3 text-center services-marquee-card">
+            <i class="fas fa-funnel-dollar text-secondary fs-2 mb-2"></i>
+            <h6>Lead Generation</h6>
+          </div>
+
+          <!-- Set 4 -->
+          <div class="glass-card p-3 text-center services-marquee-card">
+            <i class="fas fa-search text-primary fs-2 mb-2"></i>
+            <h6>AEO</h6>
+          </div>
+          <div class="glass-card p-3 text-center services-marquee-card">
+            <i class="fas fa-bullhorn text-success fs-2 mb-2"></i>
+            <h6>AI Marketing</h6>
+          </div>
+          <div class="glass-card p-3 text-center services-marquee-card">
+            <i class="fas fa-code text-warning fs-2 mb-2"></i>
+            <h6>AI Software</h6>
+          </div>
+          <div class="glass-card p-3 text-center services-marquee-card">
+            <i class="fas fa-robot text-danger fs-2 mb-2"></i>
+            <h6>AI Chatbots</h6>
+          </div>
+          <div class="glass-card p-3 text-center services-marquee-card">
+            <i class="fas fa-pen-fancy text-info fs-2 mb-2"></i>
+            <h6>AI Content</h6>
+          </div>
+          <div class="glass-card p-3 text-center services-marquee-card">
+            <i class="fas fa-funnel-dollar text-secondary fs-2 mb-2"></i>
+            <h6>Lead Generation</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       OUR OFFICE & PRESENCE
+       ============================================ -->
+  <section class="our-office" style="background: #F8FAFF;">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title" data-aos="fade-up">
+          <span class="gradient-text">Our Office</span>
+        </h2>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-6" data-aos="fade-right" data-aos-delay="100">
+          <div class="glass-card p-4">
+            <h5 class="mb-4"><i class="fas fa-map-marker-alt text-primary me-2"></i>Office Address</h5>
+            <p class="fs-5 mb-4">
+              <strong>210, Sarthak Pulse Mall,<br>
+                PDPU Cross Road,<br>
+                Ahmedabad - Gandhinagar Highway,<br>
+                Bhaijipura, Kudasan, Gandhinagar.</strong>
+
+            </p>
+
+            <div class="contact-info mt-4">
+              <div class="d-flex align-items-center mb-3">
+                <a href="mailto:info.omnexaai@gmail.com" class="text-decoration-none d-flex align-items-center"
+                  style="color: inherit;">
+                  <i class="fas fa-envelope text-primary fs-4 me-3"></i>
+                  <span class="fs-5">info.omnexaai@gmail.com</span>
+                </a>
+              </div>
+              <div class="d-flex align-items-center">
+                <a href="tel:+919687517233" class="text-decoration-none d-flex align-items-center"
+                  style="color: inherit;">
+                  <i class="fas fa-phone text-primary fs-4 me-3"></i>
+                  <span class="fs-5">+91 96875 17233</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
+          <div class="glass-card p-0 overflow-hidden position-relative">
+            <a href="https://maps.app.goo.gl/rJrDEAXuMCZB4Xdr8?g_st=aw" target="_blank"
+              class="position-absolute w-100 h-100" style="top: 0; left: 0; z-index: 10;"></a>
+            <iframe
+              src="https://maps.google.com/maps?q=Sarthak+Pulse+Mall,+PDPU+Cross+Road,+Ahmedabad+-+Gandhinagar+Highway,+Bhaijipura,+Kudasan,+Gandhinagar&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              width="100%" height="300" style="border:0; pointer-events: none;" allowfullscreen="" loading="lazy">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       OUR APPROACH - 3 STEPS
+       ============================================ -->
+  <section class="our-approach">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title" data-aos="fade-up">
+          <span class="gradient-text">Our Approach</span>
+        </h2>
+      </div>
+
+      <div class="process-steps">
+        <div class="step-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="step-number">
+            <i class="fas fa-brain"></i>
+          </div>
+          <h3>Step 1: Understand Your Business Using AI Analysis</h3>
+          <p>We analyze your current setup, market position, and growth opportunities using advanced AI tools and data
+            insights.</p>
+        </div>
+
+        <div class="step-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="step-number">
+            <i class="fas fa-cogs"></i>
+          </div>
+          <h3>Step 2: Build AI Systems & Content</h3>
+          <p>We create custom AI tools, automated marketing systems, and AI-generated content tailored to your brand and
+            goals.</p>
+        </div>
+
+        <div class="step-card" data-aos="fade-up" data-aos-delay="500">
+          <div class="step-number">
+            <i class="fas fa-rocket"></i>
+          </div>
+          <h3>Step 3: Automate Growth and Lead Generation</h3>
+          <p>Your AI systems run 24/7, generating leads, creating content, and growing your business automatically while
+            you focus on what matters.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       CLOSING CTA
+       ============================================ -->
+  <section class="cta-section cosmic-pulse">
+    <div class="container">
+      <div class="cta-content" data-aos="fade-up">
+        <h2>The Future of Business Growth is AI. OMNEXA AI is Here to Build That Future for You.</h2>
+        <p>Book a free strategy call and discover how AI can transform your business.</p>
+        <a href="{% url 'contact:contact' %}" class="btn btn-gradient btn-lg">
+          <i class="fas fa-calendar-check me-2"></i>Book Free AI Strategy Call
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="footer footer-cosmic">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="footer-brand">
+            <img src="{% static 'img/OmnexaAI2.png' %}" alt="OMNEXA AI Logo" class="footer-logo mb-3">
+            <p>Your Innovative Partner</p>
+            <p class="mt-3">Building the future of business growth with intelligent AI automation and marketing systems.
+            </p>
+            <div class="social-icons">
+              <a href="https://www.facebook.com/profile.php?id=61589441850784" target="_blank"><i
+                  class="fab fa-facebook-f"></i></a>
+              <a href="https://www.instagram.com/omnexaai/" target="_blank"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.linkedin.com/company/omnexa-ai/" target="_blank"><i
+                  class="fab fa-linkedin-in"></i></a>
+              <!-- <a href="#"><i class="fab fa-youtube"></i></a> -->
+              <a href="https://wa.me/919687517233" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-6">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="{% url 'home:home' %}"><i class="fas fa-chevron-right me-2"></i>Home</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>Services</a></li>
+            <li><a href="{% url 'solutions:solutions' %}"><i class="fas fa-chevron-right me-2"></i>Solutions</a></li>
+            <li><a href="{% url 'case_studies:case-studies' %}"><i class="fas fa-chevron-right me-2"></i>Case
+                Studies</a></li>
+            <li><a href="{% url 'blog:blog' %}"><i class="fas fa-chevron-right me-2"></i>Blog</a></li>
+            <li><a href="{% url 'about:about' %}"><i class="fas fa-chevron-right me-2"></i>About</a></li>
+            <li><a href="{% url 'contact:contact' %}"><i class="fas fa-chevron-right me-2"></i>Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <h4>Services</h4>
+          <ul class="footer-links">
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AEO</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AI Marketing</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AI Software</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AI Chatbots</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AI Content</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>Lead Generation</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <h4>Contact</h4>
+          <a href="https://maps.app.goo.gl/rJrDEAXuMCZB4Xdr8?g_st=aw" target="_blank" class="footer-contact-link">
+            <div class="footer-contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>210, Sarthak Pulse Mall, PDPU Cross Road,<br>Ahmedabad - Gandhinagar Highway,<br>Bhaijipura,
+                Kudasan,
+                Gandhinagar</span>
+            </div>
+          </a>
+          <a href="mailto:info.omnexaai@gmail.com" class="footer-contact-link">
+            <div class="footer-contact-item">
+              <i class="fas fa-envelope"></i>
+              <span>info.omnexaai@gmail.com</span>
+            </div>
+          </a>
+          <a href="tel:+919687517233" class="footer-contact-link">
+            <div class="footer-contact-item">
+              <i class="fas fa-phone"></i>
+              <span>+91 96875 17233</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; <span class="current-year"></span> OMNEXA AI. All Rights Reserved. | Powered by Artificial
+          Intelligence</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       CHATBOT WIDGET
+       ============================================ -->
+  <div class="chatbot-widget">
+    <div class="chatbot-popup">
+      <div class="chatbot-header">
+        <div class="chatbot-avatar">
+          <i class="fas fa-robot"></i>
+        </div>
+        <div class="chatbot-info">
+          <h4>OMNEXA AI Assistant</h4>
+          <p>Online • Ready to help</p>
+        </div>
+      </div>
+      <div class="chatbot-messages">
+        <div class="chatbot-message">
+          Hi! I'm the OMNEXA AI assistant. How can I help you grow your business today?
+        </div>
+      </div>
+      <div class="chatbot-input-group">
+        <input type="text" class="chatbot-input" placeholder="Type your message...">
+        <button type="button"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+    <div class="chatbot-button">
+      <i class="fas fa-comments"></i>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SCRIPTS
+       ============================================ -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/brand-theme.js' %}?v=3"></script>
+
+  <script>
+    particlesJS('particles-js', {
+      'particles': {
+        'number': {
+          'value': 60,
+          'density': {
+            'enable': true,
+            'value_area': 800
+          }
+        },
+        'color': {
+          'value': ['#282973', '#FDB81E']
+        },
+        'shape': {
+          'type': 'circle'
+        },
+        'opacity': {
+          'value': 0.6,
+          'random': true,
+          'anim': {
+            'enable': true,
+            'speed': 1,
+            'opacity_min': 0.3,
+            'sync': false
+          }
+        },
+        'size': {
+          'value': 6,
+          'random': true,
+          'anim': {
+            'enable': true,
+            'speed': 2,
+            'size_min': 1.5,
+            'sync': false
+          }
+        },
+        'line_linked': {
+          'enable': true,
+          'distance': 150,
+          'color': '#282973',
+          'opacity': 0.35,
+          'width': 1.5
+        },
+        'move': {
+          'enable': true,
+          'speed': 2,
+          'direction': 'none',
+          'random': false,
+          'straight': false,
+          'out_mode': 'out',
+          'bounce': false
+        }
+      },
+      'interactivity': {
+        'detect_on': 'canvas',
+        'events': {
+          'onhover': {
+            'enable': true,
+            'mode': 'grab'
+          },
+          'onclick': {
+            'enable': true,
+            'mode': 'push'
+          },
+          'resize': true
+        },
+        'modes': {
+          'grab': {
+            'distance': 140,
+            'line_linked': {
+              'opacity': 0.5
+            }
+          },
+          'push': {
+            'particles_nb': 4
+          }
+        }
+      },
+      'retina_detect': true
+    });
+  </script>
+</body>
+
+</html>

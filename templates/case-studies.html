@@ -1,0 +1,864 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="shortcut icon" type="image/png" href="{% static 'img/OmnexaAI.png' %}" />
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="OMNEXA AI Case Studies - Real business growth powered by AI. See how our systems generated leads, traffic, and ROI.">
+  <meta name="keywords" content="AI Case Studies, Business Growth, Lead Generation, AEO Results, AI Marketing Results">
+  <title>Case Studies - OMNEXA AI | Real Business Growth Powered by AI</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- AOS CSS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <!-- Font Awesome 6 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;900&family=Nunito:wght@400;500;600&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}?v=26">
+  <link rel="stylesheet" href="{% static 'css/brand-theme.css' %}">
+</head>
+
+<body>
+  <!-- ============================================
+       NAVBAR
+       ============================================ -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'home:home' %}">
+        <img src="{% static 'img/OmnexaAI.png' %}" alt="OMNEXA AI Logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'home:home' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'services:services' %}">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'solutions:solutions' %}">Solutions</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'case_studies:case-studies' %}">Case Studies</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'blog:blog' %}">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'about:about' %}">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'careers:careers' %}">Careers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'contact:contact' %}">Contact</a>
+          </li>
+        </ul>
+        <a href="{% url 'contact:contact' %}" class="btn btn-gradient ms-3">Book Free Strategy</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================
+       HERO SECTION
+       ============================================ -->
+  <section class="hero-section hero-cosmic" style="min-height: 60vh; padding: 150px 0 80px;">
+    <div id="particles-js"></div>
+    <div class="container hero-content">
+      <div class="row align-items-center">
+        <div class="col-lg-10 mx-auto text-center">
+          <h1 class="hero-title" data-aos="fade-up">
+            <span class="gradient-text">Real Business Growth Powered by AI</span>
+          </h1>
+          <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
+            See how OMNEXA AI systems generated leads, traffic, and ROI using automation, AEO, and AI marketing.
+          </p>
+          <div class="d-flex justify-content-center gap-3 flex-wrap" data-aos="fade-up" data-aos-delay="400">
+            <a href="#contact" class="btn btn-gradient btn-lg">
+              <i class="fas fa-rocket me-2"></i>Get Free AI Strategy
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       RESULTS SNAPSHOT - ANIMATED COUNTERS
+       ============================================ -->
+  <section class="counter-section">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title" data-aos="fade-up">
+          <span class="gradient-text">Results Snapshot</span>
+        </h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">
+          Numbers that prove AI-powered growth works
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+          <div class="glass-card stat-card">
+            <span class="stat-number" data-target="300" data-suffix="%">0%</span>
+            <span class="stat-label">Traffic Growth</span>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+          <div class="glass-card stat-card">
+            <span class="stat-number" data-target="5" data-suffix="X">0X</span>
+            <span class="stat-label">Lead Generation</span>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+          <div class="glass-card stat-card">
+            <span class="stat-number" data-target="60" data-suffix="%">0%</span>
+            <span class="stat-label">Lower Ad Cost</span>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+          <div class="glass-card stat-card">
+            <span class="stat-number" data-target="24" data-suffix="/7">0/7</span>
+            <span class="stat-label">Automated Lead Capture</span>
+          </div>
+        </div>
+
+        <div class="col-lg-6 mx-auto mt-4" data-aos="zoom-in" data-aos-delay="500">
+          <div class="glass-card stat-card">
+            <span class="stat-number" data-target="100" data-suffix="%">0%</span>
+            <span class="stat-label">Ranked in AI Answers (AEO)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       COMMON RESULTS CLIENTS GET
+       ============================================ -->
+  <section class="common-results">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title" data-aos="fade-up">
+          <span class="gradient-text">Common Results Clients Get</span>
+        </h2>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="glass-card p-4 d-flex align-items-center">
+            <i class="fas fa-check-circle text-success fs-1 me-3"></i>
+            <span>Automated lead generation 24/7</span>
+          </div>
+        </div>
+
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="glass-card p-4 d-flex align-items-center">
+            <i class="fas fa-check-circle text-success fs-1 me-3"></i>
+            <span>Better ad ROI with AI optimization</span>
+          </div>
+        </div>
+
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="glass-card p-4 d-flex align-items-center">
+            <i class="fas fa-check-circle text-success fs-1 me-3"></i>
+            <span>Visibility in AI answers and search</span>
+          </div>
+        </div>
+
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
+          <div class="glass-card p-4 d-flex align-items-center">
+            <i class="fas fa-check-circle text-success fs-1 me-3"></i>
+            <span>High converting landing pages</span>
+          </div>
+        </div>
+
+        <div class="col-md-6 mx-auto" data-aos="fade-up" data-aos-delay="500">
+          <div class="glass-card p-4 d-flex align-items-center">
+            <i class="fas fa-check-circle text-success fs-1 me-3"></i>
+            <span>AI-powered content created daily</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       VISUAL PROOF SECTION
+       ============================================ -->
+  <section class="visual-proof" style="background: #F8FAFF;">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title" data-aos="fade-up">
+          <span class="gradient-text">Our AI in Action</span>
+        </h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">
+          See the real impact of our AI systems
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+          <div class="glass-card p-4 text-center">
+            <div class="visual-placeholder mb-3"
+              style="height: 150px; background: linear-gradient(135deg, #1A6DFF, #7B2FD4); border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+              <i class="fas fa-chart-line text-white fs-1"></i>
+            </div>
+            <h5>Traffic Growth Graph</h5>
+            <p class="text-muted">300% increase in organic traffic</p>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+          <div class="glass-card p-4 text-center">
+            <div class="visual-placeholder mb-3"
+              style="height: 150px; background: linear-gradient(135deg, #7B2FD4, #FF6B00); border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+              <i class="fas fa-ad text-white fs-1"></i>
+            </div>
+            <h5>Ad Manager Results</h5>
+            <p class="text-muted">60% lower cost per acquisition</p>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+          <div class="glass-card p-4 text-center">
+            <div class="visual-placeholder mb-3"
+              style="height: 150px; background: linear-gradient(135deg, #FF6B00, #22C55E); border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+              <i class="fas fa-chart-bar text-white fs-1"></i>
+            </div>
+            <h5>Analytics Growth</h5>
+            <p class="text-muted">5X lead generation improvement</p>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+          <div class="glass-card p-4 text-center">
+            <div class="visual-placeholder mb-3"
+              style="height: 150px; background: linear-gradient(135deg, #22C55E, #1A6DFF); border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+              <i class="fas fa-comments text-white fs-1"></i>
+            </div>
+            <h5>Chatbot Conversations</h5>
+            <p class="text-muted">24/7 automated lead capture</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       INDIVIDUAL CASE STUDIES
+       ============================================ -->
+  <section class="case-studies">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title" data-aos="fade-up">
+          <span class="gradient-text">Detailed Case Studies</span>
+        </h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">
+          Real results from real businesses
+        </p>
+      </div>
+
+      <!-- Case Study 1: Real Estate -->
+      <div class="glass-card mb-5" data-aos="fade-up" data-aos-delay="100">
+        <div class="p-5">
+          <h3 class="gradient-text mb-4"><i class="fas fa-building me-3"></i>Case Study: Real Estate Developer</h3>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <h5><i class="fas fa-user me-2 text-primary"></i>Client Type</h5>
+              <p>Real Estate Developer - Luxury Properties</p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <h5><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Problem They Faced</h5>
+              <p>Struggling to generate qualified leads for high-value properties. Traditional advertising was expensive
+                and ineffective. Competition was fierce in the local market.</p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <h5><i class="fas fa-tools me-2 text-info"></i>What OMNEXA AI Implemented</h5>
+              <p>AEO optimization, AI-powered property listings, automated lead capture system, AI chatbot for property
+                inquiries, automated email nurturing sequences.</p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <h5><i class="fas fa-lightbulb me-2 text-success"></i>AI Strategy Used</h5>
+              <p>Optimized property content for AI answers, created AI-generated virtual tour descriptions, implemented
+                automated follow-ups for interested prospects, used AI to identify high-intent leads.</p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <h5><i class="fas fa-clock me-2 text-secondary"></i>Process Timeline</h5>
+              <p>Week 1-2: Analysis and strategy<br>Week 3-4: System implementation<br>Week 5-8: Optimization and
+                scaling<br>Results achieved within 8 weeks</p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <h5><i class="fas fa-trophy me-2 text-warning"></i>Results</h5>
+              <p><strong>350% increase</strong> in qualified property inquiries<br><strong>45% reduction</strong> in
+                advertising costs<br><strong>3 property sales</strong> from AI-generated leads in first
+                month<br><strong>24/7 automated</strong> inquiry handling</p>
+            </div>
+
+            <div class="col-12 mb-3">
+              <h5><i class="fas fa-table me-2 text-primary"></i>Before vs After</h5>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Metric</th>
+                    <th>Before</th>
+                    <th>After</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Monthly Inquiries</td>
+                    <td>15</td>
+                    <td class="text-success fw-bold">68</td>
+                  </tr>
+                  <tr>
+                    <td>Cost per Lead</td>
+                    <td>$150</td>
+                    <td class="text-success fw-bold">$82</td>
+                  </tr>
+                  <tr>
+                    <td>Response Time</td>
+                    <td>4-8 hours</td>
+                    <td class="text-success fw-bold">Instant (AI)</td>
+                  </tr>
+                  <tr>
+                    <td>Conversion Rate</td>
+                    <td>2%</td>
+                    <td class="text-success fw-bold">8%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="col-12">
+              <blockquote class="blockquote p-4"
+                style="background: var(--gradient-light); border-left: 4px solid var(--primary-blue); border-radius: 10px;">
+                <p class="mb-0">"OMNEXA AI transformed our lead generation completely. We went from struggling to find
+                  buyers to having more qualified inquiries than we could handle. The AI systems work 24/7 and the
+                  results speak for themselves."</p>
+                <footer class="blockquote-footer mt-2">Property Director, <cite title="Source Title">Luxury Real Estate
+                    Developer</cite></footer>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case Study 2: Healthcare -->
+      <div class="glass-card mb-5" data-aos="fade-up" data-aos-delay="200">
+        <div class="p-5">
+          <h3 class="gradient-text mb-4"><i class="fas fa-heartbeat me-3"></i>Case Study: Healthcare Clinic</h3>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <h5><i class="fas fa-user me-2 text-primary"></i>Client Type</h5>
+              <p>Multi-specialty Healthcare Clinic</p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <h5><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Problem They Faced</h5>
+              <p>Difficulty attracting new patients, high no-show rates, limited online visibility, time-consuming
+                appointment scheduling, inconsistent patient communication.</p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <h5><i class="fas fa-tools me-2 text-info"></i>What OMNEXA AI Implemented</h5>
+              <p>AI-powered patient acquisition system, automated appointment scheduling, AI chatbot for patient
+                inquiries, automated reminder system, health content creation and marketing.</p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <h5><i class="fas fa-lightbulb me-2 text-success"></i>AI Strategy Used</h5>
+              <p>Optimized for local health-related AI answers, created AI-generated health content, implemented
+                automated patient communication, used AI to predict and prevent no-shows.</p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <h5><i class="fas fa-clock me-2 text-secondary"></i>Process Timeline</h5>
+              <p>Week 1-2: Patient journey analysis<br>Week 3-4: System implementation<br>Week 5-6: Testing and
+                optimization<br>Results achieved within 6 weeks</p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <h5><i class="fas fa-trophy me-2 text-warning"></i>Results</h5>
+              <p><strong>280% increase</strong> in new patient appointments<br><strong>65% reduction</strong> in no-show
+                rates<br><strong>4.8 star rating</strong> increase on Google<br><strong>24/7 patient support</strong>
+                availability</p>
+            </div>
+
+            <div class="col-12 mb-3">
+              <h5><i class="fas fa-table me-2 text-primary"></i>Before vs After</h5>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Metric</th>
+                    <th>Before</th>
+                    <th>After</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>New Patients/Month</td>
+                    <td>25</td>
+                    <td class="text-success fw-bold">95</td>
+                  </tr>
+                  <tr>
+                    <td>No-Show Rate</td>
+                    <td>35%</td>
+                    <td class="text-success fw-bold">12%</td>
+                  </tr>
+                  <tr>
+                    <td>Appointment Booking Time</td>
+                    <td>2-3 days</td>
+                    <td class="text-success fw-bold">Same day</td>
+                  </tr>
+                  <tr>
+                    <td>Patient Satisfaction</td>
+                    <td>3.8/5</td>
+                    <td class="text-success fw-bold">4.8/5</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="col-12">
+              <blockquote class="blockquote p-4"
+                style="background: var(--gradient-light); border-left: 4px solid var(--primary-blue); border-radius: 10px;">
+                <p class="mb-0">"The AI systems have revolutionized how we attract and retain patients. Our no-show
+                  rates dropped dramatically and new patient bookings have tripled. The automated reminders and 24/7
+                  support have been game-changers."</p>
+                <footer class="blockquote-footer mt-2">Clinic Director, <cite title="Source Title">Multi-specialty
+                    Healthcare Clinic</cite></footer>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case Study 3: E-commerce -->
+      <div class="glass-card mb-5" data-aos="fade-up" data-aos-delay="300">
+        <div class="p-5">
+          <h3 class="gradient-text mb-4"><i class="fas fa-shopping-cart me-3"></i>Case Study: E-commerce Store</h3>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <h5><i class="fas fa-user me-2 text-primary"></i>Client Type</h5>
+              <p>Online Fashion Retailer</p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <h5><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Problem They Faced</h5>
+              <p>High cart abandonment rates, expensive customer acquisition, difficulty personalizing experiences,
+                time-consuming product content creation, inconsistent customer support.</p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <h5><i class="fas fa-tools me-2 text-info"></i>What OMNEXA AI Implemented</h5>
+              <p>AI-powered product recommendations, automated cart recovery system, AI chatbot for customer support,
+                product content generation, personalized email marketing automation.</p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <h5><i class="fas fa-lightbulb me-2 text-success"></i>AI Strategy Used</h5>
+              <p>Implemented AI recommendation engine, created automated cart recovery sequences, generated AI product
+                descriptions, personalized customer journeys based on behavior.</p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <h5><i class="fas fa-clock me-2 text-secondary"></i>Process Timeline</h5>
+              <p>Week 1-2: E-commerce data analysis<br>Week 3-4: AI system integration<br>Week 5-8: Optimization and
+                scaling<br>Results achieved within 8 weeks</p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <h5><i class="fas fa-trophy me-2 text-warning"></i>Results</h5>
+              <p><strong>420% increase</strong> in recovered carts<br><strong>55% reduction</strong> in customer
+                acquisition cost<br><strong>35% increase</strong> in average order value<br><strong>24/7 customer
+                  support</strong> with AI chatbot</p>
+            </div>
+
+            <div class="col-12 mb-3">
+              <h5><i class="fas fa-table me-2 text-primary"></i>Before vs After</h5>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Metric</th>
+                    <th>Before</th>
+                    <th>After</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Cart Abandonment Rate</td>
+                    <td>78%</td>
+                    <td class="text-success fw-bold">42%</td>
+                  </tr>
+                  <tr>
+                    <td>Cost per Acquisition</td>
+                    <td>$45</td>
+                    <td class="text-success fw-bold">$20</td>
+                  </tr>
+                  <tr>
+                    <td>Average Order Value</td>
+                    <td>$65</td>
+                    <td class="text-success fw-bold">$88</td>
+                  </tr>
+                  <tr>
+                    <td>Customer Support Response</td>
+                    <td>4-12 hours</td>
+                    <td class="text-success fw-bold">Instant (AI)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="col-12">
+              <blockquote class="blockquote p-4"
+                style="background: var(--gradient-light); border-left: 4px solid var(--primary-blue); border-radius: 10px;">
+                <p class="mb-0">"The AI systems have completely transformed our e-commerce operations. Cart recovery
+                  went from manual follow-ups to automated sequences that actually work. Our average order value has
+                  increased significantly thanks to AI recommendations."</p>
+                <footer class="blockquote-footer mt-2">E-commerce Manager, <cite title="Source Title">Online Fashion
+                    Retailer</cite></footer>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case Study 4: Business Coach -->
+      <div class="glass-card mb-5" data-aos="fade-up" data-aos-delay="400">
+        <div class="p-5">
+          <h3 class="gradient-text mb-4"><i class="fas fa-chalkboard-teacher me-3"></i>Case Study: Business Coach</h3>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <h5><i class="fas fa-user me-2 text-primary"></i>Client Type</h5>
+              <p>Business & Leadership Coach</p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <h5><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Problem They Faced</h5>
+              <p>Difficulty attracting new coaching clients, time-consuming content creation, inconsistent lead
+                generation, limited time for actual coaching, manual follow-up processes.</p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <h5><i class="fas fa-tools me-2 text-info"></i>What OMNEXA AI Implemented</h5>
+              <p>AI-powered lead generation system, automated content creation for social media, AI chatbot for initial
+                consultations, automated email nurturing sequences, client onboarding automation.</p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <h5><i class="fas fa-lightbulb me-2 text-success"></i>AI Strategy Used</h5>
+              <p>Created AI content for thought leadership, implemented automated lead nurturing, used AI to qualify
+                coaching prospects, automated client onboarding process.</p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <h5><i class="fas fa-clock me-2 text-secondary"></i>Process Timeline</h5>
+              <p>Week 1-2: Coaching brand analysis<br>Week 3-4: AI system setup<br>Week 5-6: Content
+                automation<br>Results achieved within 6 weeks</p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <h5><i class="fas fa-trophy me-2 text-warning"></i>Results</h5>
+              <p><strong>500% increase</strong> in coaching inquiries<br><strong>40 hours/week saved</strong> on content
+                creation<br><strong>12 new clients</strong> in first month<br><strong>Automated 80%</strong> of
+                follow-up process</p>
+            </div>
+
+            <div class="col-12 mb-3">
+              <h5><i class="fas fa-table me-2 text-primary"></i>Before vs After</h5>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Metric</th>
+                    <th>Before</th>
+                    <th>After</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Monthly Inquiries</td>
+                    <td>8</td>
+                    <td class="text-success fw-bold">48</td>
+                  </tr>
+                  <tr>
+                    <td>Content Creation Time</td>
+                    <td>40 hrs/week</td>
+                    <td class="text-success fw-bold">5 hrs/week</td>
+                  </tr>
+                  <tr>
+                    <td>Client Conversion Rate</td>
+                    <td>15%</td>
+                    <td class="text-success fw-bold">35%</td>
+                  </tr>
+                  <tr>
+                    <td>Follow-up Automation</td>
+                    <td>0%</td>
+                    <td class="text-success fw-bold">80%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="col-12">
+              <blockquote class="blockquote p-4"
+                style="background: var(--gradient-light); border-left: 4px solid var(--primary-blue); border-radius: 10px;">
+                <p class="mb-0">"OMNEXA AI has given me my time back while dramatically increasing my client base. The
+                  automated content creation means I can focus on coaching instead of marketing. The lead nurturing
+                  system has been incredibly effective."</p>
+                <footer class="blockquote-footer mt-2">Business Coach, <cite title="Source Title">Leadership & Business
+                    Coaching</cite></footer>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+       FINAL CTA
+       ============================================ -->
+  <section class="cta-section cosmic-pulse">
+    <div class="container">
+      <div class="cta-content" data-aos="fade-up">
+        <h2>Want Similar AI-Powered Results for Your Business?</h2>
+        <p>Book a free strategy call and discover how AI can transform your business growth.</p>
+        <a href="{% url 'contact:contact' %}" class="btn btn-gradient btn-lg">
+          <i class="fas fa-calendar-check me-2"></i>Get Free AI Strategy
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="footer footer-cosmic">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="footer-brand">
+            <img src="{% static 'img/OmnexaAI2.png' %}" alt="OMNEXA AI Logo" class="footer-logo mb-3">
+            <p>Your Innovative Partner</p>
+            <p class="mt-3">Building the future of business growth with intelligent AI automation and marketing systems.
+            </p>
+            <div class="social-icons">
+              <a href="https://www.facebook.com/profile.php?id=61589441850784" target="_blank"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://www.instagram.com/omnexaai/" target="_blank"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.linkedin.com/company/omnexa-ai/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+              <!-- <a href="#"><i class="fab fa-youtube"></i></a> -->
+              <a href="https://wa.me/919687517233" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-6">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="{% url 'home:home' %}"><i class="fas fa-chevron-right me-2"></i>Home</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>Services</a></li>
+            <li><a href="{% url 'solutions:solutions' %}"><i class="fas fa-chevron-right me-2"></i>Solutions</a></li>
+            <li><a href="{% url 'case_studies:case-studies' %}"><i class="fas fa-chevron-right me-2"></i>Case
+                Studies</a></li>
+            <li><a href="{% url 'blog:blog' %}"><i class="fas fa-chevron-right me-2"></i>Blog</a></li>
+            <li><a href="{% url 'about:about' %}"><i class="fas fa-chevron-right me-2"></i>About</a></li>
+            <li><a href="{% url 'contact:contact' %}"><i class="fas fa-chevron-right me-2"></i>Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <h4>Services</h4>
+          <ul class="footer-links">
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AEO</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AI Marketing</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AI Software</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AI Chatbots</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>AI Content</a></li>
+            <li><a href="{% url 'services:services' %}"><i class="fas fa-chevron-right me-2"></i>Lead Generation</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <h4>Contact</h4>
+          <a href="https://maps.app.goo.gl/rJrDEAXuMCZB4Xdr8?g_st=aw" target="_blank" class="footer-contact-link">
+            <div class="footer-contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>210, Sarthak Pulse Mall, PDPU Cross Road,<br>Ahmedabad - Gandhinagar Highway,<br>Bhaijipura, Kudasan,
+                Gandhinagar</span>
+            </div>
+          </a>
+          <a href="mailto:info.omnexaai@gmail.com" class="footer-contact-link">
+            <div class="footer-contact-item">
+              <i class="fas fa-envelope"></i>
+              <span>info.omnexaai@gmail.com</span>
+            </div>
+          </a>
+          <a href="tel:+919687517233" class="footer-contact-link">
+            <div class="footer-contact-item">
+              <i class="fas fa-phone"></i>
+              <span>+91 96875 17233</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; <span class="current-year"></span> OMNEXA AI. All Rights Reserved. | Powered by Artificial
+          Intelligence</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       CHATBOT WIDGET
+       ============================================ -->
+  <div class="chatbot-widget">
+    <div class="chatbot-popup">
+      <div class="chatbot-header">
+        <div class="chatbot-avatar">
+          <i class="fas fa-robot"></i>
+        </div>
+        <div class="chatbot-info">
+          <h4>OMNEXA AI Assistant</h4>
+          <p>Online • Ready to help</p>
+        </div>
+      </div>
+      <div class="chatbot-messages">
+        <div class="chatbot-message">
+          Hi! I'm the OMNEXA AI assistant. How can I help you grow your business today?
+        </div>
+      </div>
+      <div class="chatbot-input-group">
+        <input type="text" class="chatbot-input" placeholder="Type your message...">
+        <button type="button"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+    <div class="chatbot-button">
+      <i class="fas fa-comments"></i>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SCRIPTS
+       ============================================ -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/brand-theme.js' %}?v=3"></script>
+
+  <script>
+    particlesJS('particles-js', {
+      'particles': {
+        'number': {
+          'value': 60,
+          'density': {
+            'enable': true,
+            'value_area': 800
+          }
+        },
+        'color': {
+          'value': ['#282973', '#FDB81E']
+        },
+        'shape': {
+          'type': 'circle'
+        },
+        'opacity': {
+          'value': 0.6,
+          'random': true,
+          'anim': {
+            'enable': true,
+            'speed': 1,
+            'opacity_min': 0.3,
+            'sync': false
+          }
+        },
+        'size': {
+          'value': 6,
+          'random': true,
+          'anim': {
+            'enable': true,
+            'speed': 2,
+            'size_min': 1.5,
+            'sync': false
+          }
+        },
+        'line_linked': {
+          'enable': true,
+          'distance': 150,
+          'color': '#282973',
+          'opacity': 0.35,
+          'width': 1.5
+        },
+        'move': {
+          'enable': true,
+          'speed': 2,
+          'direction': 'none',
+          'random': false,
+          'straight': false,
+          'out_mode': 'out',
+          'bounce': false
+        }
+      },
+      'interactivity': {
+        'detect_on': 'canvas',
+        'events': {
+          'onhover': {
+            'enable': true,
+            'mode': 'grab'
+          },
+          'onclick': {
+            'enable': true,
+            'mode': 'push'
+          },
+          'resize': true
+        },
+        'modes': {
+          'grab': {
+            'distance': 140,
+            'line_linked': {
+              'opacity': 0.5
+            }
+          },
+          'push': {
+            'particles_nb': 4
+          }
+        }
+      },
+      'retina_detect': true
+    });
+  </script>
+</body>
+
+</html>
