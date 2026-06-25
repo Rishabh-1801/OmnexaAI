@@ -32,14 +32,29 @@ def validate_phone_number(phone):
     return len(digits) >= 10
 
 
+import threading
+
+def send_mail_async(subject, message, from_email, recipient_list, fail_silently=True):
+    """
+    Send email asynchronously using a background thread to prevent SMTP connection timeouts
+    from blocking the main request-response cycle.
+    """
+    thread = threading.Thread(
+        target=send_mail,
+        args=(subject, message, from_email, recipient_list),
+        kwargs={'fail_silently': fail_silently}
+    )
+    thread.start()
+
+
 def send_admin_email(subject, message, recipient_list=None):
     """
-    Send email to admin(s).
+    Send email to admin(s) asynchronously.
     """
     if recipient_list is None:
         recipient_list = [settings.ADMIN_EMAIL]
 
-    send_mail(
+    send_mail_async(
         subject=subject,
         message=message,
         from_email=settings.DEFAULT_FROM_EMAIL,
@@ -50,9 +65,9 @@ def send_admin_email(subject, message, recipient_list=None):
 
 def send_user_email(subject, message, recipient_email):
     """
-    Send email to a user.
+    Send email to a user asynchronously.
     """
-    send_mail(
+    send_mail_async(
         subject=subject,
         message=message,
         from_email=settings.DEFAULT_FROM_EMAIL,

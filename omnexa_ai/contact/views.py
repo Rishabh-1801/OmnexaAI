@@ -10,9 +10,9 @@ from rest_framework import status
 from django.shortcuts import render
 from .models import ConsultationBooking, NewsletterSubscriber
 from .serializers import ConsultationBookingSerializer, NewsletterSerializer
-from omnexa_ai.core.utils import get_client_ip
-
-
+from omnexa_ai.core.utils import get_client_ip, send_mail_async
+ 
+ 
 class ConsultationBookingCreateView(APIView):
     """
     POST /api/v1/contact/book/
@@ -41,7 +41,7 @@ class ConsultationBookingCreateView(APIView):
             )
 
             # Send confirmation email to lead
-            send_mail(
+            send_mail_async(
                 subject="✅ Your Free AI Strategy Consultation is Booked — OMNEXA AI",
                 message=f"""
 Hi {booking.name},
@@ -66,7 +66,7 @@ OMNEXA AI Team
             )
 
             # Notify admin
-            send_mail(
+            send_mail_async(
                 subject=f"🔥 New Lead: {booking.name} — {booking.business_name}",
                 message=f"""
 New consultation booking received!

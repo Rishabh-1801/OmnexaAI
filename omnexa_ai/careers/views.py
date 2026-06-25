@@ -18,7 +18,7 @@ from .serializers import (
     JobApplicationCreateSerializer, JobApplicationDetailSerializer,
     CareersPageContentSerializer, CompanyBenefitSerializer
 )
-from omnexa_ai.core.utils import get_client_ip
+from omnexa_ai.core.utils import get_client_ip, send_mail_async
 
 
 # --- Template Views (SSR) ---
@@ -145,7 +145,7 @@ class JobApplicationCreateAPIView(CreateAPIView):
             )
 
             # Send confirmation email to applicant
-            send_mail(
+            send_mail_async(
                 subject=f"Application Received — OMNEXA AI",
                 message=f"""
 Dear {application.name},
@@ -172,7 +172,7 @@ OMNEXA AI Hiring Team
             )
 
             # Send notification email to HR
-            send_mail(
+            send_mail_async(
                 subject=f"📋 New Application: {application.name} — {application.category}",
                 message=f"""
 New job application received!
