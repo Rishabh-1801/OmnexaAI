@@ -10,7 +10,7 @@ from .models import BlogPost
 class BlogPostAdmin(admin.ModelAdmin):
     list_display = ['title', 'category', 'is_published', 'views_count', 'published_at']
     list_filter = ['is_published', 'category']
-    search_fields = ['title', 'excerpt', 'content']
+    search_fields = ['title', 'content']
     prepopulated_fields = {'slug': ('title',)}
     list_editable = ['is_published']
     date_hierarchy = 'published_at'
@@ -21,8 +21,9 @@ class BlogPostAdmin(admin.ModelAdmin):
             'fields': ('title', 'slug', 'category', 'author', 'is_published', 'published_at')
         }),
         ('Content', {
-            'fields': ('excerpt', 'content', 'featured_image')
+            'fields': ('content', 'featured_image')
         }),
+
         ('SEO', {
             'fields': ('meta_title', 'meta_description'),
             'classes': ('collapse',),

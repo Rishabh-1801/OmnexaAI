@@ -3,9 +3,10 @@ URL configuration for OMNEXA AI project.
 """
 
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.static import serve
 
 urlpatterns = [
     # Django Admin
@@ -30,4 +31,12 @@ urlpatterns = [
     path('api/v1/chatbot/', include('omnexa_ai.chatbot.urls')),
     path('api/v1/careers/', include('omnexa_ai.careers.urls_api')),
     path('api/v1/home/', include('omnexa_ai.home.urls_api')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+# Always serve media files (even in production with DEBUG=False)
+urlpatterns += [
+    re_path(r'^media/(?P<path>.*)$', serve, {
+        'document_root': settings.MEDIA_ROOT,
+    }),
+]
+

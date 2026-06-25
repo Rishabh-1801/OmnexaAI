@@ -16,7 +16,7 @@ class BlogPostListSerializer(serializers.ModelSerializer):
         model = BlogPost
         fields = [
             'id', 'title', 'slug', 'category', 'category_display',
-            'excerpt', 'featured_image', 'published_at', 'views_count'
+            'content', 'featured_image', 'published_at', 'views_count'
         ]
 
 

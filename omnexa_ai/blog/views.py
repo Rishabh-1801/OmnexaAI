@@ -65,7 +65,7 @@ class BlogListAPIView(ListAPIView):
     """
     serializer_class = BlogPostListSerializer
     filter_backends = [SearchFilter]
-    search_fields = ['title', 'excerpt']
+    search_fields = ['title', 'content']
 
     def get_queryset(self):
         qs = BlogPost.objects.filter(is_published=True).order_by('-published_at')

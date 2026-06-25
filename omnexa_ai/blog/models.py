@@ -29,10 +29,6 @@ class BlogPost(TimeStampedModel, MetaTagModel, PublishableModel):
         choices=BLOG_CATEGORY_CHOICES,
         default='ai_marketing'
     )
-    excerpt = models.TextField(
-        max_length=300,
-        help_text="2-line description shown on blog card"
-    )
     content = models.TextField(help_text="Full article content (HTML or Markdown)")
     featured_image = models.ImageField(
         upload_to='blog/images/',

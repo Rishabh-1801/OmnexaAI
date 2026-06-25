@@ -135,7 +135,7 @@
             <div class="p-4">
               <span class="badge bg-primary mb-2">{{ post.get_category_display }}</span>
               <h5 class="mb-3">{{ post.title }}</h5>
-              <p class="text-muted mb-3">{{ post.excerpt }}</p>
+              <p class="text-muted mb-3" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">{{ post.content|striptags }}</p>
               <a href="{% url 'blog:blog-detail' post.slug %}" class="btn btn-outline-gradient btn-sm">Read More <i
                   class="fas fa-arrow-right ms-2"></i></a>
             </div>
