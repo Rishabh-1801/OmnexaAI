@@ -7,6 +7,8 @@ from .models import ConsultationBooking, NewsletterSubscriber
 
 
 class ConsultationBookingSerializer(serializers.ModelSerializer):
+    website = serializers.CharField(required=False, allow_blank=True, allow_null=True)
+
     class Meta:
         model = ConsultationBooking
         fields = [
@@ -29,6 +31,32 @@ class ConsultationBookingSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 "Please enter a valid phone number with at least 10 digits."
             )
+        return value
+
+    def validate_website(self, value):
+        """Clean and validate website URL."""
+        if not value:
+            return ''
+        
+        value = value.strip()
+        # Clean placeholders like N/A, None, etc.
+        if value.lower() in ['n/a', 'na', 'none', 'no', 'nil', 'null']:
+            return ''
+            
+        # Prepend https:// if it does not have a protocol scheme
+        import re
+        if not re.match(r'^https?://', value, re.IGNORECASE):
+            value = 'https://' + value
+            
+        # Validate it using Django's URLValidator
+        from django.core.validators import URLValidator
+        from django.core.exceptions import ValidationError
+        val = URLValidator()
+        try:
+            val(value)
+        except ValidationError:
+            raise serializers.ValidationError("Enter a valid URL.")
+            
         return value
 
 

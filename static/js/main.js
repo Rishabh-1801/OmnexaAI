@@ -312,36 +312,75 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // ============================================
 function validateForm(form) {
   let isValid = true;
-  const requiredFields = form.querySelectorAll('[required]');
+  const fields = form.querySelectorAll('input, select, textarea');
 
-  requiredFields.forEach(field => {
-    if (!field.value.trim()) {
-      isValid = false;
-      field.classList.add('is-invalid');
-    } else {
-      field.classList.remove('is-invalid');
+  // Clear existing errors
+  form.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
+  form.querySelectorAll('.invalid-feedback').forEach(el => el.remove());
+
+  fields.forEach(field => {
+    let fieldValid = true;
+    let errorMsg = '';
+    const val = field.value.trim();
+
+    // Check required
+    if (field.hasAttribute('required') && !val) {
+      fieldValid = false;
+      errorMsg = 'This field is required.';
     }
 
     // Email validation
-    if (field.type === 'email' && field.value.trim()) {
+    if (fieldValid && field.type === 'email' && val) {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(field.value.trim())) {
-        isValid = false;
-        field.classList.add('is-invalid');
+      if (!emailRegex.test(val)) {
+        fieldValid = false;
+        errorMsg = 'Please enter a valid email address.';
       }
     }
 
     // Phone validation
-    if (field.type === 'tel' && field.value.trim()) {
+    if (fieldValid && field.type === 'tel' && val) {
+      const digits = val.replace(/\D/g, '');
       const phoneRegex = /^[+]?[(]?[0-9]{1,4}[)]?[-\s.]?[(]?[0-9]{1,4}[)]?[-\s.]?[0-9]{1,9}$/;
-      if (!phoneRegex.test(field.value.trim())) {
-        isValid = false;
-        field.classList.add('is-invalid');
+      if (!phoneRegex.test(val)) {
+        fieldValid = false;
+        errorMsg = 'Please enter a valid phone number.';
+      } else if (digits.length < 10) {
+        fieldValid = false;
+        errorMsg = 'Phone number must be at least 10 digits.';
       }
+    }
+
+    if (!fieldValid) {
+      isValid = false;
+      field.classList.add('is-invalid');
+      
+      const feedback = document.createElement('div');
+      feedback.className = 'invalid-feedback';
+      feedback.textContent = errorMsg;
+      field.after(feedback);
     }
   });
 
   return isValid;
+}
+
+function showFieldErrors(form, errors) {
+  // Clear any existing errors first
+  form.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
+  form.querySelectorAll('.invalid-feedback').forEach(el => el.remove());
+
+  for (const [field, messages] of Object.entries(errors)) {
+    const inputField = form.querySelector(`[name="${field}"]`);
+    if (inputField) {
+      inputField.classList.add('is-invalid');
+      
+      const feedback = document.createElement('div');
+      feedback.className = 'invalid-feedback';
+      feedback.textContent = messages.join(' ');
+      inputField.after(feedback);
+    }
+  }
 }
 
 // ============================================
@@ -386,12 +425,19 @@ if (bookingForm) {
           submitBtn.style.background = 'var(--accent-green)';
           this.reset();
 
+          // Clear any remaining errors
+          this.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
+          this.querySelectorAll('.invalid-feedback').forEach(el => el.remove());
+
           setTimeout(() => {
             submitBtn.innerHTML = originalText;
             submitBtn.style.background = '';
             submitBtn.disabled = false;
           }, 3000);
         } else {
+          if (result.errors) {
+            showFieldErrors(this, result.errors);
+          }
           throw new Error(result.message || 'Submission failed');
         }
       } catch (error) {
@@ -446,12 +492,19 @@ if (candidateForm) {
           submitBtn.style.background = 'var(--accent-green)';
           this.reset();
 
+          // Clear any remaining errors
+          this.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
+          this.querySelectorAll('.invalid-feedback').forEach(el => el.remove());
+
           setTimeout(() => {
             submitBtn.innerHTML = originalText;
             submitBtn.style.background = '';
             submitBtn.disabled = false;
           }, 3000);
         } else {
+          if (result.errors) {
+            showFieldErrors(this, result.errors);
+          }
           throw new Error(result.message || 'Submission failed');
         }
       } catch (error) {
