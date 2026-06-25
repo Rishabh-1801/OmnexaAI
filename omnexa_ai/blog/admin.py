@@ -32,3 +32,10 @@ class BlogPostAdmin(admin.ModelAdmin):
             'classes': ('collapse',),
         }),
     )
+
+    class Media:
+        js = (
+            'https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js',
+            'js/admin_ckeditor.js',
+        )
+

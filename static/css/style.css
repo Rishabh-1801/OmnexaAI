@@ -3311,55 +3311,107 @@ section {
 }
 
 /* Article Body Typography */
-.blog-body h2 {
-  font-size: 1.75rem;
-  font-weight: 800;
-  color: #282973;
-  margin-top: 2.5rem;
+.blog-body {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #374151;
+}
+
+.blog-body h2, .blog-body h3, .blog-body h4 {
+  font-family: 'Exo 2', sans-serif;
+  color: #1a1a2e;
+  margin-top: 2.2rem;
   margin-bottom: 1rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.blog-body h2 {
+  font-size: 1.65rem;
+  border-bottom: 2px solid rgba(40, 41, 115, 0.08);
   padding-bottom: 0.5rem;
-  border-bottom: 2px solid rgba(40, 41, 115, 0.1);
 }
 
 .blog-body h3 {
   font-size: 1.4rem;
-  font-weight: 700;
-  color: #282973;
-  margin-top: 2rem;
-  margin-bottom: 0.75rem;
+}
+
+.blog-body h4 {
+  font-size: 1.2rem;
 }
 
 .blog-body p {
-  margin-bottom: 1.1rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+
+.blog-body a {
+  color: #282973;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.blog-body a:hover {
+  color: #FDB81E;
 }
 
 .blog-body blockquote {
   border-left: 5px solid #FDB81E;
-  background: rgba(253, 184, 30, 0.06);
+  background: rgba(253, 184, 30, 0.05);
   padding: 1.25rem 1.75rem;
   margin: 2rem 0;
   border-radius: 0 12px 12px 0;
   font-style: italic;
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   color: #282973;
 }
 
-.blog-body ul,
-.blog-body ol {
-  padding-left: 1.5rem;
+.blog-body ul {
+  list-style-type: disc !important;
+  margin-top: 1rem;
   margin-bottom: 1.5rem;
+  padding-left: 2rem !important;
+}
+
+.blog-body ol {
+  list-style-type: decimal !important;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  padding-left: 2rem !important;
 }
 
 .blog-body li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
+  line-height: 1.7;
 }
 
 .blog-body img {
   max-width: 100%;
   border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(40, 41, 115, 0.12);
-  margin: 1.5rem 0;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+  margin: 2rem 0;
+  display: block;
 }
+
+.blog-body table {
+  width: 100%;
+  margin: 2.5rem 0;
+  border-collapse: collapse;
+  font-size: 1.05rem;
+}
+
+.blog-body th, .blog-body td {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 0.8rem 1.2rem;
+}
+
+.blog-body th {
+  background-color: rgba(40, 41, 115, 0.03);
+  font-weight: 700;
+  color: #282973;
+}
+
 
 /* Related Article Card Hover */
 .glass-card:hover {

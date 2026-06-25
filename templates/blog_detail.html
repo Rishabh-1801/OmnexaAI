@@ -74,64 +74,64 @@
   </nav>
 
   <!-- ============================================
-       HERO SECTION
+       BLOG DETAIL CONTAINER (Single Column)
        ============================================ -->
-  <section class="hero-section" style="min-height: 45vh; padding: 130px 0 70px;">
-    <div class="container hero-content">
-      <div class="row align-items-center">
-        <div class="col-lg-10 mx-auto text-center">
-          <h1 class="hero-title mb-4" data-aos="fade-up">
-            <span class="gradient-text">{{ post.title }}</span>
-          </h1>
-          <div class="d-flex flex-wrap justify-content-center align-items-center gap-3" data-aos="fade-up"
-            data-aos-delay="200">
-            <span class="badge rounded-pill px-4 py-2 fw-bold fs-6"
-              style="background:rgba(40,41,115,0.85);color:#FDB81E;border:1px solid rgba(253,184,30,0.4);">
-              <i class="fas fa-tag me-2"></i>{{ post.get_category_display }}
-            </span>
-            <span class="fw-semibold" style="color:#282973;"><i class="far fa-calendar-alt me-2"
-                style="color:#FDB81E;"></i>{{ post.published_at|date:"F d, Y" }}</span>
-            <span class="fw-semibold" style="color:#282973;"><i class="far fa-eye me-2" style="color:#FDB81E;"></i>{{ post.views_count }} views</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================
-       BLOG CONTENT
-       ============================================ -->
-  <section class="blog-content py-5">
+  <section class="blog-detail-section py-5" style="margin-top: 90px; background-color: #fafbfc;">
     <div class="container">
-      <div class="row g-5">
-        <div class="col-lg-8">
-          <div class="bg-white p-4 p-md-5 shadow-sm" data-aos="fade-up"
-            style="border-radius:20px; border: 1px solid rgba(40,41,115,0.05);">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          
+          <!-- Breadcrumb/Back Button -->
+          <div class="mb-4" data-aos="fade-up">
+            <a href="{% url 'blog:blog' %}"
+              class="btn d-inline-flex align-items-center gap-2 px-4 py-2 rounded-pill fw-bold"
+              style="background: rgba(40, 41, 115, 0.08); color: #282973; border: 1px solid rgba(40, 41, 115, 0.15); transition: all 0.3s ease;"
+              onmouseover="this.style.background='linear-gradient(135deg, #282973, #FDB81E)'; this.style.color='white'; this.style.borderColor='transparent'; this.style.boxShadow='0 4px 15px rgba(40,41,115,0.2)';"
+              onmouseout="this.style.background='rgba(40, 41, 115, 0.08)'; this.style.color='#282973'; this.style.borderColor='rgba(40, 41, 115, 0.15)'; this.style.boxShadow='none';">
+              <i class="fas fa-arrow-left"></i> Back to Blog
+            </a>
+          </div>
 
-            <!-- Back to Blog Button -->
-            <div class="mb-4">
-              <a href="{% url 'blog:blog' %}"
-                class="btn d-inline-flex align-items-center gap-2 px-4 py-2 rounded-pill fw-bold"
-                style="background: rgba(40, 41, 115, 0.08); color: #282973; border: 1px solid rgba(40, 41, 115, 0.15); transition: all 0.3s ease;"
-                onmouseover="this.style.background='linear-gradient(135deg, #282973, #FDB81E)'; this.style.color='white'; this.style.borderColor='transparent'; this.style.boxShadow='0 4px 15px rgba(40,41,115,0.2)';"
-                onmouseout="this.style.background='rgba(40, 41, 115, 0.08)'; this.style.color='#282973'; this.style.borderColor='rgba(40, 41, 115, 0.15)'; this.style.boxShadow='none';">
-                <i class="fas fa-arrow-left"></i> Back to Blog
-              </a>
+          <!-- Article Header -->
+          <div class="article-header mb-4" data-aos="fade-up">
+            <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+              <span class="badge rounded-pill px-3 py-1.5 fw-bold text-uppercase"
+                style="background: rgba(40, 41, 115, 0.08); color: #282973; border: 1px solid rgba(40, 41, 115, 0.15); font-size: 0.75rem; letter-spacing: 0.5px;">
+                <i class="fas fa-tag me-1.5"></i>{{ post.get_category_display }}
+              </span>
             </div>
+            
+            <h1 class="article-title fw-bold mb-3" style="font-family: 'Exo 2', sans-serif; font-size: calc(1.8rem + 1.5vw); line-height: 1.25; color: #1a1a2e; letter-spacing: -0.5px;">
+              {{ post.title }}
+            </h1>
 
-            {% if post.featured_image %}
-            <div class="mb-5">
-              <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" class="w-100 shadow-sm"
-                style="max-height:450px;object-fit:cover;border-radius:16px;display:block;">
+            <div class="article-meta d-flex flex-wrap align-items-center gap-3 text-muted fw-semibold" style="font-size: 0.95rem;">
+              <span><i class="far fa-calendar-alt me-1.5" style="color: #FDB81E;"></i>{{ post.published_at|date:"F d, Y" }}</span>
+              <span>•</span>
+              <span>By <strong style="color: #282973;">{% if post.author %}{{ post.author.get_full_name|default:post.author.username }}{% else %}OMNEXA AI{% endif %}</strong></span>
+              <span>•</span>
+              <span><i class="far fa-eye me-1.5" style="color: #FDB81E;"></i>{{ post.views_count }} views</span>
             </div>
-            {% endif %}
+          </div>
 
-            <div class="blog-body" style="font-size:1.1rem;line-height:1.75;color:#374151;">
+          <!-- Featured Image -->
+          {% if post.featured_image %}
+          <div class="article-featured-image mb-5" data-aos="fade-up" data-aos-delay="100">
+            <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" class="w-100 shadow-sm"
+              style="max-height: 520px; object-fit: cover; border-radius: 20px; display: block;">
+          </div>
+          {% endif %}
+
+          <!-- Article Content -->
+          <div class="bg-white p-4 p-md-5 shadow-sm mb-5" data-aos="fade-up" data-aos-delay="150"
+            style="border-radius: 24px; border: 1px solid rgba(40,41,115,0.04);">
+            <div class="blog-body ck-content" style="font-size: 1.15rem; line-height: 1.8; color: #374151; font-family: 'Nunito', sans-serif;">
               {{ post.content|safe }}
             </div>
 
-            <div class="mt-5 pt-4" style="border-top:2px solid rgba(40,41,115,0.1);">
-
+            <!-- Share Buttons -->
+            <div class="mt-5 pt-4" style="border-top: 1px solid rgba(40,41,115,0.1);">
+              <h5 class="fw-bold mb-3" style="color: #282973; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.5px;">Share this article</h5>
               <div class="share-buttons-grid">
                 <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri|urlencode }}"
                   target="_blank" rel="noopener" class="bd-share-btn" style="background:#1877F2;">
@@ -153,34 +153,65 @@
             </div>
           </div>
 
+          <!-- CTA Banner -->
+          <div class="p-4 p-md-5 overflow-hidden position-relative mb-5 text-center text-md-start" data-aos="fade-up"
+            style="border-radius: 24px; background: linear-gradient(135deg, #282973 0%, #1a1b55 100%); box-shadow: 0 10px 30px rgba(40,41,115,0.15);">
+            <div class="position-absolute" style="top:-50px; right:-50px; width:200px; height:200px; background:rgba(253,184,30,0.12); border-radius:50%;"></div>
+            <div class="position-absolute" style="bottom:-50px; left:-50px; width:150px; height:150px; background:rgba(253,184,30,0.08); border-radius:50%;"></div>
+            <div class="row align-items-center position-relative">
+              <div class="col-md-8 mb-4 mb-md-0">
+                <div class="mb-3 d-inline-flex align-items-center justify-content-center rounded-circle" style="width: 56px; height: 56px; background: rgba(253,184,30,0.15);">
+                  <i class="fas fa-rocket" style="color: #FDB81E; font-size: 1.5rem;"></i>
+                </div>
+                <h3 class="fw-bold text-white mb-2" style="font-family: 'Exo 2', sans-serif;">Supercharge Your Business with AI</h3>
+                <p class="mb-0" style="color: rgba(255,255,255,0.85); font-size: 1.05rem;">Discover how our customized AI automation and marketing systems can scale your growth. Book a free 30-minute strategy call today.</p>
+              </div>
+              <div class="col-md-4 text-md-end">
+                <a href="{% url 'contact:contact' %}" class="btn fw-bold py-3 px-4 rounded-pill shadow-lg text-uppercase"
+                  style="background: #FDB81E; color: #282973; font-size: 0.95rem; letter-spacing: 0.5px; border: none; transition: all 0.3s;"
+                  onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(253,184,30,0.3)';"
+                  onmouseout="this.style.transform='none'; this.style.boxShadow='none';">
+                  <i class="fas fa-calendar-check me-2"></i>Book Call
+                </a>
+              </div>
+            </div>
+          </div>
+
           <!-- Related Posts -->
           {% if related_posts %}
           <div class="mt-5" data-aos="fade-up">
             <div class="d-flex align-items-center gap-3 mb-4">
-              <div style="width:5px;height:32px;background:linear-gradient(180deg,#282973,#FDB81E);border-radius:3px;">
-              </div>
-              <h4 class="mb-0 fw-bold" style="color:#282973;">Related Articles</h4>
+              <div style="width: 5px; height: 28px; background: linear-gradient(180deg,#282973,#FDB81E); border-radius: 3px;"></div>
+              <h4 class="mb-0 fw-bold" style="color: #282973; font-family: 'Exo 2', sans-serif;">Related Articles</h4>
             </div>
             <div class="row g-4">
               {% for related in related_posts %}
               <div class="col-md-6">
-                <div class="glass-card h-100 overflow-hidden" style="border-radius:18px;transition:all 0.3s ease;">
+                <div class="glass-card h-100 overflow-hidden" style="border-radius: 18px; transition: all 0.3s ease; background: white; border: 1px solid rgba(40,41,115,0.06); box-shadow: 0 4px 20px rgba(0,0,0,0.02);">
                   {% if related.featured_image %}
                   <img src="{{ related.featured_image.url }}" alt="{{ related.title }}" class="w-100"
-                    style="height:170px;object-fit:cover;display:block;">
+                    style="height: 180px; object-fit: cover; display: block;">
                   {% else %}
-                  <div
-                    style="height:170px;background:linear-gradient(135deg,#282973,#3D3E94);display:flex;align-items:center;justify-content:center;">
-                    <i class="fas fa-newspaper text-white" style="font-size:2.5rem;opacity:0.5;"></i>
+                  <div style="height: 180px; background: linear-gradient(135deg,#282973,#3D3E94); display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-newspaper text-white" style="font-size: 2.5rem; opacity: 0.5;"></i>
                   </div>
                   {% endif %}
-                  <div class="p-4">
-                    <span class="badge rounded-pill px-3 mb-2 fw-semibold"
-                      style="background:rgba(40,41,115,0.1);color:#282973;">{{ related.get_category_display }}</span>
-                    <h6 class="fw-bold mb-3" style="color:#1a1a2e;line-height:1.5;">{{ related.title }}</h6>
-                    <a href="{% url 'blog:blog-detail' related.slug %}" class="btn btn-sm fw-bold px-4 rounded-pill"
-                      style="background:linear-gradient(135deg,#282973,#FDB81E);color:white;">Read More <i
-                        class="fas fa-arrow-right ms-1"></i></a>
+                  <div class="p-4 d-flex flex-column justify-content-between" style="min-height: 180px;">
+                    <div>
+                      <span class="badge rounded-pill px-3 mb-2 fw-semibold"
+                        style="background: rgba(40,41,115,0.08); color: #282973; font-size: 0.75rem;">{{ related.get_category_display }}</span>
+                      <h6 class="fw-bold mb-3" style="color: #1a1a2e; line-height: 1.45; font-family: 'Exo 2', sans-serif; font-size: 1.1rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                        {{ related.title }}
+                      </h6>
+                    </div>
+                    <div>
+                      <a href="{% url 'blog:blog-detail' related.slug %}" class="btn btn-sm fw-bold px-4 rounded-pill"
+                        style="background: linear-gradient(135deg,#282973,#FDB81E); color: white; border: none; font-size: 0.85rem; transition: all 0.3s;"
+                        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(40,41,115,0.2)';"
+                        onmouseout="this.style.transform='none'; this.style.boxShadow='none';">
+                        Read More <i class="fas fa-arrow-right ms-1"></i>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -188,64 +219,12 @@
             </div>
           </div>
           {% endif %}
-        </div>
-
-        <div class="col-lg-4">
-          <div style="position:sticky;top:110px;">
-
-            <!-- Categories Card -->
-            <div class="glass-card p-4 mb-4" data-aos="fade-left" style="border-radius:20px;">
-              <div class="d-flex align-items-center gap-2 mb-4">
-                <span
-                  style="width:4px;height:24px;background:linear-gradient(180deg,#282973,#FDB81E);border-radius:3px;display:inline-block;"></span>
-                <h5 class="mb-0 fw-bold" style="color:#282973;"><i class="fas fa-layer-group me-2"
-                    style="color:#FDB81E;"></i>Topics</h5>
-              </div>
-              <ul class="list-unstyled mb-0">
-                {% for value, label in categories %}
-                <li class="mb-1">
-                  <a href="{% url 'blog:blog' %}?category={{ value }}"
-                    class="text-decoration-none d-flex align-items-center p-2 rounded-3 bd-cat-link">
-                    <span class="me-3 rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
-                      style="width:32px;height:32px;background:rgba(40,41,115,0.08);">
-                      <i class="fas fa-chevron-right" style="font-size:0.7rem;color:#282973;"></i>
-                    </span>
-                    <span class="fw-semibold" style="color:#374151;">{{ label }}</span>
-                  </a>
-                </li>
-                {% endfor %}
-              </ul>
-            </div>
-
-            <!-- CTA Card -->
-            <div class="p-4 overflow-hidden position-relative" data-aos="fade-left" data-aos-delay="150"
-              style="border-radius:20px;background:linear-gradient(135deg,#282973 0%,#1a1b55 60%,#282973 100%);">
-              <div class="position-absolute"
-                style="top:-30px;right:-30px;width:130px;height:130px;background:rgba(253,184,30,0.15);border-radius:50%;">
-              </div>
-              <div class="position-absolute"
-                style="bottom:-20px;left:-20px;width:90px;height:90px;background:rgba(253,184,30,0.1);border-radius:50%;">
-              </div>
-              <div class="position-relative">
-                <div class="mb-3 d-inline-flex align-items-center justify-content-center rounded-circle"
-                  style="width:52px;height:52px;background:rgba(253,184,30,0.2);">
-                  <i class="fas fa-rocket" style="color:#FDB81E;font-size:1.4rem;"></i>
-                </div>
-                <h4 class="fw-bold text-white mb-2">Free AI Strategy</h4>
-                <p class="mb-4" style="color:rgba(255,255,255,0.7);font-size:0.95rem;">Discover how AI can supercharge
-                  your business. Book a free session today.</p>
-                <a href="{% url 'contact:contact' %}" class="btn fw-bold w-100 py-3 rounded-pill shadow"
-                  style="background:#FDB81E;color:#282973;font-size:1rem;letter-spacing:0.3px;">
-                  <i class="fas fa-calendar-check me-2"></i>Book Free Strategy Call
-                </a>
-              </div>
-            </div>
-
-          </div>
+          
         </div>
       </div>
     </div>
   </section>
+
 
   <!-- ============================================
        FOOTER
