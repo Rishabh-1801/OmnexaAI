@@ -2114,15 +2114,19 @@ section {
   right: 0;
   width: 380px;
   max-width: 92vw;
+  height: 520px;
+  max-height: calc(100vh - 110px);
   background: white;
   border-radius: 20px;
   box-shadow: var(--shadow-lg);
-  padding: 22px;
+  padding: 20px;
   display: none;
+  flex-direction: column;
   opacity: 0;
   transform: translateY(20px) scale(0.95);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .chatbot-popup::before {
@@ -2136,7 +2140,7 @@ section {
 }
 
 .chatbot-popup.active {
-  display: block;
+  display: flex;
   opacity: 1;
   transform: translateY(0) scale(1);
 }
@@ -2145,10 +2149,11 @@ section {
   display: flex;
   align-items: center;
   gap: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   padding-bottom: 12px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   animation: slideDown 0.4s ease forwards;
+  flex-shrink: 0;
 }
 
 @keyframes slideDown {
@@ -2213,9 +2218,10 @@ section {
 }
 
 .chatbot-messages {
-  max-height: 420px;
+  flex: 1;
+  min-height: 150px;
   overflow-y: auto;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   padding-right: 8px;
 }
 
