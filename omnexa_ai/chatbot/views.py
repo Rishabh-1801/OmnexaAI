@@ -108,71 +108,19 @@ def _nvidia_response(user_message: str) -> str | None:
 
 def generate_bot_response(user_message: str) -> str:
     """
-    Generate a bot response.
-    First tries NVIDIA NIM GLM-5.2; falls back to rule-based responses if unavailable.
+    Generate a bot response using NVIDIA NIM GLM-5.2 AI exclusively.
+    No static or rule-based fallback — always AI-powered answers.
     """
-    # 1️⃣ Try NVIDIA GLM-5.2 first
     ai_reply = _nvidia_response(user_message)
     if ai_reply:
         return ai_reply
 
-    # 2️⃣ Check knowledge base
-    msg = user_message.lower()
-    knowledge_responses = ChatbotKnowledgeBase.objects.filter(is_active=True)
-    for kb in knowledge_responses:
-        keywords = kb.keywords.lower().split(',') if kb.keywords else []
-        if any(keyword.strip() in msg for keyword in keywords):
-            return kb.answer
-
-    # 3️⃣ Rule-based fallback
-    if any(word in msg for word in ['price', 'cost', 'pricing', 'how much', 'charge', 'fee']):
-        return ("Our pricing depends on your specific business needs and goals. "
-                "Book a free AI strategy call and we'll give you a custom quote. "
-                "Click 'Book Free Strategy' in the top menu!")
-
-    if any(word in msg for word in ['aeo', 'answer engine', 'ai search', 'search engine']):
-        return ("AEO (Answer Engine Optimization) helps your business appear in AI-powered "
-                "search tools like ChatGPT, Perplexity, and Google AI Overviews. "
-                "It's the future of SEO. We specialize in this! Want to learn more?")
-
-    if any(word in msg for word in ['chatbot', 'ai bot', 'automation', 'bot']):
-        return ("We build AI chatbots that capture leads, answer FAQs, and qualify prospects 24/7 — "
-                "even when you're sleeping! Shall I book a free demo for you?")
-
-    if any(word in msg for word in ['lead', 'leads', 'lead generation', 'generate leads']):
-        return ("Our AI lead generation systems run 24/7 using chatbots, AI ads, AEO, and automation. "
-                "Clients typically see 5X more qualified leads. Want a free strategy session?")
-
-    if any(word in msg for word in ['contact', 'call', 'speak', 'book', 'consultation', 'meeting']):
-        return ("I'd love to connect you with our team! "
-                "Book your free 30-minute AI strategy call here: /contact/ "
-                "No commitment — pure value.")
-
-    if any(word in msg for word in ['service', 'offer', 'provide', 'what do you do']):
-        return ("We offer 11 AI-powered services including AEO, AI Marketing, AI Software Development, "
-                "AI Chatbots, Content Creation, Image & Video Generation, Blog Writing, Lead Generation, "
-                "Meta Ads, Landing Page Optimization, and Social Media Marketing. "
-                "Visit /services/ for details!")
-
-    if any(word in msg for word in ['hello', 'hi', 'hey', 'namaste', 'greetings']):
-        return ("Hi there! 👋 I'm the OMNEXA AI assistant. "
-                "I can help you learn about our AI services, answer your questions, "
-                "or book a free strategy call. What can I help you with today?")
-
-    if any(word in msg for word in ['thank', 'thanks', 'appreciate']):
-        return ("You're welcome! Is there anything else I can help you with? "
-                "Feel free to ask about our services or book a free consultation!")
-
-    if any(word in msg for word in ['bye', 'goodbye', 'see you', 'take care']):
-        return ("Goodbye! It was great chatting with you. "
-                "Don't forget to book your free AI strategy consultation at /contact/ "
-                "We'd love to help transform your business with AI!")
-
-    # Default fallback
-    return ("Great question! Our team would love to give you a detailed answer. "
-            "Book a free AI strategy consultation at /contact/ and we'll analyze "
-            "your business and show you exactly how AI can help you grow. "
-            "It's completely free — no commitment!")
+    # Only if AI is completely unreachable (network/key issue)
+    return (
+        "I'm having a little trouble connecting right now. "
+        "Please try again in a moment, or reach us directly at /contact/ — "
+        "we'd love to help! 🙏"
+    )
 
 
 @csrf_exempt
