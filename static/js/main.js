@@ -244,6 +244,47 @@ if (chatbotButton) {
   });
 }
 
+// Helper to parse Markdown safely into formatted HTML
+function formatMarkdown(text) {
+  if (!text) return '';
+  if (typeof marked !== 'undefined' && (marked.parse || typeof marked === 'function')) {
+    try {
+      const parseFn = marked.parse || marked;
+      return parseFn(text, { breaks: true, gfm: true });
+    } catch (e) {
+      console.error('Marked parsing error:', e);
+    }
+  }
+
+  // Robust fallback markdown parser
+  let html = text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+
+  // Code blocks (```lang ... ```)
+  html = html.replace(/```(?:[a-zA-Z0-9]+)?\n?([\s\S]*?)```/g, function(match, code) {
+    return '<pre class="chatbot-code-block"><code>' + code.trim() + '</code></pre>';
+  });
+
+  // Inline code (`code`)
+  html = html.replace(/`([^`]+)`/g, '<code class="chatbot-inline-code">$1</code>');
+
+  // Bold (**text**)
+  html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+
+  // Italics (*text*)
+  html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+
+  // Bullet points
+  html = html.replace(/^\s*[-*+]\s+(.*)$/gm, '• $1');
+
+  // Newlines
+  html = html.replace(/\n/g, '<br>');
+
+  return html;
+}
+
 // Chatbot message handling
 function addChatbotMessage(message, isUser = false) {
   const messageDiv = document.createElement('div');
@@ -253,8 +294,11 @@ function addChatbotMessage(message, isUser = false) {
     messageDiv.style.color = 'white';
     messageDiv.style.marginLeft = 'auto';
     messageDiv.style.maxWidth = '80%';
+    messageDiv.textContent = message;
+  } else {
+    messageDiv.style.maxWidth = '92%';
+    messageDiv.innerHTML = formatMarkdown(message);
   }
-  messageDiv.textContent = message;
   chatbotMessages.appendChild(messageDiv);
   chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
 }

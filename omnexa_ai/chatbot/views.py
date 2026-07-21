@@ -33,42 +33,31 @@ NVIDIA_API_URL = "https://integrate.api.nvidia.com/v1/chat/completions"
 MODEL          = "openai/gpt-oss-120b"   # sole model — no fallback
 
 SYSTEM_PROMPT = (
-    "You are the OMNEXA AI Assistant — a helpful, friendly, and professional AI chatbot "
-    "for OMNEXA AI, a company that specializes in AI-powered business solutions. "
-    "Your role is to help visitors learn about OMNEXA AI's services, answer their questions, "
-    "and guide them toward booking a free strategy consultation. "
-    "\n\nIMPORTANT DEFINITIONS FOR OMNEXA AI CONTEXT:"
-    "\n- AEO = Answer Engine Optimization (NOT 'Authorized Economic Operator'). "
-    "AEO helps businesses appear in AI-powered search tools like ChatGPT, Perplexity, and Google AI Overviews. It is the next evolution of SEO."
-    "\n\nOMNEXA AI services include:"
-    "\n1. AEO (Answer Engine Optimization) - Get found in AI search tools"
-    "\n2. AI Marketing - Intelligent, data-driven marketing campaigns"
-    "\n3. AI Software Development - Custom AI-powered applications"
-    "\n4. AI Chatbots - 24/7 lead capture and customer support bots"
-    "\n5. Content Creation - AI-assisted blogs, copy, and scripts"
-    "\n6. Image & Video Generation - AI-generated visual content"
-    "\n7. Blog Writing - SEO-optimized, high-quality articles"
-    "\n8. Lead Generation - AI-powered prospect acquisition systems"
-    "\n9. Meta Ads - AI-optimized Facebook and Instagram advertising"
-    "\n10. Landing Page Optimization - Conversion-focused page design"
-    "\n11. Social Media Marketing - Automated social media growth"
-    "\n\nAlways be concise, warm, and end responses with a helpful next step. "
-    "If someone asks about pricing, suggest booking a free consultation at /contact/. "
-    "Keep responses under 150 words unless the question needs a detailed answer. "
-    "Respond in the same language the user is writing in. "
-    "Never confuse OMNEXA AI's AEO (Answer Engine Optimization) with other meanings of AEO."
+    "You are OMNEXA AI Assistant — a highly capable, intelligent, helpful, and friendly AI chatbot "
+    "powered by OMNEXA AI. "
+    "You answer ANY user questions accurately, thoroughly, and professionally like ChatGPT and Claude — "
+    "including programming/coding (Python, JavaScript, HTML, etc.), business advice, math, writing, technical Q&A, "
+    "and general knowledge. "
+    "Use standard Markdown formatting (bold text, bullet points, clean code blocks with language tags, tables when helpful) "
+    "so your responses are formatted cleanly and easy to read. "
+    "\n\nOMNEXA AI CONTEXT & SERVICES:"
+    "\nOMNEXA AI specializes in AI-powered business solutions including:"
+    "\n1. AEO (Answer Engine Optimization) - Helps businesses get found in AI search tools like ChatGPT, Perplexity, & Google AI Overviews."
+    "\n2. AI Marketing, AI Software Development, AI Chatbots, Content & Blog Creation, Image/Video Generation, Lead Generation, Meta Ads, and Social Media Automation."
+    "\n\nGUIDELINES:"
+    "\n- Always respond in the SAME language or dialect the user is writing in (English, Gujarati, Gujarati in Roman/Gujlish, Hinglish, etc.)."
+    "\n- Provide comprehensive, accurate, step-by-step answers for code/technical questions."
+    "\n- When relevant or when asked about growth/services/pricing, naturally offer to connect them with OMNEXA AI's free strategy consultation at /contact/."
 )
 
 
-def _call_nvidia(user_message: str, api_key: str) -> str | None:
-    """Call NVIDIA NIM openai/gpt-oss-120b via OpenAI-compatible endpoint."""
+def _call_nvidia(conversation_messages: list, api_key: str) -> str | None:
+    """Call NVIDIA NIM openai/gpt-oss-120b via OpenAI-compatible endpoint with context history."""
+    messages = [{"role": "system", "content": SYSTEM_PROMPT}] + conversation_messages
     payload = json.dumps({
         "model": MODEL,
-        "messages": [
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user",   "content": user_message},
-        ],
-        "max_tokens": 300,
+        "messages": messages,
+        "max_tokens": 1500,
         "temperature": 0.7,
     }).encode("utf-8")
 
@@ -96,10 +85,9 @@ def _call_nvidia(user_message: str, api_key: str) -> str | None:
         return None
 
 
-def generate_bot_response(user_message: str) -> str:
+def generate_bot_response(user_message_or_history) -> str:
     """
-    Generate a bot response using NVIDIA NIM openai/gpt-oss-120b exclusively.
-    No other models — single, clean AI-powered path.
+    Generate a bot response using NVIDIA NIM openai/gpt-oss-120b with full conversation context.
     """
     nvidia_key = (
         os.environ.get("NVIDIA_API_KEY", "")
@@ -114,7 +102,12 @@ def generate_bot_response(user_message: str) -> str:
             "we'd love to help! 🙏"
         )
 
-    reply = _call_nvidia(user_message, nvidia_key)
+    if isinstance(user_message_or_history, str):
+        conversation_messages = [{"role": "user", "content": user_message_or_history}]
+    else:
+        conversation_messages = user_message_or_history
+
+    reply = _call_nvidia(conversation_messages, nvidia_key)
     if reply:
         print(f"[GPT-OSS-120B ✅] {reply[:80]}...")
         return reply
@@ -133,13 +126,6 @@ def chat_message(request):
     POST /api/v1/chatbot/message/
 
     Body: { "session_key": "abc123", "message": "How can you help me?", "page_url": "..." }
-
-    Logic:
-      1. Get or create ChatSession using session_key
-      2. Save user message
-      3. Generate bot response (rule-based or AI-powered)
-      4. Save bot response
-      5. Return JSON with bot reply
     """
     try:
         data = json.loads(request.body)
@@ -161,15 +147,22 @@ def chat_message(request):
             }
         )
 
-        # Save user message
+        # Save user message first
         user_msg = ChatMessage.objects.create(
             session=session,
             role='user',
             content=user_message
         )
 
-        # Generate bot response
-        bot_reply = generate_bot_response(user_message)
+        # Fetch recent chat context (up to 10 messages)
+        recent_msgs = list(session.messages.order_by('-created_at')[:10])[::-1]
+        formatted_history = []
+        for m in recent_msgs:
+            role = 'assistant' if m.role in ('bot', 'assistant') else 'user'
+            formatted_history.append({"role": role, "content": m.content})
+
+        # Generate bot response with context
+        bot_reply = generate_bot_response(formatted_history)
 
         # Save bot response
         bot_msg = ChatMessage.objects.create(

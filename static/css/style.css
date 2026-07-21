@@ -2112,11 +2112,12 @@ section {
   position: absolute;
   bottom: 80px;
   right: 0;
-  width: 350px;
+  width: 380px;
+  max-width: 92vw;
   background: white;
   border-radius: 20px;
   box-shadow: var(--shadow-lg);
-  padding: 25px;
+  padding: 22px;
   display: none;
   opacity: 0;
   transform: translateY(20px) scale(0.95);
@@ -2144,8 +2145,8 @@ section {
   display: flex;
   align-items: center;
   gap: 15px;
-  margin-bottom: 20px;
-  padding-bottom: 15px;
+  margin-bottom: 15px;
+  padding-bottom: 12px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   animation: slideDown 0.4s ease forwards;
 }
@@ -2212,10 +2213,10 @@ section {
 }
 
 .chatbot-messages {
-  max-height: 300px;
+  max-height: 420px;
   overflow-y: auto;
-  margin-bottom: 20px;
-  padding-right: 10px;
+  margin-bottom: 15px;
+  padding-right: 8px;
 }
 
 .chatbot-messages::-webkit-scrollbar {
@@ -2234,12 +2235,85 @@ section {
 
 .chatbot-message {
   background: var(--gradient-light);
-  padding: 15px;
+  padding: 14px 16px;
   border-radius: 15px;
-  margin-bottom: 15px;
-  font-size: 0.95rem;
+  margin-bottom: 12px;
+  font-size: 0.92rem;
+  line-height: 1.55;
   animation: messageSlide 0.4s ease forwards;
   position: relative;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.chatbot-message p {
+  margin-bottom: 8px;
+}
+
+.chatbot-message p:last-child {
+  margin-bottom: 0;
+}
+
+.chatbot-message pre,
+.chatbot-code-block {
+  background: #1e1e2e !important;
+  color: #cdd6f4 !important;
+  padding: 10px 14px !important;
+  border-radius: 8px !important;
+  overflow-x: auto !important;
+  font-family: 'Fira Code', 'Consolas', monospace !important;
+  font-size: 0.84rem !important;
+  margin: 10px 0 !important;
+  white-space: pre !important;
+}
+
+.chatbot-message code {
+  background: rgba(40, 41, 115, 0.08);
+  color: #d63384;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.88em;
+}
+
+.chatbot-message pre code {
+  background: transparent !important;
+  color: inherit !important;
+  padding: 0 !important;
+  font-size: inherit !important;
+}
+
+.chatbot-message table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 0.85rem;
+  background: white;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.chatbot-message th,
+.chatbot-message td {
+  border: 1px solid #e2e8f0;
+  padding: 6px 10px;
+  text-align: left;
+}
+
+.chatbot-message th {
+  background: #f1f5f9;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.chatbot-message ul,
+.chatbot-message ol {
+  padding-left: 20px;
+  margin: 8px 0;
+}
+
+.chatbot-message li {
+  margin-bottom: 4px;
 }
 
 @keyframes messageSlide {
