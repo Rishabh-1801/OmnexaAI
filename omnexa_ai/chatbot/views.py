@@ -1,10 +1,12 @@
 """
 Views for chatbot widget backend.
-Stores sessions and messages. Can integrate with OpenAI/Gemini for AI responses.
+Stores sessions and messages. Integrated with Groq AI for fast, smart responses.
 """
 
+import os
 import uuid
 import json
+import logging
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST, require_GET
@@ -14,6 +16,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.utils import timezone
 from datetime import timedelta
+from django.conf import settings
 from .models import ChatSession, ChatMessage, ChatbotKnowledgeBase
 from .serializers import (
     ChatSessionSerializer, ChatMessageSerializer,
@@ -21,35 +24,88 @@ from .serializers import (
 )
 from omnexa_ai.core.utils import get_client_ip
 
-# Optional: import openai if using GPT-4o for chatbot responses
-# import openai
+logger = logging.getLogger(__name__)
+
+# ── Groq AI Setup ─────────────────────────────────────────────────────────────
+_groq_client = None
+
+SYSTEM_PROMPT = (
+    "You are the OMNEXA AI Assistant — a helpful, friendly, and professional AI chatbot "
+    "for OMNEXA AI, a company that specializes in AI-powered business solutions. "
+    "Your role is to help visitors learn about OMNEXA AI's services, answer their questions, "
+    "and guide them toward booking a free strategy consultation. "
+    "\n\nOMNEXA AI services include: AEO (Answer Engine Optimization), AI Marketing, "
+    "AI Software Development, AI Chatbots, Content Creation, Image & Video Generation, "
+    "Blog Writing, Lead Generation, Meta Ads, Landing Page Optimization, and Social Media Marketing. "
+    "\n\nAlways be concise, warm, and end responses with a helpful next step. "
+    "If someone asks about pricing, suggest booking a free consultation at /contact/. "
+    "Keep responses under 150 words unless the question needs a detailed answer. "
+    "Respond in the same language the user is writing in."
+)
+
+
+def _get_groq_client():
+    """Lazily initialize and return the Groq client."""
+    global _groq_client
+    if _groq_client is not None:
+        return _groq_client
+
+    api_key = os.environ.get('GROQ_API_KEY', '') or getattr(settings, 'GROQ_API_KEY', '')
+
+    if not api_key or api_key == 'your-groq-api-key-here':
+        logger.warning("GROQ_API_KEY not set — falling back to rule-based responses.")
+        return None
+
+    try:
+        from groq import Groq
+        _groq_client = Groq(api_key=api_key)
+        logger.info("Groq AI client initialized successfully.")
+        return _groq_client
+    except Exception as e:
+        logger.error(f"Failed to initialize Groq AI: {e}")
+        return None
+
+
+def _groq_response(user_message: str) -> str | None:
+    """Call Groq API and return the response text, or None on failure."""
+    client = _get_groq_client()
+    if client is None:
+        return None
+    try:
+        completion = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": user_message},
+            ],
+            max_tokens=300,
+            temperature=0.7,
+        )
+        return completion.choices[0].message.content.strip()
+    except Exception as e:
+        logger.error(f"Groq API error: {e}")
+        return None
 
 
 def generate_bot_response(user_message: str) -> str:
     """
-    Rule-based chatbot responses for common queries.
-    Replace with OpenAI/Gemini API call for smarter responses.
-
-    To use OpenAI GPT-4o:
-        response = openai.chat.completions.create(
-            model="gpt-4o",
-            messages=[
-                {"role": "system", "content": "You are the OMNEXA AI assistant..."},
-                {"role": "user", "content": user_message}
-            ]
-        )
-        return response.choices[0].message.content
+    Generate a bot response.
+    First tries Groq AI; falls back to rule-based responses if unavailable.
     """
-    msg = user_message.lower()
+    # 1️⃣ Try Groq AI first
+    ai_reply = _groq_response(user_message)
+    if ai_reply:
+        return ai_reply
 
-    # Check knowledge base first
+    # 2️⃣ Check knowledge base
+    msg = user_message.lower()
     knowledge_responses = ChatbotKnowledgeBase.objects.filter(is_active=True)
     for kb in knowledge_responses:
         keywords = kb.keywords.lower().split(',') if kb.keywords else []
         if any(keyword.strip() in msg for keyword in keywords):
             return kb.answer
 
-    # Rule-based responses
+    # 3️⃣ Rule-based fallback
     if any(word in msg for word in ['price', 'cost', 'pricing', 'how much', 'charge', 'fee']):
         return ("Our pricing depends on your specific business needs and goals. "
                 "Book a free AI strategy call and we'll give you a custom quote. "

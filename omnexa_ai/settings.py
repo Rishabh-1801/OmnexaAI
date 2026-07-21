@@ -225,3 +225,7 @@ LOGGING = {
 
 # Create logs directory if it doesn't exist
 os.makedirs(BASE_DIR / 'logs', exist_ok=True)
+
+
+# ── 17. AI / GROQ CONFIGURATION ──────────────────────────────────────────────
+GROQ_API_KEY = config('GROQ_API_KEY', default='')
