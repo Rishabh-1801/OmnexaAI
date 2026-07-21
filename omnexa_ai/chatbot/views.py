@@ -28,11 +28,10 @@ from omnexa_ai.core.utils import get_client_ip
 
 logger = logging.getLogger(__name__)
 
-# ── AI Setup ─────────────────────────────────────────────────────────────────
-GROQ_API_URL   = "https://api.groq.com/openai/v1/chat/completions"
-GROQ_MODEL     = "llama-3.3-70b-versatile"
-NVIDIA_API_URL = "https://integrate.api.nvidia.com/v1/chat/completions"
-NVIDIA_MODEL   = "meta/llama-3.1-8b-instruct"
+# ── AI Setup (NVIDIA NIM - Kimi K2.6) ───────────────────────────────────────
+NVIDIA_API_URL  = "https://integrate.api.nvidia.com/v1/chat/completions"
+KIMI_MODEL      = "moonshotai/kimi-k2.6"
+FALLBACK_MODEL  = "meta/llama-3.3-70b-instruct"  # fast backup if kimi unavailable
 
 SYSTEM_PROMPT = (
     "You are the OMNEXA AI Assistant — a helpful, friendly, and professional AI chatbot "
@@ -87,33 +86,33 @@ def _call_ai(api_url: str, model: str, api_key: str, user_message: str) -> str |
 
 def generate_bot_response(user_message: str) -> str:
     """
-    Try Groq (primary) → NVIDIA (backup).
-    Both are free. Whichever key is valid will answer.
+    NVIDIA NIM only - Kimi K2.6 primary, llama-3.3-70b backup.
     """
-    # 1️⃣ Try Groq (Llama 3.3 70B) - Primary
-    groq_key = os.environ.get('GROQ_API_KEY', '') or getattr(settings, 'GROQ_API_KEY', '')
-    groq_key = groq_key.strip()
-    if groq_key and groq_key.startswith('gsk_'):
-        reply = _call_ai(GROQ_API_URL, GROQ_MODEL, groq_key, user_message)
-        if reply:
-            print(f"[GROQ ✅] {reply[:60]}...")
-            return reply
-
-    # 2️⃣ Try NVIDIA NIM (GLM-5.2) - Backup
     nvidia_key = os.environ.get('NVIDIA_API_KEY', '') or getattr(settings, 'NVIDIA_API_KEY', '')
     nvidia_key = nvidia_key.strip()
-    if nvidia_key and nvidia_key.startswith('nvapi-'):
-        reply = _call_ai(NVIDIA_API_URL, NVIDIA_MODEL, nvidia_key, user_message)
-        if reply:
-            print(f"[NVIDIA ✅] {reply[:60]}...")
-            return reply
 
-    # Only shown if BOTH keys are missing/invalid
-    print("[AI] ❌ No valid API key found for any provider.")
+    if not nvidia_key or not nvidia_key.startswith('nvapi-'):
+        print("[AI] ❌ No valid NVIDIA key found.")
+        return (
+            "I'm having a little trouble connecting right now. "
+            "Please try again in a moment, or reach us at /contact/ — we'd love to help! 🙏"
+        )
+
+    # 1️⃣ Try Kimi K2.6 first
+    reply = _call_ai(NVIDIA_API_URL, KIMI_MODEL, nvidia_key, user_message)
+    if reply:
+        print(f"[Kimi K2.6 ✅] {reply[:60]}...")
+        return reply
+
+    # 2️⃣ Fallback to llama-3.3-70b
+    reply = _call_ai(NVIDIA_API_URL, FALLBACK_MODEL, nvidia_key, user_message)
+    if reply:
+        print(f"[Llama-3.3 ✅] {reply[:60]}...")
+        return reply
+
     return (
         "I'm having a little trouble connecting right now. "
-        "Please try again in a moment, or reach us directly at /contact/ — "
-        "we'd love to help! 🙏"
+        "Please try again in a moment, or reach us at /contact/ — we'd love to help! 🙏"
     )
 
 
