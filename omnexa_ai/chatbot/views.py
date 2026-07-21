@@ -28,8 +28,9 @@ from omnexa_ai.core.utils import get_client_ip
 
 logger = logging.getLogger(__name__)
 
-# ── AI Setup ───────────────────────────────────────────────────────────────────
-GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
+# ── AI Setup (NVIDIA NIM - GLM-5.2) ───────────────────────────────────────────────
+NVIDIA_API_URL = "https://integrate.api.nvidia.com/v1/chat/completions"
+NVIDIA_MODEL   = "z-ai/glm-5.2"
 
 SYSTEM_PROMPT = (
     "You are the OMNEXA AI Assistant — a helpful, friendly, and professional AI chatbot "
@@ -46,72 +47,72 @@ SYSTEM_PROMPT = (
 )
 
 
-def _get_groq_key():
-    """Read GROQ_API_KEY from environment."""
-    key = os.environ.get('GROQ_API_KEY', '').strip()
+def _get_nvidia_key():
+    """Read NVIDIA_API_KEY from environment."""
+    key = os.environ.get('NVIDIA_API_KEY', '').strip()
     if not key:
-        key = getattr(settings, 'GROQ_API_KEY', '').strip()
-    if key and key != 'your-groq-api-key-here':
-        print(f"[GROQ] Key loaded: {key[:10]}...")
+        key = getattr(settings, 'NVIDIA_API_KEY', '').strip()
+    if key and key.startswith('nvapi-'):
+        print(f"[NVIDIA] Key loaded: {key[:15]}...")
         return key
-    print("[GROQ] No valid API key found.")
+    print("[NVIDIA] No valid API key found.")
     return None
 
 
-def _groq_response(user_message: str) -> str | None:
+def _nvidia_response(user_message: str) -> str | None:
     """
-    Call Groq API directly via urllib (no external package needed).
-    Uses Groq's OpenAI-compatible REST endpoint.
+    Call NVIDIA NIM API (GLM-5.2) via urllib.
+    Uses NVIDIA's OpenAI-compatible REST endpoint.
     """
-    api_key = _get_groq_key()
+    api_key = _get_nvidia_key()
     if not api_key:
         return None
 
     payload = json.dumps({
-        "model": "llama-3.3-70b-versatile",
+        "model": NVIDIA_MODEL,
         "messages": [
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": user_message},
         ],
         "max_tokens": 300,
         "temperature": 0.7,
+        "stream": False,
     }).encode("utf-8")
 
     req = urllib.request.Request(
-        GROQ_API_URL,
+        NVIDIA_API_URL,
         data=payload,
         headers={
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         },
         method="POST",
     )
 
     try:
-        with urllib.request.urlopen(req, timeout=15) as resp:
+        with urllib.request.urlopen(req, timeout=20) as resp:
             data = json.loads(resp.read().decode("utf-8"))
             reply = data["choices"][0]["message"]["content"].strip()
-            print(f"[GROQ] ✅ Response: {reply[:60]}...")
+            print(f"[NVIDIA GLM-5.2] ✅ Response: {reply[:60]}...")
             return reply
     except urllib.error.HTTPError as e:
         body = e.read().decode("utf-8", errors="ignore")
-        print(f"[GROQ] ❌ HTTP {e.code}: {body[:200]}")
-        logger.error(f"Groq HTTP error {e.code}: {body[:200]}")
+        print(f"[NVIDIA] ❌ HTTP {e.code}: {body[:200]}")
+        logger.error(f"NVIDIA API HTTP error {e.code}: {body[:200]}")
         return None
     except Exception as e:
-        print(f"[GROQ] ❌ Error: {e}")
-        logger.error(f"Groq API error: {e}")
+        print(f"[NVIDIA] ❌ Error: {e}")
+        logger.error(f"NVIDIA API error: {e}")
         return None
 
 
 def generate_bot_response(user_message: str) -> str:
     """
     Generate a bot response.
-    First tries Groq AI; falls back to rule-based responses if unavailable.
+    First tries NVIDIA NIM GLM-5.2; falls back to rule-based responses if unavailable.
     """
-    # 1️⃣ Try Groq AI first
-    ai_reply = _groq_response(user_message)
+    # 1️⃣ Try NVIDIA GLM-5.2 first
+    ai_reply = _nvidia_response(user_message)
     if ai_reply:
         return ai_reply
 

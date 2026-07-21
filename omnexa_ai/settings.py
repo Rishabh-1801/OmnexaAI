@@ -227,5 +227,6 @@ LOGGING = {
 os.makedirs(BASE_DIR / 'logs', exist_ok=True)
 
 
-# ── 17. AI / GROQ CONFIGURATION ──────────────────────────────────────────────
-GROQ_API_KEY = config('GROQ_API_KEY', default='')
+# ── 17. AI CONFIGURATION (NVIDIA NIM - GLM-5.2) ──────────────────────────────
+NVIDIA_API_KEY = config('NVIDIA_API_KEY', default='')
+GROQ_API_KEY   = config('GROQ_API_KEY', default='')  # kept for backward compat
