@@ -52,17 +52,26 @@ def _get_groq_client():
 
     api_key = os.environ.get('GROQ_API_KEY', '') or getattr(settings, 'GROQ_API_KEY', '')
 
+    print(f"[GROQ] API key found: {'YES (' + api_key[:8] + '...)' if api_key and api_key != 'your-groq-api-key-here' else 'NO'}")
+
     if not api_key or api_key == 'your-groq-api-key-here':
         logger.warning("GROQ_API_KEY not set — falling back to rule-based responses.")
+        print("[GROQ] WARNING: No API key set, using rule-based fallback.")
         return None
 
     try:
         from groq import Groq
         _groq_client = Groq(api_key=api_key)
         logger.info("Groq AI client initialized successfully.")
+        print("[GROQ] Client initialized successfully!")
         return _groq_client
+    except ImportError as e:
+        logger.error(f"groq package not installed: {e}")
+        print(f"[GROQ] ERROR: groq package not installed: {e}")
+        return None
     except Exception as e:
         logger.error(f"Failed to initialize Groq AI: {e}")
+        print(f"[GROQ] ERROR initializing: {e}")
         return None
 
 
@@ -81,10 +90,14 @@ def _groq_response(user_message: str) -> str | None:
             max_tokens=300,
             temperature=0.7,
         )
-        return completion.choices[0].message.content.strip()
+        reply = completion.choices[0].message.content.strip()
+        print(f"[GROQ] Response OK: {reply[:50]}...")
+        return reply
     except Exception as e:
         logger.error(f"Groq API error: {e}")
+        print(f"[GROQ] API call ERROR: {e}")
         return None
+
 
 
 def generate_bot_response(user_message: str) -> str:
