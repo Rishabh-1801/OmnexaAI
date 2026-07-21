@@ -1,12 +1,14 @@
 """
 Views for chatbot widget backend.
-Stores sessions and messages. Integrated with Groq AI for fast, smart responses.
+Stores sessions and messages. Integrated with Groq AI (via direct HTTP) for smart responses.
 """
 
 import os
 import uuid
 import json
 import logging
+import urllib.request
+import urllib.error
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST, require_GET
@@ -26,8 +28,8 @@ from omnexa_ai.core.utils import get_client_ip
 
 logger = logging.getLogger(__name__)
 
-# ── Groq AI Setup ─────────────────────────────────────────────────────────────
-_groq_client = None
+# ── AI Setup ───────────────────────────────────────────────────────────────────
+GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
 
 SYSTEM_PROMPT = (
     "You are the OMNEXA AI Assistant — a helpful, friendly, and professional AI chatbot "
@@ -44,60 +46,63 @@ SYSTEM_PROMPT = (
 )
 
 
-def _get_groq_client():
-    """Lazily initialize and return the Groq client."""
-    global _groq_client
-    if _groq_client is not None:
-        return _groq_client
-
-    api_key = os.environ.get('GROQ_API_KEY', '') or getattr(settings, 'GROQ_API_KEY', '')
-
-    print(f"[GROQ] API key found: {'YES (' + api_key[:8] + '...)' if api_key and api_key != 'your-groq-api-key-here' else 'NO'}")
-
-    if not api_key or api_key == 'your-groq-api-key-here':
-        logger.warning("GROQ_API_KEY not set — falling back to rule-based responses.")
-        print("[GROQ] WARNING: No API key set, using rule-based fallback.")
-        return None
-
-    try:
-        from groq import Groq
-        _groq_client = Groq(api_key=api_key)
-        logger.info("Groq AI client initialized successfully.")
-        print("[GROQ] Client initialized successfully!")
-        return _groq_client
-    except ImportError as e:
-        logger.error(f"groq package not installed: {e}")
-        print(f"[GROQ] ERROR: groq package not installed: {e}")
-        return None
-    except Exception as e:
-        logger.error(f"Failed to initialize Groq AI: {e}")
-        print(f"[GROQ] ERROR initializing: {e}")
-        return None
+def _get_groq_key():
+    """Read GROQ_API_KEY from environment."""
+    key = os.environ.get('GROQ_API_KEY', '').strip()
+    if not key:
+        key = getattr(settings, 'GROQ_API_KEY', '').strip()
+    if key and key != 'your-groq-api-key-here':
+        print(f"[GROQ] Key loaded: {key[:10]}...")
+        return key
+    print("[GROQ] No valid API key found.")
+    return None
 
 
 def _groq_response(user_message: str) -> str | None:
-    """Call Groq API and return the response text, or None on failure."""
-    client = _get_groq_client()
-    if client is None:
-        return None
-    try:
-        completion = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
-            messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": user_message},
-            ],
-            max_tokens=300,
-            temperature=0.7,
-        )
-        reply = completion.choices[0].message.content.strip()
-        print(f"[GROQ] Response OK: {reply[:50]}...")
-        return reply
-    except Exception as e:
-        logger.error(f"Groq API error: {e}")
-        print(f"[GROQ] API call ERROR: {e}")
+    """
+    Call Groq API directly via urllib (no external package needed).
+    Uses Groq's OpenAI-compatible REST endpoint.
+    """
+    api_key = _get_groq_key()
+    if not api_key:
         return None
 
+    payload = json.dumps({
+        "model": "llama-3.3-70b-versatile",
+        "messages": [
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": user_message},
+        ],
+        "max_tokens": 300,
+        "temperature": 0.7,
+    }).encode("utf-8")
+
+    req = urllib.request.Request(
+        GROQ_API_URL,
+        data=payload,
+        headers={
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        },
+        method="POST",
+    )
+
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+            reply = data["choices"][0]["message"]["content"].strip()
+            print(f"[GROQ] ✅ Response: {reply[:60]}...")
+            return reply
+    except urllib.error.HTTPError as e:
+        body = e.read().decode("utf-8", errors="ignore")
+        print(f"[GROQ] ❌ HTTP {e.code}: {body[:200]}")
+        logger.error(f"Groq HTTP error {e.code}: {body[:200]}")
+        return None
+    except Exception as e:
+        print(f"[GROQ] ❌ Error: {e}")
+        logger.error(f"Groq API error: {e}")
+        return None
 
 
 def generate_bot_response(user_message: str) -> str:
