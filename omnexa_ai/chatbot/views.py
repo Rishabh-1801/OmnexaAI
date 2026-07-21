@@ -30,8 +30,7 @@ logger = logging.getLogger(__name__)
 
 # ── AI Setup (NVIDIA NIM - Kimi K2.6) ───────────────────────────────────────
 NVIDIA_API_URL  = "https://integrate.api.nvidia.com/v1/chat/completions"
-KIMI_MODEL      = "moonshotai/kimi-k2.6"
-FALLBACK_MODEL  = "meta/llama-3.3-70b-instruct"  # fast backup if kimi unavailable
+PRIMARY_MODEL   = "meta/llama-3.1-8b-instruct"    # fast & confirmed working
 
 SYSTEM_PROMPT = (
     "You are the OMNEXA AI Assistant — a helpful, friendly, and professional AI chatbot "
@@ -86,7 +85,7 @@ def _call_ai(api_url: str, model: str, api_key: str, user_message: str) -> str |
 
 def generate_bot_response(user_message: str) -> str:
     """
-    NVIDIA NIM only - Kimi K2.6 primary, llama-3.3-70b backup.
+    NVIDIA NIM - meta/llama-3.1-8b-instruct (fast, free, confirmed working).
     """
     nvidia_key = os.environ.get('NVIDIA_API_KEY', '') or getattr(settings, 'NVIDIA_API_KEY', '')
     nvidia_key = nvidia_key.strip()
@@ -98,16 +97,9 @@ def generate_bot_response(user_message: str) -> str:
             "Please try again in a moment, or reach us at /contact/ — we'd love to help! 🙏"
         )
 
-    # 1️⃣ Try Kimi K2.6 first
-    reply = _call_ai(NVIDIA_API_URL, KIMI_MODEL, nvidia_key, user_message)
+    reply = _call_ai(NVIDIA_API_URL, PRIMARY_MODEL, nvidia_key, user_message)
     if reply:
-        print(f"[Kimi K2.6 ✅] {reply[:60]}...")
-        return reply
-
-    # 2️⃣ Fallback to llama-3.3-70b
-    reply = _call_ai(NVIDIA_API_URL, FALLBACK_MODEL, nvidia_key, user_message)
-    if reply:
-        print(f"[Llama-3.3 ✅] {reply[:60]}...")
+        print(f"[Llama-3.1-8B ✅] {reply[:60]}...")
         return reply
 
     return (
