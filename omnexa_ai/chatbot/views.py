@@ -28,7 +28,9 @@ from omnexa_ai.core.utils import get_client_ip
 
 logger = logging.getLogger(__name__)
 
-# ── AI Setup (NVIDIA NIM - GLM-5.2) ───────────────────────────────────────────────
+# ── AI Setup ─────────────────────────────────────────────────────────────────
+GROQ_API_URL   = "https://api.groq.com/openai/v1/chat/completions"
+GROQ_MODEL     = "llama-3.3-70b-versatile"
 NVIDIA_API_URL = "https://integrate.api.nvidia.com/v1/chat/completions"
 NVIDIA_MODEL   = "z-ai/glm-5.2"
 
@@ -47,40 +49,20 @@ SYSTEM_PROMPT = (
 )
 
 
-def _get_nvidia_key():
-    """Read NVIDIA_API_KEY from environment."""
-    key = os.environ.get('NVIDIA_API_KEY', '').strip()
-    if not key:
-        key = getattr(settings, 'NVIDIA_API_KEY', '').strip()
-    if key and key.startswith('nvapi-'):
-        print(f"[NVIDIA] Key loaded: {key[:15]}...")
-        return key
-    print("[NVIDIA] No valid API key found.")
-    return None
-
-
-def _nvidia_response(user_message: str) -> str | None:
-    """
-    Call NVIDIA NIM API (GLM-5.2) via urllib.
-    Uses NVIDIA's OpenAI-compatible REST endpoint.
-    """
-    api_key = _get_nvidia_key()
-    if not api_key:
-        return None
-
+def _call_ai(api_url: str, model: str, api_key: str, user_message: str) -> str | None:
+    """Generic OpenAI-compatible API caller (works for Groq & NVIDIA)."""
     payload = json.dumps({
-        "model": NVIDIA_MODEL,
+        "model": model,
         "messages": [
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": user_message},
         ],
         "max_tokens": 300,
         "temperature": 0.7,
-        "stream": False,
     }).encode("utf-8")
 
     req = urllib.request.Request(
-        NVIDIA_API_URL,
+        api_url,
         data=payload,
         headers={
             "Authorization": f"Bearer {api_key}",
@@ -88,22 +70,51 @@ def _nvidia_response(user_message: str) -> str | None:
         },
         method="POST",
     )
-
     try:
         with urllib.request.urlopen(req, timeout=20) as resp:
             data = json.loads(resp.read().decode("utf-8"))
-            reply = data["choices"][0]["message"]["content"].strip()
-            print(f"[NVIDIA GLM-5.2] ✅ Response: {reply[:60]}...")
-            return reply
+            return data["choices"][0]["message"]["content"].strip()
     except urllib.error.HTTPError as e:
         body = e.read().decode("utf-8", errors="ignore")
-        print(f"[NVIDIA] ❌ HTTP {e.code}: {body[:200]}")
-        logger.error(f"NVIDIA API HTTP error {e.code}: {body[:200]}")
+        print(f"[AI] ❌ HTTP {e.code} from {api_url[:40]}: {body[:150]}")
+        logger.error(f"AI HTTP error {e.code}: {body[:150]}")
         return None
     except Exception as e:
-        print(f"[NVIDIA] ❌ Error: {e}")
-        logger.error(f"NVIDIA API error: {e}")
+        print(f"[AI] ❌ Error: {e}")
+        logger.error(f"AI API error: {e}")
         return None
+
+
+def generate_bot_response(user_message: str) -> str:
+    """
+    Try Groq (primary) → NVIDIA (backup).
+    Both are free. Whichever key is valid will answer.
+    """
+    # 1️⃣ Try Groq (Llama 3.3 70B) - Primary
+    groq_key = os.environ.get('GROQ_API_KEY', '') or getattr(settings, 'GROQ_API_KEY', '')
+    groq_key = groq_key.strip()
+    if groq_key and groq_key.startswith('gsk_'):
+        reply = _call_ai(GROQ_API_URL, GROQ_MODEL, groq_key, user_message)
+        if reply:
+            print(f"[GROQ ✅] {reply[:60]}...")
+            return reply
+
+    # 2️⃣ Try NVIDIA NIM (GLM-5.2) - Backup
+    nvidia_key = os.environ.get('NVIDIA_API_KEY', '') or getattr(settings, 'NVIDIA_API_KEY', '')
+    nvidia_key = nvidia_key.strip()
+    if nvidia_key and nvidia_key.startswith('nvapi-'):
+        reply = _call_ai(NVIDIA_API_URL, NVIDIA_MODEL, nvidia_key, user_message)
+        if reply:
+            print(f"[NVIDIA ✅] {reply[:60]}...")
+            return reply
+
+    # Only shown if BOTH keys are missing/invalid
+    print("[AI] ❌ No valid API key found for any provider.")
+    return (
+        "I'm having a little trouble connecting right now. "
+        "Please try again in a moment, or reach us directly at /contact/ — "
+        "we'd love to help! 🙏"
+    )
 
 
 def generate_bot_response(user_message: str) -> str:
