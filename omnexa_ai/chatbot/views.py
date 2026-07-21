@@ -28,9 +28,9 @@ from omnexa_ai.core.utils import get_client_ip
 
 logger = logging.getLogger(__name__)
 
-# ── AI Setup (NVIDIA NIM - Kimi K2.6) ───────────────────────────────────────
-NVIDIA_API_URL  = "https://integrate.api.nvidia.com/v1/chat/completions"
-PRIMARY_MODEL   = "meta/llama-3.1-8b-instruct"    # fast & confirmed working
+# ── AI Setup (NVIDIA NIM - openai/gpt-oss-120b) ─────────────────────────────
+NVIDIA_API_URL = "https://integrate.api.nvidia.com/v1/chat/completions"
+MODEL          = "openai/gpt-oss-120b"   # sole model — no fallback
 
 SYSTEM_PROMPT = (
     "You are the OMNEXA AI Assistant — a helpful, friendly, and professional AI chatbot "
@@ -60,20 +60,20 @@ SYSTEM_PROMPT = (
 )
 
 
-def _call_ai(api_url: str, model: str, api_key: str, user_message: str) -> str | None:
-    """Generic OpenAI-compatible API caller (works for Groq & NVIDIA)."""
+def _call_nvidia(user_message: str, api_key: str) -> str | None:
+    """Call NVIDIA NIM openai/gpt-oss-120b via OpenAI-compatible endpoint."""
     payload = json.dumps({
-        "model": model,
+        "model": MODEL,
         "messages": [
             {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": user_message},
+            {"role": "user",   "content": user_message},
         ],
         "max_tokens": 300,
         "temperature": 0.7,
     }).encode("utf-8")
 
     req = urllib.request.Request(
-        api_url,
+        NVIDIA_API_URL,
         data=payload,
         headers={
             "Authorization": f"Bearer {api_key}",
@@ -82,55 +82,43 @@ def _call_ai(api_url: str, model: str, api_key: str, user_message: str) -> str |
         method="POST",
     )
     try:
-        with urllib.request.urlopen(req, timeout=20) as resp:
+        with urllib.request.urlopen(req, timeout=90) as resp:
             data = json.loads(resp.read().decode("utf-8"))
             return data["choices"][0]["message"]["content"].strip()
     except urllib.error.HTTPError as e:
         body = e.read().decode("utf-8", errors="ignore")
-        print(f"[AI] ❌ HTTP {e.code} from {api_url[:40]}: {body[:150]}")
-        logger.error(f"AI HTTP error {e.code}: {body[:150]}")
+        print(f"[GPT-OSS-120B] ❌ HTTP {e.code}: {body[:200]}")
+        logger.error(f"NVIDIA HTTP error {e.code}: {body[:200]}")
         return None
     except Exception as e:
-        print(f"[AI] ❌ Error: {e}")
-        logger.error(f"AI API error: {e}")
+        print(f"[GPT-OSS-120B] ❌ Error: {e}")
+        logger.error(f"NVIDIA API error: {e}")
         return None
 
 
 def generate_bot_response(user_message: str) -> str:
     """
-    NVIDIA NIM - meta/llama-3.1-8b-instruct (fast, free, confirmed working).
+    Generate a bot response using NVIDIA NIM openai/gpt-oss-120b exclusively.
+    No other models — single, clean AI-powered path.
     """
-    nvidia_key = os.environ.get('NVIDIA_API_KEY', '') or getattr(settings, 'NVIDIA_API_KEY', '')
-    nvidia_key = nvidia_key.strip()
+    nvidia_key = (
+        os.environ.get("NVIDIA_API_KEY", "")
+        or getattr(settings, "NVIDIA_API_KEY", "")
+    ).strip()
 
-    if not nvidia_key or not nvidia_key.startswith('nvapi-'):
-        print("[AI] ❌ No valid NVIDIA key found.")
+    if not nvidia_key or not nvidia_key.startswith("nvapi-"):
+        print("[GPT-OSS-120B] ❌ No valid NVIDIA API key found.")
         return (
             "I'm having a little trouble connecting right now. "
-            "Please try again in a moment, or reach us at /contact/ — we'd love to help! 🙏"
+            "Please try again in a moment, or reach us directly at /contact/ — "
+            "we'd love to help! 🙏"
         )
 
-    reply = _call_ai(NVIDIA_API_URL, PRIMARY_MODEL, nvidia_key, user_message)
+    reply = _call_nvidia(user_message, nvidia_key)
     if reply:
-        print(f"[Llama-3.1-8B ✅] {reply[:60]}...")
+        print(f"[GPT-OSS-120B ✅] {reply[:80]}...")
         return reply
 
-    return (
-        "I'm having a little trouble connecting right now. "
-        "Please try again in a moment, or reach us at /contact/ — we'd love to help! 🙏"
-    )
-
-
-def generate_bot_response(user_message: str) -> str:
-    """
-    Generate a bot response using NVIDIA NIM GLM-5.2 AI exclusively.
-    No static or rule-based fallback — always AI-powered answers.
-    """
-    ai_reply = _nvidia_response(user_message)
-    if ai_reply:
-        return ai_reply
-
-    # Only if AI is completely unreachable (network/key issue)
     return (
         "I'm having a little trouble connecting right now. "
         "Please try again in a moment, or reach us directly at /contact/ — "
