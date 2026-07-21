@@ -265,17 +265,54 @@ function handleChatbotSubmit() {
     addChatbotMessage(message, true);
     chatbotInput.value = '';
 
-    // Simulate AI response
-    setTimeout(() => {
-      const responses = [
-        "Thanks for reaching out! I'd be happy to help you explore how AI can grow your business. Would you like to schedule a free strategy call?",
-        "Great question! Our AI systems can help automate your marketing and generate leads 24/7. What specific challenge are you facing?",
-        "I understand! Let me help you find the right AI solution for your business. What industry are you in?",
-        "Perfect! OMNEXA AI specializes in building intelligent automation systems. Would you like to learn more about our services?"
-      ];
-      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-      addChatbotMessage(randomResponse);
-    }, 1000);
+    // Add loading indicator
+    const loadingId = 'loading-' + Date.now();
+    const loadingDiv = document.createElement('div');
+    loadingDiv.id = loadingId;
+    loadingDiv.className = 'chatbot-message';
+    loadingDiv.style.background = '#f1f1f1';
+    loadingDiv.style.color = '#333';
+    loadingDiv.textContent = 'Typing...';
+    chatbotMessages.appendChild(loadingDiv);
+    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+
+    // Get or create session key
+    let sessionKey = localStorage.getItem('omnexa_chat_session');
+    if (!sessionKey) {
+      sessionKey = 'sess_' + Math.random().toString(36).substr(2, 9);
+      localStorage.setItem('omnexa_chat_session', sessionKey);
+    }
+
+    // Call actual Django backend API
+    fetch('/api/v1/chatbot/message/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        session_key: sessionKey,
+        message: message,
+        page_url: window.location.href
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Remove loading indicator
+      const loadingEl = document.getElementById(loadingId);
+      if (loadingEl) {
+        loadingEl.remove();
+      }
+      addChatbotMessage(data.reply);
+    })
+    .catch(error => {
+      console.error('Chatbot API Error:', error);
+      // Remove loading indicator
+      const loadingEl = document.getElementById(loadingId);
+      if (loadingEl) {
+        loadingEl.remove();
+      }
+      addChatbotMessage("Sorry, I'm having trouble connecting right now. Please try again later or contact us directly!");
+    });
   }
 }
 
