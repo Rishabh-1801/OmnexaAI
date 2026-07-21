@@ -32,7 +32,7 @@ logger = logging.getLogger(__name__)
 GROQ_API_URL   = "https://api.groq.com/openai/v1/chat/completions"
 GROQ_MODEL     = "llama-3.3-70b-versatile"
 NVIDIA_API_URL = "https://integrate.api.nvidia.com/v1/chat/completions"
-NVIDIA_MODEL   = "z-ai/glm-5.2"
+NVIDIA_MODEL   = "meta/llama-3.1-8b-instruct"
 
 SYSTEM_PROMPT = (
     "You are the OMNEXA AI Assistant — a helpful, friendly, and professional AI chatbot "
