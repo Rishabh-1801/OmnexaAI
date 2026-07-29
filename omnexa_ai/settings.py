@@ -57,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'omnexa_ai.core.middleware.AutoAdminMiddleware',
+    'omnexa_ai.core.middleware.SitePasswordMiddleware',
 ]
 
 
@@ -230,3 +231,7 @@ os.makedirs(BASE_DIR / 'logs', exist_ok=True)
 # ── 17. AI CONFIGURATION (NVIDIA NIM - GLM-5.2) ──────────────────────────────
 NVIDIA_API_KEY = config('NVIDIA_API_KEY', default='')
 GROQ_API_KEY   = config('GROQ_API_KEY', default='')  # kept for backward compat
+
+
+# ── 18. SITE PASSWORD PROTECTION ────────────────────────────────────────────────
+SITE_PASSWORD = config('SITE_PASSWORD', default='')
