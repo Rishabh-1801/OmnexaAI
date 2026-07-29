@@ -1,4 +1,6 @@
 from django.contrib.auth import get_user_model
+from django.shortcuts import redirect
+from django.conf import settings
 
 class AutoAdminMiddleware:
     _admin_created = False
@@ -38,3 +40,41 @@ class AutoAdminMiddleware:
                 AutoAdminMiddleware._admin_created = False
         
         return self.get_response(request)
+
+
+class SitePasswordMiddleware:
+    """
+    Middleware that gates the entire site behind a password.
+    Password is read from settings.SITE_PASSWORD.
+    Exempt paths: /enter-password/, /admin/, /static/, /media/, /api/
+    """
+
+    # Paths that bypass the password gate
+    EXEMPT_PREFIXES = (
+        '/enter-password/',
+        '/admin/',
+        '/static/',
+        '/media/',
+        '/api/',
+    )
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+        self.site_password = getattr(settings, 'SITE_PASSWORD', None)
+
+    def __call__(self, request):
+        # If no password is configured, let all traffic through
+        if not self.site_password:
+            return self.get_response(request)
+
+        # Allow exempt paths through
+        for prefix in self.EXEMPT_PREFIXES:
+            if request.path.startswith(prefix):
+                return self.get_response(request)
+
+        # Check if already authenticated via session
+        if request.session.get('site_password_ok'):
+            return self.get_response(request)
+
+        # Not authenticated — redirect to password page
+        return redirect('/enter-password/?next=' + request.path)
