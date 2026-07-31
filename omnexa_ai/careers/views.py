@@ -2,6 +2,7 @@
 Views for careers page — both SSR template and REST API.
 """
 
+import logging
 from django.shortcuts import render, get_object_or_404
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView
 from rest_framework.response import Response
@@ -19,6 +20,8 @@ from .serializers import (
     CareersPageContentSerializer, CompanyBenefitSerializer
 )
 from omnexa_ai.core.utils import get_client_ip, send_mail_async
+
+logger = logging.getLogger(__name__)
 
 
 # --- Template Views (SSR) ---
@@ -145,9 +148,10 @@ class JobApplicationCreateAPIView(CreateAPIView):
             )
 
             # Send confirmation email to applicant
-            send_mail_async(
-                subject=f"Application Received — OMNEXA AI",
-                message=f"""
+            try:
+                send_mail(
+                    subject="Application Received — OMNEXA AI",
+                    message=f"""
 Dear {application.name},
 
 Thank you for applying to OMNEXA AI!
@@ -163,18 +167,22 @@ Here's a summary of your application:
 We appreciate your interest in joining OMNEXA AI and wish you the best of luck!
 
 Best regards,
-OMNEXA AI Hiring Team
-📍 210, Sarthak Pulse Mall, Gandhinagar
-                """,
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[application.email],
-                fail_silently=True,
-            )
+Omnexa AI Hiring Team
+210, Sarthak Pulse Mall, Gandhinagar
+                    """,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[application.email],
+                    fail_silently=False,
+                )
+                logger.info(f"Confirmation email sent to applicant {application.email}")
+            except Exception as e:
+                logger.error(f"Failed to send confirmation email to {application.email}: {e}")
 
-            # Send notification email to HR
-            send_mail_async(
-                subject=f"📋 New Application: {application.name} — {application.category}",
-                message=f"""
+            # Send notification email to HR/Admin
+            try:
+                send_mail(
+                    subject=f"New Application: {application.name} — {application.category}",
+                    message=f"""
 New job application received!
 
 Applicant: {application.name}
@@ -184,11 +192,14 @@ Category: {application.category}
 Address: {application.address}
 
 View application in admin: https://omnexa.ai/admin/careers/jobapplication/{application.id}/
-                """,
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[settings.ADMIN_EMAIL],
-                fail_silently=True,
-            )
+                    """,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[settings.ADMIN_EMAIL],
+                    fail_silently=False,
+                )
+                logger.info(f"Admin notification email sent for application {application.id}")
+            except Exception as e:
+                logger.error(f"Failed to send admin email for application {application.id}: {e}")
 
             # Return success response
             return Response(
