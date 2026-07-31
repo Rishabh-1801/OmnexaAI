@@ -1,0 +1,34 @@
+{
+  "businessName": "The Omnexa AI",
+  "website": "https://www.theomnexaai.com/",
+  "supportEmail": "hello@theomnexaai.com",
+  "tone": "professional, clear, friendly, and concise",
+  "services": [
+    "AI chatbot setup for websites",
+    "AI automation for customer support and lead handling",
+    "FAQ automation",
+    "Workflow automation for businesses",
+    "Custom AI solutions"
+  ],
+  "faq": [
+    {
+      "question": "What does The Omnexa AI do?",
+      "answer": "The Omnexa AI helps businesses use AI for customer support, lead capture, FAQ automation, and workflow automation."
+    },
+    {
+      "question": "Can I add an AI chatbot to my website?",
+      "answer": "Yes. The Omnexa AI can help add an AI chatbot that answers FAQs, captures leads, and routes customer support queries."
+    },
+    {
+      "question": "How can I contact the team?",
+      "answer": "Share your name, email, phone number, and your requirement in the chat. The team will follow up."
+    }
+  ],
+  "leadFields": [
+    "name",
+    "email",
+    "phone",
+    "company",
+    "requirement"
+  ]
+}
