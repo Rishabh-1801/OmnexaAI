@@ -2,11 +2,10 @@
 Views for home page — both SSR template and REST API.
 """
 
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
-from django.conf import settings
 import json
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.response import Response
@@ -279,33 +278,3 @@ class GoogleBusinessTestimonialsAPIView(ListAPIView):
     """
     queryset = Testimonial.objects.filter(is_from_google=True, is_active=True).order_by('order')
     serializer_class = TestimonialSerializer
-
-
-# --- Site Password Views ---
-def enter_password(request):
-    """
-    GET  /enter-password/ — show the password entry form
-    POST /enter-password/ — validate the password and set session
-    """
-    site_password = getattr(settings, 'SITE_PASSWORD', '')
-    error = None
-    next_url = request.GET.get('next', '/')
-
-    if request.method == 'POST':
-        entered = request.POST.get('password', '')
-        next_url = request.POST.get('next', '/')
-        if entered == site_password:
-            request.session['site_password_ok'] = True
-            return redirect(next_url or '/')
-        else:
-            error = 'Incorrect password. Please try again.'
-
-    return render(request, 'password.html', {'error': error, 'next': next_url})
-
-
-def exit_password(request):
-    """
-    POST /exit-password/ — clears the password session (logout).
-    """
-    request.session.pop('site_password_ok', None)
-    return redirect('/enter-password/')
