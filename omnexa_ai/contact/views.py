@@ -43,12 +43,10 @@ class ConsultationBookingCreateView(APIView):
                 utm_campaign=request.data.get('utm_campaign', ''),
             )
 
-            # Send confirmation email to lead
-            try:
-                send_mail(
-                    subject="✅ Your Free AI Strategy Consultation is Booked — OMNEXA AI",
-                    message=f"""
-Hi {booking.name},
+            # Send confirmation email to user (async - non-blocking)
+            send_mail_async(
+                subject="Your Free AI Strategy Consultation is Booked — OMNEXA AI",
+                message=f"""Hi {booking.name},
 
 Thank you for booking a free AI strategy consultation with OMNEXA AI!
 
@@ -61,23 +59,16 @@ Here's what happens next:
 We're excited to show you how AI can transform your business!
 
 Best,
-Omnexa AI Team
-210, Sarthak Pulse Mall, Gandhinagar
-                    """,
-                    from_email=settings.DEFAULT_FROM_EMAIL,
-                    recipient_list=[booking.email],
-                    fail_silently=False,
-                )
-                logger.info(f"Confirmation email sent to {booking.email}")
-            except Exception as e:
-                logger.error(f"Failed to send confirmation email to {booking.email}: {e}")
+OMNEXA AI Team
+210, Sarthak Pulse Mall, Gandhinagar""",
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[booking.email],
+            )
 
-            # Notify admin
-            try:
-                send_mail(
-                    subject=f"New Lead: {booking.name} — {booking.business_name}",
-                    message=f"""
-New consultation booking received!
+            # Send notification email to company (async - non-blocking)
+            send_mail_async(
+                subject=f"New Contact Form: {booking.name} — {booking.business_name}",
+                message=f"""New consultation booking received!
 
 Name: {booking.name}
 Business: {booking.business_name}
@@ -86,16 +77,10 @@ Email: {booking.email}
 Website: {booking.website or 'N/A'}
 Service: {booking.get_service_interested_display()}
 Message: {booking.message or 'N/A'}
-
-IP: {booking.ip_address}
-                    """,
-                    from_email=settings.DEFAULT_FROM_EMAIL,
-                    recipient_list=[settings.ADMIN_EMAIL],
-                    fail_silently=False,
-                )
-                logger.info(f"Admin notification email sent for booking {booking.id}")
-            except Exception as e:
-                logger.error(f"Failed to send admin email for booking {booking.id}: {e}")
+IP: {booking.ip_address}""",
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[settings.ADMIN_EMAIL],
+            )
 
             return Response(
                 {

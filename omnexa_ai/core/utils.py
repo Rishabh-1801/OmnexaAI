@@ -33,18 +33,41 @@ def validate_phone_number(phone):
 
 
 import threading
+import logging
+
+logger = logging.getLogger(__name__)
+
+def _send_mail_in_thread(subject, message, from_email, recipient_list):
+    """
+    Internal wrapper to send mail inside a thread with error logging.
+    Errors are logged but never raised (so the thread won't crash silently).
+    """
+    try:
+        send_mail(
+            subject=subject,
+            message=message,
+            from_email=from_email,
+            recipient_list=recipient_list,
+            fail_silently=False,
+        )
+        logger.info(f"Email sent successfully to {recipient_list}")
+    except Exception as e:
+        logger.error(f"EMAIL SEND FAILED to {recipient_list} | Subject: {subject} | Error: {type(e).__name__}: {e}")
+
 
 def send_mail_async(subject, message, from_email, recipient_list, fail_silently=True):
     """
-    Send email asynchronously using a background thread to prevent SMTP connection timeouts
-    from blocking the main request-response cycle.
+    Send email asynchronously using a background thread.
+    Prevents SMTP timeouts from blocking the HTTP response (avoids 502 errors).
+    Errors are logged to Render logs for debugging.
     """
     thread = threading.Thread(
-        target=send_mail,
+        target=_send_mail_in_thread,
         args=(subject, message, from_email, recipient_list),
-        kwargs={'fail_silently': fail_silently}
+        daemon=True,
     )
     thread.start()
+    logger.info(f"Email queued for async delivery to {recipient_list}")
 
 
 def send_admin_email(subject, message, recipient_list=None):

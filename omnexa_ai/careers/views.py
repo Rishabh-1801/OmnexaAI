@@ -147,59 +147,42 @@ class JobApplicationCreateAPIView(CreateAPIView):
                 ip_address=get_client_ip(request)
             )
 
-            # Send confirmation email to applicant
-            try:
-                send_mail(
-                    subject="Application Received — OMNEXA AI",
-                    message=f"""
-Dear {application.name},
+            # Send confirmation email to applicant (async - non-blocking)
+            send_mail_async(
+                subject="Application Received — OMNEXA AI",
+                message=f"""Dear {application.name},
 
 Thank you for applying to OMNEXA AI!
 
 We have received your application and our team will review it shortly.
-If your qualifications match our requirements, we will contact you within 7-10 business days
-to schedule an interview.
+If your qualifications match our requirements, we will contact you within 7-10 business days to schedule an interview.
 
-Here's a summary of your application:
+Application Summary:
 - Category: {application.category}
 - Applied on: {application.created_at.strftime('%B %d, %Y')}
 
 We appreciate your interest in joining OMNEXA AI and wish you the best of luck!
 
 Best regards,
-Omnexa AI Hiring Team
-210, Sarthak Pulse Mall, Gandhinagar
-                    """,
-                    from_email=settings.DEFAULT_FROM_EMAIL,
-                    recipient_list=[application.email],
-                    fail_silently=False,
-                )
-                logger.info(f"Confirmation email sent to applicant {application.email}")
-            except Exception as e:
-                logger.error(f"Failed to send confirmation email to {application.email}: {e}")
+OMNEXA AI Hiring Team
+210, Sarthak Pulse Mall, Gandhinagar""",
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[application.email],
+            )
 
-            # Send notification email to HR/Admin
-            try:
-                send_mail(
-                    subject=f"New Application: {application.name} — {application.category}",
-                    message=f"""
-New job application received!
+            # Send notification email to company (async - non-blocking)
+            send_mail_async(
+                subject=f"New Job Application: {application.name} — {application.category}",
+                message=f"""New job application received!
 
 Applicant: {application.name}
 Email: {application.email}
 Phone: {application.phone}
 Category: {application.category}
-Address: {application.address}
-
-View application in admin: https://omnexa.ai/admin/careers/jobapplication/{application.id}/
-                    """,
-                    from_email=settings.DEFAULT_FROM_EMAIL,
-                    recipient_list=[settings.ADMIN_EMAIL],
-                    fail_silently=False,
-                )
-                logger.info(f"Admin notification email sent for application {application.id}")
-            except Exception as e:
-                logger.error(f"Failed to send admin email for application {application.id}: {e}")
+Address: {application.address}""",
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[settings.ADMIN_EMAIL],
+            )
 
             # Return success response
             return Response(
