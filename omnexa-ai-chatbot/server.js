@@ -57,6 +57,46 @@ function sanitizeMessages(messages) {
     }));
 }
 
+// Blocked keywords — server refuses BEFORE calling OpenAI
+const BLOCKED_PATTERNS = [
+  /source\s*code/i,
+  /website\s*code/i,
+  /give\s*me\s*(the\s*)?(full\s*)?code/i,
+  /show\s*me\s*(the\s*)?code/i,
+  /share\s*(the\s*)?code/i,
+  /\bhtml\b/i,
+  /\bcss\b/i,
+  /\bjavascript\b/i,
+  /\bpython\b/i,
+  /\bdjango\b/i,
+  /\bnode\.?js\b/i,
+  /\breact\b/i,
+  /\bvue\b/i,
+  /\bangular\b/i,
+  /\bscript\b.*\btag\b/i,
+  /write\s*(a\s*)?(code|function|script|program|class)/i,
+  /create\s*(a\s*)?(website|webpage|app|application|program)/i,
+  /build\s*(a\s*)?(website|webpage|app|application|chatbot)/i,
+  /how\s*to\s*(code|build|create|make|develop|program)/i,
+  /debug/i,
+  /error\s*in\s*(my\s*)?(code|script|program)/i,
+  /fix\s*(my\s*)?(code|bug|error)/i,
+  /tutorial/i,
+  /learn\s*(to\s*)?(code|program|develop)/i,
+  /\bapi\s*key\b/i,
+  /give\s*me\s*(a\s*)?(complete|full|ready)/i
+];
+
+const BLOCKED_REPLY = "I'm only here to assist with questions about The Omnexa AI's services and solutions. For anything else, I'm unable to help. Can I tell you about what we offer? 😊";
+
+function isBlockedMessage(messages) {
+  // Check only the latest user message
+  const lastUserMsg = [...messages].reverse().find((m) => m.role === "user");
+  if (!lastUserMsg) return false;
+  const text = lastUserMsg.content.toLowerCase();
+  return BLOCKED_PATTERNS.some((pattern) => pattern.test(text));
+}
+
 function extractLead(messages) {
   const text = messages.map((message) => message.content).join("\n");
   const email = text.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i)?.[0] || "";
@@ -118,6 +158,12 @@ async function handleChat(req, res) {
       const messages = sanitizeMessages(payload.messages);
       if (!messages.length) {
         sendJson(res, 400, { error: "Message is required." }, origin);
+        return;
+      }
+
+      // Server-side guard — block BEFORE calling OpenAI
+      if (isBlockedMessage(messages)) {
+        sendJson(res, 200, { reply: BLOCKED_REPLY, leadCaptured: false }, origin);
         return;
       }
 
