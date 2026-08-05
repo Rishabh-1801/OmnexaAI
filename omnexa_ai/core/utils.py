@@ -40,9 +40,9 @@ logger = logging.getLogger(__name__)
 def _send_mail_in_thread(subject, message, from_email, recipient_list):
     """
     Internal wrapper to send mail inside a thread with error logging.
-    Errors are logged but never raised (so the thread won't crash silently).
     """
     try:
+        print(f"[EMAIL] Attempting to send email to {recipient_list}...")
         send_mail(
             subject=subject,
             message=message,
@@ -50,24 +50,26 @@ def _send_mail_in_thread(subject, message, from_email, recipient_list):
             recipient_list=recipient_list,
             fail_silently=False,
         )
+        print(f"[EMAIL] SUCCESS - Email sent to {recipient_list}")
         logger.info(f"Email sent successfully to {recipient_list}")
     except Exception as e:
-        logger.error(f"EMAIL SEND FAILED to {recipient_list} | Subject: {subject} | Error: {type(e).__name__}: {e}")
+        print(f"[EMAIL] FAILED - {type(e).__name__}: {e}")
+        logger.error(f"EMAIL SEND FAILED to {recipient_list} | Error: {type(e).__name__}: {e}")
 
 
 def send_mail_async(subject, message, from_email, recipient_list, fail_silently=True):
     """
-    Send email asynchronously using a background thread.
-    Prevents SMTP timeouts from blocking the HTTP response (avoids 502 errors).
-    Errors are logged to Render logs for debugging.
+    Send email in a background thread (non-daemon) so it completes
+    even after the HTTP response is sent. Avoids 502 timeouts.
     """
+    print(f"[EMAIL] Queuing async email to {recipient_list} | Subject: {subject}")
     thread = threading.Thread(
         target=_send_mail_in_thread,
         args=(subject, message, from_email, recipient_list),
-        daemon=True,
+        daemon=False,  # IMPORTANT: False = thread survives after HTTP response
     )
     thread.start()
-    logger.info(f"Email queued for async delivery to {recipient_list}")
+
 
 
 def send_admin_email(subject, message, recipient_list=None):

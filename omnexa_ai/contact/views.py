@@ -133,3 +133,49 @@ class NewsletterSubscribeView(APIView):
 def contact_page(request):
     """Renders contact.html."""
     return render(request, 'contact.html')
+
+
+class EmailTestView(APIView):
+    """
+    TEMPORARY DEBUG VIEW — GET /api/v1/contact/email-test/
+    Tests SMTP email sending directly on the server.
+    Remove this view after debugging is complete.
+    """
+
+    def get(self, request):
+        try:
+            result = send_mail(
+                subject='[DEBUG] OMNEXA AI Email Test',
+                message='This is a live SMTP test from the production server. If you see this, email is working!',
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[settings.ADMIN_EMAIL],
+                fail_silently=False,
+            )
+            return Response({
+                "success": True,
+                "emails_sent": result,
+                "config": {
+                    "EMAIL_HOST": settings.EMAIL_HOST,
+                    "EMAIL_PORT": settings.EMAIL_PORT,
+                    "EMAIL_USE_TLS": settings.EMAIL_USE_TLS,
+                    "EMAIL_HOST_USER": settings.EMAIL_HOST_USER,
+                    "PASSWORD_LENGTH": len(settings.EMAIL_HOST_PASSWORD),
+                    "DEFAULT_FROM_EMAIL": settings.DEFAULT_FROM_EMAIL,
+                    "ADMIN_EMAIL": settings.ADMIN_EMAIL,
+                }
+            })
+        except Exception as e:
+            return Response({
+                "success": False,
+                "error_type": type(e).__name__,
+                "error_message": str(e),
+                "config": {
+                    "EMAIL_HOST": settings.EMAIL_HOST,
+                    "EMAIL_PORT": settings.EMAIL_PORT,
+                    "EMAIL_USE_TLS": settings.EMAIL_USE_TLS,
+                    "EMAIL_HOST_USER": settings.EMAIL_HOST_USER,
+                    "PASSWORD_LENGTH": len(settings.EMAIL_HOST_PASSWORD),
+                    "DEFAULT_FROM_EMAIL": settings.DEFAULT_FROM_EMAIL,
+                    "ADMIN_EMAIL": settings.ADMIN_EMAIL,
+                }
+            }, status=500)
