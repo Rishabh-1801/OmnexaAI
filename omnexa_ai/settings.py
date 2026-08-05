@@ -150,24 +150,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # ── 12. EMAIL CONFIGURATION ─────────────────────────────────────────────────
-# SendGrid API (works on Render - SMTP port 587 is blocked on cloud platforms)
-SENDGRID_API_KEY = config('SENDGRID_API_KEY', default='')
-
-if SENDGRID_API_KEY:
-    # Production: Use SendGrid API backend
-    EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
-    SENDGRID_SANDBOX_MODE_IN_DEBUG = False
-    SENDGRID_ECHO_TO_STDOUT = False
-else:
-    # Fallback: Gmail SMTP via SSL port 465 (port 587/TLS often blocked on Render)
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = config('EMAIL_HOST', default='smtp.gmail.com')
-    EMAIL_PORT = config('EMAIL_PORT', default=465, cast=int)
-    EMAIL_USE_TLS = False
-    EMAIL_USE_SSL = True
-    EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
-    EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
-
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='OMNEXA AI <info.omnexaai@gmail.com>')
 ADMIN_EMAIL = config('ADMIN_EMAIL', default='info.omnexaai@gmail.com')
 
