@@ -3,7 +3,6 @@ Django settings for OMNEXA AI project.
 """
 
 import os
-import dj_database_url
 from pathlib import Path
 from decouple import config
 
@@ -89,27 +88,38 @@ ASGI_APPLICATION = 'omnexa_ai.asgi.application'
 
 
 # ── 7. DATABASE ─────────────────────────────────────────────────────────────
-# Guard against Render setting DATABASE_URL to an empty or invalid string.
-# dj_database_url.parse() raises ValueError for any unparseable value, so we
-# wrap it in a try/except and fall back to SQLite for local / misconfigured envs.
+# Production: always use DATABASE_URL (PostgreSQL on Render/Neon).
+# Local dev: falls back to SQLite only when DEBUG=True.
+# IMPORTANT: Silent SQLite fallback in production causes blog posts to vanish
+# after every Render restart — do NOT fall back silently when DEBUG=False.
+
 _database_url = os.environ.get('DATABASE_URL', '').strip()
-try:
-    if not _database_url:
-        raise ValueError("DATABASE_URL is empty")
+
+if _database_url:
+    # Use PostgreSQL (or whatever DATABASE_URL points to)
+    import dj_database_url as _dj_db
     DATABASES = {
-        'default': dj_database_url.parse(
+        'default': _dj_db.parse(
             _database_url,
             conn_max_age=600,
             conn_health_checks=True,
         )
     }
-except (ValueError, KeyError):
+elif DEBUG:
+    # Local development only — SQLite is fine
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+else:
+    # Production with no DATABASE_URL — crash loudly so Render logs show the error
+    raise RuntimeError(
+        "DATABASE_URL environment variable is not set. "
+        "Set it in Render → Environment to point to your PostgreSQL database. "
+        "Without it, all blog posts and data will be lost on every server restart."
+    )
 
 
 # ── 8. AUTH PASSWORD VALIDATORS ─────────────────────────────────────────────
