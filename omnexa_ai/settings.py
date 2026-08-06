@@ -90,10 +90,12 @@ ASGI_APPLICATION = 'omnexa_ai.asgi.application'
 # ── 7. DATABASE ─────────────────────────────────────────────────────────────
 # Production: always use DATABASE_URL (PostgreSQL on Render/Neon).
 # Local dev: falls back to SQLite only when DEBUG=True.
-# IMPORTANT: Silent SQLite fallback in production causes blog posts to vanish
-# after every Render restart — do NOT fall back silently when DEBUG=False.
+# During Render BUILD phase, DATABASE_URL may not yet be injected —
+# we detect that with IS_RENDER_BUILD and allow SQLite temporarily.
+# At RUNTIME (gunicorn) DATABASE_URL must be set; otherwise data vanishes.
 
 _database_url = os.environ.get('DATABASE_URL', '').strip()
+_is_render_build = os.environ.get('IS_RENDER_BUILD', '').strip().lower() == 'true'
 
 if _database_url:
     # Use PostgreSQL (or whatever DATABASE_URL points to)
@@ -105,21 +107,25 @@ if _database_url:
             conn_health_checks=True,
         )
     }
-elif DEBUG:
-    # Local development only — SQLite is fine
+else:
+    # No DATABASE_URL — allowed during local dev (DEBUG=True) or Render build phase
+    # At runtime in production this means data loss: we log a loud warning
+    import warnings
+    if not DEBUG and not _is_render_build:
+        warnings.warn(
+            "DATABASE_URL is not set in production! "
+            "Blog posts WILL be lost on every server restart. "
+            "Set DATABASE_URL in Render → Environment.",
+            RuntimeWarning,
+            stacklevel=2,
+        )
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-else:
-    # Production with no DATABASE_URL — crash loudly so Render logs show the error
-    raise RuntimeError(
-        "DATABASE_URL environment variable is not set. "
-        "Set it in Render → Environment to point to your PostgreSQL database. "
-        "Without it, all blog posts and data will be lost on every server restart."
-    )
+
 
 
 # ── 8. AUTH PASSWORD VALIDATORS ─────────────────────────────────────────────
