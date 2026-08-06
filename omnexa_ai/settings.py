@@ -88,18 +88,14 @@ ASGI_APPLICATION = 'omnexa_ai.asgi.application'
 
 
 # ── 7. DATABASE ─────────────────────────────────────────────────────────────
-# Production: always use DATABASE_URL (PostgreSQL on Render/Neon).
-# Local dev: falls back to SQLite only when DEBUG=True.
-# During Render BUILD phase, DATABASE_URL may not yet be injected —
-# we detect that with IS_RENDER_BUILD and allow SQLite temporarily.
-# At RUNTIME (gunicorn) DATABASE_URL must be set; otherwise data vanishes.
+# Uses DATABASE_URL env var on Render (PostgreSQL).
+# Falls back to local SQLite for development.
+import dj_database_url as _dj_db
 
 _database_url = os.environ.get('DATABASE_URL', '').strip()
-_is_render_build = os.environ.get('IS_RENDER_BUILD', '').strip().lower() == 'true'
-
-if _database_url:
-    # Use PostgreSQL (or whatever DATABASE_URL points to)
-    import dj_database_url as _dj_db
+try:
+    if not _database_url:
+        raise ValueError("DATABASE_URL is empty")
     DATABASES = {
         'default': _dj_db.parse(
             _database_url,
@@ -107,18 +103,7 @@ if _database_url:
             conn_health_checks=True,
         )
     }
-else:
-    # No DATABASE_URL — allowed during local dev (DEBUG=True) or Render build phase
-    # At runtime in production this means data loss: we log a loud warning
-    import warnings
-    if not DEBUG and not _is_render_build:
-        warnings.warn(
-            "DATABASE_URL is not set in production! "
-            "Blog posts WILL be lost on every server restart. "
-            "Set DATABASE_URL in Render → Environment.",
-            RuntimeWarning,
-            stacklevel=2,
-        )
+except (ValueError, KeyError):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
