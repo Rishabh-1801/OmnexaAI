@@ -465,6 +465,11 @@ function showFieldErrors(form, errors) {
 }
 
 // ============================================
+// EmailJS Initialization
+// ============================================
+emailjs.init('HtQrOlJUegDcNM4Nc');
+
+// ============================================
 // Contact Form Submission
 // ============================================
 const bookingForm = document.getElementById('bookingForm');
@@ -504,6 +509,16 @@ if (bookingForm) {
         if (response.ok && result.success) {
           submitBtn.innerHTML = '<i class="fas fa-check me-2"></i>Booking Confirmed!';
           submitBtn.style.background = 'var(--accent-green)';
+
+          // Send email notification via EmailJS
+          emailjs.send('service_omnexa', 'aaj1ac8', {
+            subject_line: 'Contact / Consultation Request',
+            from_name: data.name || 'Unknown',
+            from_email: data.email || '',
+            phone: data.phone || 'N/A',
+            message: 'Business: ' + (data.business_name || 'N/A') + '\nService: ' + (data.service_interested || 'N/A') + '\nMessage: ' + (data.message || 'N/A'),
+          }).catch(err => console.warn('EmailJS error:', err));
+
           this.reset();
 
           // Clear any remaining errors
@@ -571,6 +586,17 @@ if (candidateForm) {
         if (response.ok && result.success) {
           submitBtn.innerHTML = '<i class="fas fa-check me-2"></i>Application Submitted!';
           submitBtn.style.background = 'var(--accent-green)';
+
+          // Send email notification via EmailJS
+          const careerData = Object.fromEntries(new FormData(this).entries());
+          emailjs.send('service_omnexa', 'aaj1ac8', {
+            subject_line: 'Job Application - ' + (careerData.category || 'General'),
+            from_name: careerData.name || 'Unknown',
+            from_email: careerData.email || '',
+            phone: careerData.phone || 'N/A',
+            message: 'Category: ' + (careerData.category || 'N/A') + '\nAddress: ' + (careerData.address || 'N/A'),
+          }).catch(err => console.warn('EmailJS error:', err));
+
           this.reset();
 
           // Clear any remaining errors
