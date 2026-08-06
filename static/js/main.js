@@ -467,7 +467,13 @@ function showFieldErrors(form, errors) {
 // ============================================
 // EmailJS Initialization
 // ============================================
-emailjs.init('HtQrOlJUegDcNM4Nc');
+if (typeof emailjs !== 'undefined') {
+  try {
+    emailjs.init('HtQrOlJUegDcNM4Nc');
+  } catch (e) {
+    console.warn('EmailJS init error:', e);
+  }
+}
 
 // ============================================
 // Contact Form Submission
