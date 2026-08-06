@@ -517,13 +517,18 @@ if (bookingForm) {
           submitBtn.style.background = 'var(--accent-green)';
 
           // Send email notification via EmailJS
-          emailjs.send('service_omnexa', 'aaj1ac8', {
-            subject_line: 'Contact / Consultation Request',
-            from_name: data.name || 'Unknown',
-            from_email: data.email || '',
-            phone: data.phone || 'N/A',
-            message: 'Business: ' + (data.business_name || 'N/A') + '\nService: ' + (data.service_interested || 'N/A') + '\nMessage: ' + (data.message || 'N/A'),
-          }).catch(err => console.warn('EmailJS error:', err));
+          if (typeof emailjs !== 'undefined') {
+            emailjs.send('service_omnexa', 'aaj1ac8', {
+              title: 'Contact / Consultation Request',
+              subject_line: 'Contact / Consultation Request',
+              name: data.name || 'Unknown',
+              from_name: data.name || 'Unknown',
+              email: data.email || '',
+              from_email: data.email || '',
+              phone: data.phone || 'N/A',
+              message: 'Name: ' + (data.name || '') + '\nEmail: ' + (data.email || '') + '\nPhone: ' + (data.phone || 'N/A') + '\nBusiness: ' + (data.business_name || 'N/A') + '\nService: ' + (data.service_interested || 'N/A') + '\nMessage: ' + (data.message || 'N/A'),
+            }).then(r => console.log('EmailJS Sent:', r)).catch(err => console.warn('EmailJS error:', err));
+          }
 
           this.reset();
 
@@ -577,6 +582,7 @@ if (candidateForm) {
 
       // Prepare form data with file
       const formData = new FormData(this);
+      const careerData = Object.fromEntries(formData.entries());
 
       try {
         const response = await fetch('/api/v1/careers/apply/', {
@@ -594,14 +600,18 @@ if (candidateForm) {
           submitBtn.style.background = 'var(--accent-green)';
 
           // Send email notification via EmailJS
-          const careerData = Object.fromEntries(new FormData(this).entries());
-          emailjs.send('service_omnexa', 'aaj1ac8', {
-            subject_line: 'Job Application - ' + (careerData.category || 'General'),
-            from_name: careerData.name || 'Unknown',
-            from_email: careerData.email || '',
-            phone: careerData.phone || 'N/A',
-            message: 'Category: ' + (careerData.category || 'N/A') + '\nAddress: ' + (careerData.address || 'N/A'),
-          }).catch(err => console.warn('EmailJS error:', err));
+          if (typeof emailjs !== 'undefined') {
+            emailjs.send('service_omnexa', 'aaj1ac8', {
+              title: 'Job Application - ' + (careerData.category || 'General'),
+              subject_line: 'Job Application - ' + (careerData.category || 'General'),
+              name: careerData.name || 'Unknown',
+              from_name: careerData.name || 'Unknown',
+              email: careerData.email || '',
+              from_email: careerData.email || '',
+              phone: careerData.phone || 'N/A',
+              message: 'Name: ' + (careerData.name || '') + '\nEmail: ' + (careerData.email || '') + '\nPhone: ' + (careerData.phone || 'N/A') + '\nCategory: ' + (careerData.category || 'N/A') + '\nAddress: ' + (careerData.address || 'N/A'),
+            }).then(r => console.log('EmailJS Sent:', r)).catch(err => console.warn('EmailJS error:', err));
+          }
 
           this.reset();
 
