@@ -518,7 +518,7 @@ if (bookingForm) {
 
           // Send email notification via EmailJS
           if (typeof emailjs !== 'undefined') {
-            emailjs.send('service_omnexa', 'aaj1ac8', {
+            emailjs.send('service_omnexa', 'template_aaj1ac8', {
               title: 'Contact / Consultation Request',
               subject_line: 'Contact / Consultation Request',
               name: data.name || 'Unknown',
@@ -601,7 +601,7 @@ if (candidateForm) {
 
           // Send email notification via EmailJS
           if (typeof emailjs !== 'undefined') {
-            emailjs.send('service_omnexa', 'aaj1ac8', {
+            emailjs.send('service_omnexa', 'template_aaj1ac8', {
               title: 'Job Application - ' + (careerData.category || 'General'),
               subject_line: 'Job Application - ' + (careerData.category || 'General'),
               name: careerData.name || 'Unknown',
